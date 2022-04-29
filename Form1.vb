@@ -155,7 +155,7 @@ Public Class frmMain
         txtTransmit.Text = ""
         rtbReceived.Text = ""
         DEBUGTextBox1.Text = ""
-        TextBox1.Text = "MENU"
+        'TextBox1.Text = "MENU"
 
         cmbPort.Enabled = True
 
@@ -270,7 +270,7 @@ Public Class frmMain
         Dim Str As String = ""
         Dim Str2 As String = ""
         Dim Str_number As Integer
-
+        Dim Data As Integer = 0
         If Me.rtbReceived.InvokeRequired Then
             Dim x As New SetTextCallback(AddressOf ReceivedText)
             Me.Invoke(x, New Object() {(text)})
@@ -291,6 +291,12 @@ Public Class frmMain
                 If (InStr(1, Me.rtbReceived.Text, "ETX") = (Str_number + 11)) Then
                     Me.DEBUGTextBox1.Text &= Mid(Me.rtbReceived.Text, Str_number + 3, 2)
                     TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3, 2)
+                    'If Val(TextBox5.Text) = 0 Then
+                    '    TextBox5.Text = "0"
+                    'Else
+                    '    TextBox5.Text = TextBox5.Text.TrimStart("0")
+                    'End If
+                    TextBox4.Text = TextBox5.Text
                     'Else
                     '   Me.DEBUGTextBox1.Text &= " " & "Error CMD"
                 End If
@@ -302,7 +308,7 @@ Public Class frmMain
             Me.DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
             Me.DEBUGTextBox1.Focus()
             CMD_Action = False
-        End If
+            End If
 
 
     End Sub
@@ -531,7 +537,9 @@ Public Class frmMain
             strbuff = Replace("7E,07,01,01,07,", ",", "") 'WDT Enable=1
         ElseIf idx = 16 Then
             Me.rtbReceived.Text = ""
-            strbuff = TextBox1.Text + Chr(13)  '自動傳送資料
+            'strbuff = TextBox1.Text + Chr(13)  '自動傳送資料
+            strbuff = ComboBox3.Text + Chr(13)  '自動傳送資料
+
         ElseIf idx = 17 Then
             Me.rtbReceived.Text = ""
             strbuff = "UP" + Chr(13)  'UP KEY
@@ -574,6 +582,7 @@ Public Class frmMain
    
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        SerialPort1.Close()
         Timer2.Enabled = False
         Timer1.Enabled = False
         Timer3.Enabled = False
@@ -594,7 +603,7 @@ Public Class frmMain
         SendCMD(16)
     End Sub
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        If Timer1.Enabled = False And ComboBox1.SelectedIndex <> 0 And TextBox1.Text <> "" Then
+        If Timer1.Enabled = False And ComboBox1.SelectedIndex <> 0 And ComboBox3.Text <> "" Then
             Timer1.Enabled = True
             Button3.Text = "停止"
             Button3.BackColor = Color.Red
@@ -616,6 +625,8 @@ Public Class frmMain
         'Me.rtbReceived.Text = "開始自動傳送命令"
         If ComboBox1.SelectedIndex = 0 Then
             Timer1.Enabled = False
+            Button3.Text = "開始"
+            Button3.BackColor = Color.Empty
         Else
             'Timer1.Enabled = True
             If ComboBox1.SelectedIndex = 1 Then
@@ -662,12 +673,14 @@ Public Class frmMain
 
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
         'If CMD_Action = False Then
+        TextBox3.Text = TextBox2.Text
         SendCMD(21)
         'End If
     End Sub
 
     Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button11.Click
         '  If CMD_Action = False Then
+        TextBox2.Text = TextBox3.Text
         SendCMD(22)
         '   End If
     End Sub
@@ -742,8 +755,77 @@ Public Class frmMain
         SendCMD(7)
     End Sub
 
-    Private Sub DEBUGTextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DEBUGTextBox1.TextChanged
+    Private Sub TextBox6_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox6.KeyPress
+        ' If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+        Dim intNumber As Integer = 0
+        TextBox6.Text = UCase(TextBox6.Text)
+
+        intNumber = Val("&H" + (TextBox6.Text) + "&")
+
+        TextBox6.Text = Hex(intNumber)
+
+        If intNumber >= 255 Then
+            intNumber = 255
+            TextBox6.Text = Hex(intNumber)
+        ElseIf intNumber <= 0 Then
+            intNumber = 0
+            TextBox6.Text = Hex(intNumber)
+        End If
+        '  End If
+    End Sub
+
+   
+    Private Sub TextBox2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
+        ' If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+        Dim intNumber As Integer = 0
+        TextBox2.Text = UCase(TextBox2.Text)
+
+        intNumber = Val("&H" + (TextBox2.Text) + "&")
+
+        TextBox2.Text = Hex(intNumber)
+
+        If intNumber >= 255 Then
+            intNumber = 255
+            TextBox2.Text = Hex(intNumber)
+        ElseIf intNumber <= 0 Then
+            intNumber = 0
+            TextBox2.Text = Hex(intNumber)
+        End If
+        '  End If
+    End Sub
+
+    Private Sub TextBox3_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox3.KeyPress
+        ' If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+        Dim intNumber As Integer = 0
+        TextBox3.Text = UCase(TextBox3.Text)
+
+        intNumber = Val("&H" + (TextBox3.Text) + "&")
+
+        TextBox3.Text = Hex(intNumber)
+
+        If intNumber >= 255 Then
+            intNumber = 255
+            TextBox3.Text = Hex(intNumber)
+        ElseIf intNumber <= 0 Then
+            intNumber = 0
+            TextBox3.Text = Hex(intNumber)
+        End If
+        ' End If
+    End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
+
+        If ComboBox2.SelectedIndex = 0 Then
+            TextBox6.Text = "40"
+        ElseIf ComboBox2.SelectedIndex = 1 Then
+            TextBox6.Text = "88"
+        ElseIf ComboBox2.SelectedIndex = 2 Then
+            TextBox6.Text = "A0"
+        ElseIf ComboBox2.SelectedIndex = 3 Then
+            TextBox6.Text = "12"
+        End If
 
     End Sub
+
 End Class
 'Whole Code Ends Here ....

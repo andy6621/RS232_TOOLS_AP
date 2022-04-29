@@ -40,8 +40,15 @@ Partial Class frmMain
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.DEBUGTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.btnGroupBox = New System.Windows.Forms.GroupBox()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
@@ -52,7 +59,6 @@ Partial Class frmMain
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
@@ -120,22 +126,22 @@ Partial Class frmMain
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("微軟正黑體", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label1.Location = New System.Drawing.Point(22, 54)
+        Me.Label1.Location = New System.Drawing.Point(14, 54)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(120, 24)
         Me.Label1.TabIndex = 4
-        Me.Label1.Text = " Comm Port"
+        Me.Label1.Text = " COM PORT"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("微軟正黑體", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label2.Location = New System.Drawing.Point(30, 120)
+        Me.Label2.Location = New System.Drawing.Point(15, 120)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(104, 24)
+        Me.Label2.Size = New System.Drawing.Size(119, 24)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Baud Rate"
+        Me.Label2.Text = "BAUD RATE"
         '
         'GroupBox1
         '
@@ -218,8 +224,15 @@ Partial Class frmMain
         '
         'btnGroupBox
         '
+        Me.btnGroupBox.Controls.Add(Me.ComboBox3)
+        Me.btnGroupBox.Controls.Add(Me.ComboBox2)
         Me.btnGroupBox.Controls.Add(Me.Button13)
         Me.btnGroupBox.Controls.Add(Me.Button12)
+        Me.btnGroupBox.Controls.Add(Me.Label9)
+        Me.btnGroupBox.Controls.Add(Me.Label7)
+        Me.btnGroupBox.Controls.Add(Me.Label8)
+        Me.btnGroupBox.Controls.Add(Me.Label6)
+        Me.btnGroupBox.Controls.Add(Me.Label10)
         Me.btnGroupBox.Controls.Add(Me.Label5)
         Me.btnGroupBox.Controls.Add(Me.TextBox6)
         Me.btnGroupBox.Controls.Add(Me.TextBox5)
@@ -230,7 +243,6 @@ Partial Class frmMain
         Me.btnGroupBox.Controls.Add(Me.Button10)
         Me.btnGroupBox.Controls.Add(Me.Button3)
         Me.btnGroupBox.Controls.Add(Me.Button9)
-        Me.btnGroupBox.Controls.Add(Me.TextBox1)
         Me.btnGroupBox.Controls.Add(Me.Button8)
         Me.btnGroupBox.Controls.Add(Me.Button7)
         Me.btnGroupBox.Controls.Add(Me.Button6)
@@ -247,9 +259,33 @@ Partial Class frmMain
         Me.btnGroupBox.TabStop = False
         Me.btnGroupBox.Text = "GroupBox1"
         '
+        'ComboBox3
+        '
+        Me.ComboBox3.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.ComboBox3.ForeColor = System.Drawing.Color.Blue
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Items.AddRange(New Object() {"MENU", "SELECT", "JUMP", "UP", "DOWN"})
+        Me.ComboBox3.Location = New System.Drawing.Point(199, 192)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(85, 29)
+        Me.ComboBox3.TabIndex = 48
+        Me.ComboBox3.Text = "MENU"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.ComboBox2.ForeColor = System.Drawing.Color.Red
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"VS4210", "TP2824", "EEPROM", "VS8812"})
+        Me.ComboBox2.Location = New System.Drawing.Point(190, 274)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(74, 21)
+        Me.ComboBox2.TabIndex = 47
+        Me.ComboBox2.Text = "VS4210"
+        '
         'Button13
         '
-        Me.Button13.Location = New System.Drawing.Point(255, 360)
+        Me.Button13.Location = New System.Drawing.Point(262, 398)
         Me.Button13.Name = "Button13"
         Me.Button13.Size = New System.Drawing.Size(32, 28)
         Me.Button13.TabIndex = 46
@@ -258,84 +294,142 @@ Partial Class frmMain
         '
         'Button12
         '
-        Me.Button12.Location = New System.Drawing.Point(255, 323)
+        Me.Button12.Location = New System.Drawing.Point(262, 361)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(32, 27)
         Me.Button12.TabIndex = 45
         Me.Button12.Text = "U"
         Me.Button12.UseVisualStyleBackColor = True
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label9.Location = New System.Drawing.Point(203, 363)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(34, 17)
+        Me.Label9.TabIndex = 44
+        Me.Label9.Text = "資料"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label7.Location = New System.Drawing.Point(203, 307)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(34, 17)
+        Me.Label7.TabIndex = 44
+        Me.Label7.Text = "資料"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label8.Location = New System.Drawing.Point(126, 365)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(34, 17)
+        Me.Label8.TabIndex = 44
+        Me.Label8.Text = "地址"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label6.Location = New System.Drawing.Point(126, 309)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(34, 17)
+        Me.Label6.TabIndex = 44
+        Me.Label6.Text = "地址"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label10.Location = New System.Drawing.Point(197, 253)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(47, 17)
+        Me.Label10.TabIndex = 44
+        Me.Label10.Text = "IC編號"
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(36, 399)
+        Me.Label5.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label5.Location = New System.Drawing.Point(117, 254)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(53, 12)
+        Me.Label5.Size = New System.Drawing.Size(55, 17)
         Me.Label5.TabIndex = 44
-        Me.Label5.Text = "I2C Addr."
+        Me.Label5.Text = "I2C位置"
         '
         'TextBox6
         '
-        Me.TextBox6.Location = New System.Drawing.Point(107, 396)
+        Me.TextBox6.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.TextBox6.Font = New System.Drawing.Font("新細明體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.TextBox6.ForeColor = System.Drawing.Color.Red
+        Me.TextBox6.Location = New System.Drawing.Point(112, 274)
         Me.TextBox6.MaxLength = 2
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(60, 22)
+        Me.TextBox6.Size = New System.Drawing.Size(60, 23)
         Me.TextBox6.TabIndex = 43
         Me.TextBox6.Text = "40"
-        Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(183, 300)
+        Me.TextBox5.Location = New System.Drawing.Point(189, 327)
         Me.TextBox5.MaxLength = 2
         Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.ReadOnly = True
         Me.TextBox5.Size = New System.Drawing.Size(65, 22)
         Me.TextBox5.TabIndex = 42
         Me.TextBox5.Text = "?"
-        Me.TextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(181, 348)
+        Me.TextBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.TextBox4.Location = New System.Drawing.Point(188, 386)
         Me.TextBox4.MaxLength = 2
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(68, 22)
         Me.TextBox4.TabIndex = 41
         Me.TextBox4.Text = "?"
-        Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(104, 348)
+        Me.TextBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.TextBox3.Location = New System.Drawing.Point(111, 386)
         Me.TextBox3.MaxLength = 2
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(64, 22)
         Me.TextBox3.TabIndex = 40
         Me.TextBox3.Text = "0"
-        Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button11
         '
-        Me.Button11.Location = New System.Drawing.Point(20, 344)
+        Me.Button11.Location = New System.Drawing.Point(27, 382)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(68, 37)
         Me.Button11.TabIndex = 39
-        Me.Button11.Text = "寫入"
+        Me.Button11.Text = "寫入資料"
         Me.Button11.UseVisualStyleBackColor = True
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(106, 302)
+        Me.TextBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.TextBox2.Location = New System.Drawing.Point(112, 329)
         Me.TextBox2.MaxLength = 2
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(62, 22)
         Me.TextBox2.TabIndex = 38
         Me.TextBox2.Text = "0"
-        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button10
         '
-        Me.Button10.Location = New System.Drawing.Point(21, 296)
+        Me.Button10.Location = New System.Drawing.Point(27, 323)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(68, 37)
         Me.Button10.TabIndex = 37
@@ -363,16 +457,6 @@ Partial Class frmMain
         Me.Button9.TabIndex = 25
         Me.Button9.Text = "清除"
         Me.Button9.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.Color.Blue
-        Me.TextBox1.Location = New System.Drawing.Point(222, 194)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(63, 29)
-        Me.TextBox1.TabIndex = 36
-        Me.TextBox1.Text = "MENU"
         '
         'Button8
         '
@@ -420,7 +504,7 @@ Partial Class frmMain
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Red
-        Me.Label3.Location = New System.Drawing.Point(227, 163)
+        Me.Label3.Location = New System.Drawing.Point(218, 161)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(131, 20)
         Me.Label3.TabIndex = 31
@@ -499,7 +583,7 @@ Partial Class frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(842, 645)
+        Me.ClientSize = New System.Drawing.Size(842, 639)
         Me.Controls.Add(Me.btnGroupBox)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.GroupBox3)
@@ -555,7 +639,6 @@ Partial Class frmMain
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Timer2 As System.Windows.Forms.Timer
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Button8 As System.Windows.Forms.Button
@@ -571,5 +654,12 @@ Partial Class frmMain
     Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
     Friend WithEvents Button13 As System.Windows.Forms.Button
     Friend WithEvents Button12 As System.Windows.Forms.Button
+    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
 
 End Class
