@@ -1,0 +1,63 @@
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.exe
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.pdb
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.xml
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.frmMain.resources
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.Resources.resources
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.vbproj.GenerateResource.Cache
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.exe
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.xml
+C:\Users\ryanc\documents\visual studio 2010\Projects\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.pdb
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.exe
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.pdb
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.xml
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.frmMain.resources
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.Resources.resources
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.vbproj.GenerateResource.Cache
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.exe
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.xml
+C:\Users\ryanc\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.pdb
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.exe
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.pdb
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\bin\Release\Serial Port Interface.xml
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.frmMain.resources
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.Resources.resources
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.vbproj.GenerateResource.Cache
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.exe
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.xml
+C:\Users\ryanc.HS\Documents\HISHARP\Serial Port Interface\Serial Port Interface\obj\x86\Release\Serial Port Interface.pdb
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\bin\Release\Serial Port Interface.exe
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\bin\Release\Serial Port Interface.pdb
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\bin\Release\Serial Port Interface.xml
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.frmMain.resources
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.Resources.resources
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\obj\x86\Release\Serial Port Interface.vbproj.GenerateResource.Cache
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\obj\x86\Release\Serial Port Interface.exe
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\obj\x86\Release\Serial Port Interface.xml
+C:\WORK\Serial Port Interface_20200925\Serial Port Interface\obj\x86\Release\Serial Port Interface.pdb
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.Resources.resources
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\obj\x86\Release\Serial Port Interface.vbproj.GenerateResource.Cache
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\obj\x86\Release\Serial Port Interface.exe
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\obj\x86\Release\Serial Port Interface.xml
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\obj\x86\Release\Serial Port Interface.pdb
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\bin\Release\Serial Port Interface.exe
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\bin\Release\Serial Port Interface.pdb
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\bin\Release\Serial Port Interface.xml
+C:\WORK\Serial Port Interface_TOA產線治具\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.frmMain.resources
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\bin\Release\Serial Port Interface.exe
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\bin\Release\Serial Port Interface.pdb
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\bin\Release\Serial Port Interface.xml
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.frmMain.resources
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\obj\x86\Release\Serial_Port_Interface.Resources.resources
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\obj\x86\Release\Serial Port Interface.vbproj.GenerateResource.Cache
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\obj\x86\Release\Serial Port Interface.exe
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\obj\x86\Release\Serial Port Interface.xml
+C:\WORK\Serial Port Interface_ML076Q產線治具\Serial Port Interface\obj\x86\Release\Serial Port Interface.pdb
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Release\Serial Port Interface.vbproj.GenerateResource.Cache
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\bin\Release\IC I2C Register Tools.exe
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\bin\Release\IC I2C Register Tools.pdb
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\bin\Release\IC I2C Register Tools.xml
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Release\IC_I2C_Register_Tools.frmMain.resources
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Release\IC_I2C_Register_Tools.Resources.resources
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Release\IC I2C Register Tools.exe
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Release\IC I2C Register Tools.xml
+C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Release\IC I2C Register Tools.pdb
