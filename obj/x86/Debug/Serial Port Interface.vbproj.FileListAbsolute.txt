@@ -64,3 +64,12 @@ C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\
 C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Debug\IC I2C Register Tools.exe
 C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Debug\IC I2C Register Tools.xml
 C:\WORK\Serial Port Interface_ML076Q產線治具2\Serial Port Interface\obj\x86\Debug\IC I2C Register Tools.pdb
+D:\share\RS232_TOOLS_AP\obj\x86\Debug\IC I2C Register Tools.exe
+D:\share\RS232_TOOLS_AP\obj\x86\Debug\IC I2C Register Tools.xml
+D:\share\RS232_TOOLS_AP\obj\x86\Debug\IC I2C Register Tools.pdb
+D:\share\RS232_TOOLS_AP\bin\Debug\IC I2C Register Tools.exe
+D:\share\RS232_TOOLS_AP\bin\Debug\IC I2C Register Tools.pdb
+D:\share\RS232_TOOLS_AP\bin\Debug\IC I2C Register Tools.xml
+D:\share\RS232_TOOLS_AP\obj\x86\Debug\IC_I2C_Register_Tools.frmMain.resources
+D:\share\RS232_TOOLS_AP\obj\x86\Debug\IC_I2C_Register_Tools.Resources.resources
+D:\share\RS232_TOOLS_AP\obj\x86\Debug\Serial Port Interface.vbproj.GenerateResource.Cache

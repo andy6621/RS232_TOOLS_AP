@@ -5,7 +5,6 @@ Imports System.ComponentModel
 Imports System.Threading
 Imports System.IO.Ports
 
-#Const MCU_PROTOCOL_CMD_SYS_READY_NOTICE = &H1
 
 'frmMain is the name of our form ....
 'Here starts our main form code .....
@@ -285,18 +284,18 @@ Public Class frmMain
             Me.rtbReceived.Focus()
 
             Me.DEBUGTextBox1.Text = ""
-            Str_number = InStr(1, Str, "STX")
+            Str_number = InStr(1, Me.rtbReceived.Text, "STX")
 
             If Str_number > 0 Then
                 Me.DEBUGTextBox1.Text &= "STX ADDR=" & Str_number.ToString() & " "
-                If (InStr(1, Str, "ETX") = (Str_number + 11)) Then
-                    Me.DEBUGTextBox1.Text &= Mid(Str, Str_number + 3, 2)
-                    TextBox5.Text = Mid(Str, Str_number + 3, 2)
-                Else
-                    Me.DEBUGTextBox1.Text &= " " & "Error CMD"
+                If (InStr(1, Me.rtbReceived.Text, "ETX") = (Str_number + 11)) Then
+                    Me.DEBUGTextBox1.Text &= Mid(Me.rtbReceived.Text, Str_number + 3, 2)
+                    TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3, 2)
+                    'Else
+                    '   Me.DEBUGTextBox1.Text &= " " & "Error CMD"
                 End If
-            Else
-                Me.DEBUGTextBox1.Text &= " " & "CMD not thing=" & Str
+                'Else
+                '   Me.DEBUGTextBox1.Text &= " " & "CMD not thing=" & Me.rtbReceived.Text
             End If
 
             Me.DEBUGTextBox1.SelectionStart = Me.DEBUGTextBox1.Text.Length   '文本的选取长度
