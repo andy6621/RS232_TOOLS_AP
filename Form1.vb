@@ -20,6 +20,7 @@ Public Class frmMain
     Dim Gbuff() As Byte
     Dim strPort As String
     Dim CMD_Action As Boolean = False
+    Dim REGValueChenage As Boolean = False
 
     'Dump 設定
     Dim Dump_Start, Dump_End, Dump_Loop As Integer
@@ -123,59 +124,79 @@ Public Class frmMain
         Me.SerialPort1.WriteTimeout = -1
         Me.SerialPort1.DtrEnable = Enabled
 
-        SerialPort1.Open()
-        btnConnect.Enabled = False
-        btnDisconnect.Enabled = True
+        Try
+            SerialPort1.Open()
 
-        GroupBox2.Enabled = True
-        btnGroupBox.Enabled = True
-        GroupBox3.Enabled = True
-        GroupBox1.Enabled = True
-        TabControl1.Enabled = True
-        Button8.Enabled = True
-        Label4.Visible = True
+            btnConnect.Enabled = False
+            btnDisconnect.Enabled = True
 
-        cmbPort.Enabled = False
+            GroupBox2.Enabled = True
+            btnGroupBox.Enabled = True
+            GroupBox3.Enabled = True
+            GroupBox1.Enabled = True
+            TabControl1.Enabled = True
+            Button8.Enabled = True
+            Label4.Visible = True
 
-        Timer2.Interval = 1000 '設Timer2的時間間隔為1000毫秒，也就是1秒
-        Timer2.Enabled = True '啟動Timer2
+            cmbPort.Enabled = False
 
-        Timer3.Interval = 500 '設Timer5的時間間隔為500毫秒，也就是0.5秒
-        Timer3.Enabled = True '啟動Timer2
+            Timer2.Interval = 1000 '設Timer2的時間間隔為1000毫秒，也就是1秒
+            Timer2.Enabled = True '啟動Timer2
 
-        cmbBaud.Enabled = False
+            Timer3.Interval = 500 '設Timer5的時間間隔為500毫秒，也就是0.5秒
+            Timer3.Enabled = True '啟動Timer2
+
+            cmbBaud.Enabled = False
+
+
+            Button14.Enabled = True 
+            Button15.Enabled = True
+            TabControl1.Enabled = True
+
+        Catch ex As Exception
+            MsgBox(cmbPort.Text & " 有問題無法使用")
+        End Try
+
+   
     End Sub
     'Connect Button Code Ends Here ....
 
     'Disconnect Button Code Starts Here ....
     Private Sub btnDisconnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDisconnect.Click
-        SerialPort1.Close()
-        btnConnect.Enabled = True
-        btnDisconnect.Enabled = False
 
-        GroupBox2.Enabled = False
-        btnGroupBox.Enabled = False
-        GroupBox3.Enabled = False
-        GroupBox1.Enabled = False
-        TabControl1.Enabled = False
-        Button8.Enabled = False
-        Label4.Visible = False
+        Try
+            SerialPort1.Close()
 
-        Timer2.Enabled = False
-        Timer1.Enabled = False
-        Timer3.Enabled = False
-        ComboBox1.SelectedIndex = 0
-        Button3.Text = "開始"
+            btnConnect.Enabled = True
+            btnDisconnect.Enabled = False
 
-        txtTransmit.Text = ""
-        rtbReceived.Text = ""
-        DEBUGTextBox1.Text = ""
-        'TextBox1.Text = "MENU"
+            GroupBox2.Enabled = False
+            btnGroupBox.Enabled = False
+            GroupBox3.Enabled = False
+            GroupBox1.Enabled = False
+            TabControl1.Enabled = False
+            Button8.Enabled = False
+            Label4.Visible = False
 
-        cmbPort.Enabled = True
-        cmbBaud.Enabled = True
+            Timer2.Enabled = False
+            Timer1.Enabled = False
+            Timer3.Enabled = False
+            ComboBox1.SelectedIndex = 0
+            Button3.Text = "開始"
 
-        Button3.BackColor = Color.Empty
+            txtTransmit.Text = ""
+            rtbReceived.Text = ""
+            DEBUGTextBox1.Text = ""
+            'TextBox1.Text = "MENU"
+
+            cmbPort.Enabled = True
+            cmbBaud.Enabled = True
+
+            Button3.BackColor = Color.Empty
+        Catch ex As Exception
+            MsgBox(cmbPort.Text & " 有問題無法關閉")
+        End Try
+    
 
     End Sub
     'Disconnect Button Code Ends Here ....
@@ -316,6 +337,9 @@ Public Class frmMain
                         SendCMD(21)
                     Else
                         Dump_Action = False
+                        Button14.Enabled = True
+                        Button15.Enabled = True
+                        TabControl1.Enabled = True
                     End If
 
                     'If Val(TextBox5.Text) = 0 Then
@@ -352,7 +376,24 @@ Public Class frmMain
     End Sub
     Private Sub GETREGDATA(ByVal Addr As String, ByVal Data As String)
 
-        Dim REG() As TextBox = {REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F}
+        Dim REG() As TextBox = { _
+       REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+       REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+       REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+       REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+       REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+       REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+       REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+       REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+       REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+       REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+       REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+       REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+       REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+       REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+       REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+       REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
 
         'Try
         If REG(Integer.Parse(Val("&H" + (Addr) + "&"))).Text <> Data Then
@@ -360,14 +401,21 @@ Public Class frmMain
             REG(Integer.Parse(Val("&H" + (Addr) + "&"))).Text = Data
             REG(Integer.Parse(Val("&H" + (Addr) + "&"))).ForeColor = Color.Red
         Else
-            REG(Integer.Parse(Val("&H" + (Addr) + "&"))).ForeColor = Color.Empty
+
+            If REGValueChenage = True Then
+                REG(Integer.Parse(Val("&H" + (Addr) + "&"))).ForeColor = Color.Purple
+                REGValueChenage = False
+            Else
+                REG(Integer.Parse(Val("&H" + (Addr) + "&"))).ForeColor = Color.Empty
+            End If
+
         End If
 
-        '你的程式碼
-        'Catch ex As Exception
-        '出了錯該怎麼辦？
-        'End Try
-        'Val("&H" + (Addr) + "&")
+            '你的程式碼
+            'Catch ex As Exception
+            '出了錯該怎麼辦？
+            'End Try
+            'Val("&H" + (Addr) + "&")
     End Sub
     'Serial Port Receiving Code(Invoke) Ends Here ....
 
@@ -871,6 +919,8 @@ Public Class frmMain
             TextBox1.Text = "12"
         End If
 
+        Label14.Text = ComboBox2.Text
+
     End Sub
 
     Private Sub ComboBox4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox4.SelectedIndexChanged
@@ -914,11 +964,14 @@ Public Class frmMain
 
     Private Sub Button14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button14.Click
         Dump_Start = 0
-        Dump_End = &HF&
+        Dump_End = &HFF&  '0~255
         Dump_Loop = Dump_Start
         Dump_Action = True
         TextBox2.Text = Hex(Dump_Loop)
         SendCMD(21)
+        Button14.Enabled = False
+        Button15.Enabled = False
+        TabControl1.Enabled = False
     End Sub
 
  
@@ -959,7 +1012,25 @@ Public Class frmMain
 
 #Const FileModeAppend = 0
 
-        Dim REG() As TextBox = {REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F}
+        Dim REG() As TextBox = { _
+        REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+        REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+        REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+        REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+        REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+        REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+        REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+        REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+        REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+        REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+        REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+        REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+        REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+        REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+        REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+        REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
         Dim FileNum As Integer
         Dim strTemp As String
         Dim DayString, TimeString As String '用來顯示日期與時間字串變數
@@ -969,10 +1040,10 @@ Public Class frmMain
         FileOpen(FileNum, My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", OpenMode.Output)
         DayString = Format(Now, "yyyy/MM/dd") '指定DayString為時間格式為有西元年的日期
         TimeString = TimeOfDay.ToString("tt h:mm:ss ")
-        strTemp = DayString + Space(1) + TimeString '將結果Show在Label1(space(1)為空一格)
+        strTemp = "," + DayString + Space(1) + TimeString '將結果Show在Label1(space(1)為空一格)
         PrintLine(FileNum, strTemp)
         For index As Integer = 0 To REG.Count - 1
-            strTemp = TextBox1.Text & " " & Mid(REG(index).Name, 4, 2) & " " & REG(index).Text
+            strTemp = TextBox1.Text & "," & Mid(REG(index).Name, 4, 2) & "," & REG(index).Text
             PrintLine(FileNum, strTemp)
         Next
         FileClose(FileNum)
@@ -986,11 +1057,11 @@ Public Class frmMain
             TimeString = "FM" & Mid(TimeString, 3, 9)
         End If
 
-        strTemp = DayString + Space(1) + TimeString & vbNewLine '將結果Show在Label1(space(1)為空一格)
+        strTemp = "," + DayString + Space(1) + TimeString & vbNewLine '將結果Show在Label1(space(1)為空一格)
         My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", strTemp, True)
 
         For index As Integer = 0 To REG.Count - 1
-            strTemp = TextBox1.Text & " " & Mid(REG(index).Name, 4, 2) & " " & REG(index).Text & vbNewLine
+            strTemp = TextBox1.Text & "," & Mid(REG(index).Name, 4, 2) & "," & REG(index).Text & vbNewLine
             My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", strTemp, True)
         Next
 #End If
@@ -1002,6 +1073,46 @@ Public Class frmMain
 #End If
 
 
+    End Sub
+    Sub REGKeyCheck(ByVal Index As Integer)
+        Dim REG() As TextBox = { _
+               REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+               REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+               REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+               REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+               REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+               REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+               REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+               REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+               REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+               REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+               REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+               REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+               REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+               REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+               REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+               REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        REG(Index).Text = UCase(REG(Index).Text)
+        TextBox3.Text = Hex(Index)
+        TextBox2.Text = TextBox3.Text
+        TextBox4.Text = REG(Index).Text
+        REGValueChenage = True
+        SendCMD(22)
+
+
+        ' DEBUGTextBox1.Text &= REG(Index).Name & "W=" & REG(Index).Text & vbNewLine
+
+     
+
+    End Sub
+
+    Private Sub REG31_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG31.KeyPress
+
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            REGKeyCheck(&H31&)
+        End If
     End Sub
 
 End Class

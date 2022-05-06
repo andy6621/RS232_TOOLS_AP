@@ -8,9 +8,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E3C81A78-996C-40AA-96D4-B9B272004FD7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>IC_I2C_Register_Tools.My.MyApplication</StartupObject>
-    <RootNamespace>IC_I2C_Register_Tools</RootNamespace>
-    <AssemblyName>IC I2C Register Tools</AssemblyName>
+    <StartupObject>RS232_TOOL.My.MyApplication</StartupObject>
+    <RootNamespace>RS232_TOOL</RootNamespace>
+    <AssemblyName>RS232 TOOL</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -38,7 +38,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>IC I2C Register Tools.xml</DocumentationFile>
+    <DocumentationFile>RS232 TOOL.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -48,7 +48,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>IC I2C Register Tools.xml</DocumentationFile>
+    <DocumentationFile>RS232 TOOL.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -70,6 +70,7 @@
     <ApplicationIcon>大象.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />

@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.IC_I2C_Register_Tools.frmMain
+            Me.MainForm = Global.RS232_TOOL.frmMain
         End Sub
     End Class
 End Namespace

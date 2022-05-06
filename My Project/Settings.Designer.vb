@@ -64,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.IC_I2C_Register_Tools.My.MySettings
+        Friend ReadOnly Property Settings() As Global.RS232_TOOL.My.MySettings
             Get
-                Return Global.IC_I2C_Register_Tools.My.MySettings.Default
+                Return Global.RS232_TOOL.My.MySettings.Default
             End Get
         End Property
     End Module
