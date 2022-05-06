@@ -9,6 +9,10 @@ Imports System.IO.Ports
 'frmMain is the name of our form ....
 'Here starts our main form code .....
 Public Class frmMain
+
+    Const TAB_PAGE0 = 0
+    Const TAB_PAGE1 = 1
+
     Dim myPort As Array
     Delegate Sub SetTextCallback(ByVal [text] As String)
     Dim act As Integer
@@ -17,7 +21,10 @@ Public Class frmMain
     Dim strPort As String
     Dim CMD_Action As Boolean = False
 
-
+    'Dump 設定
+    Dim Dump_Start, Dump_End, Dump_Loop As Integer
+    Dim Dump_Timer As Boolean = False
+    Dim Dump_Action As Boolean = False
     'Page Load Code Starts Here....
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         myPort = IO.Ports.SerialPort.GetPortNames()
@@ -41,6 +48,7 @@ Public Class frmMain
         btnGroupBox.Enabled = True
         GroupBox3.Enabled = False
         GroupBox1.Enabled = False
+        TabControl1.Enabled = False
         btnGroupBox.Enabled = False
 
         SerialPort1.BaudRate = "115200"
@@ -53,6 +61,10 @@ Public Class frmMain
 
         Timer2.Interval = 1000 '設Timer2的時間間隔為1000毫秒，也就是1秒
         Timer2.Enabled = True '啟動Timer2
+
+        'TabControl1.SelectedIndex = 0
+
+
     End Sub
     Function ReceiveSerialData() As String
         ' Receive strings from a serial port.
@@ -119,6 +131,7 @@ Public Class frmMain
         btnGroupBox.Enabled = True
         GroupBox3.Enabled = True
         GroupBox1.Enabled = True
+        TabControl1.Enabled = True
         Button8.Enabled = True
         Label4.Visible = True
 
@@ -130,6 +143,7 @@ Public Class frmMain
         Timer3.Interval = 500 '設Timer5的時間間隔為500毫秒，也就是0.5秒
         Timer3.Enabled = True '啟動Timer2
 
+        cmbBaud.Enabled = False
     End Sub
     'Connect Button Code Ends Here ....
 
@@ -143,6 +157,7 @@ Public Class frmMain
         btnGroupBox.Enabled = False
         GroupBox3.Enabled = False
         GroupBox1.Enabled = False
+        TabControl1.Enabled = False
         Button8.Enabled = False
         Label4.Visible = False
 
@@ -158,6 +173,7 @@ Public Class frmMain
         'TextBox1.Text = "MENU"
 
         cmbPort.Enabled = True
+        cmbBaud.Enabled = True
 
         Button3.BackColor = Color.Empty
 
@@ -290,7 +306,18 @@ Public Class frmMain
                 Me.DEBUGTextBox1.Text &= "STX ADDR=" & Str_number.ToString() & " "
                 If (InStr(1, Me.rtbReceived.Text, "ETX") = (Str_number + 11)) Then
                     Me.DEBUGTextBox1.Text &= Mid(Me.rtbReceived.Text, Str_number + 3, 2)
-                    TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3, 2)
+                    TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2)
+
+                    GETREGDATA(Mid(Me.rtbReceived.Text, Str_number + 3, 2), TextBox5.Text)
+
+                    If Dump_Loop < Dump_End And Dump_Action = True Then
+                        Dump_Loop += 1
+                        TextBox2.Text = Hex(Dump_Loop)
+                        SendCMD(21)
+                    Else
+                        Dump_Action = False
+                    End If
+
                     'If Val(TextBox5.Text) = 0 Then
                     '    TextBox5.Text = "0"
                     'Else
@@ -322,6 +349,25 @@ Public Class frmMain
             DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
             DEBUGTextBox1.Focus()
         End If
+    End Sub
+    Private Sub GETREGDATA(ByVal Addr As String, ByVal Data As String)
+
+        Dim REG() As TextBox = {REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F}
+
+        'Try
+        If REG(Integer.Parse(Val("&H" + (Addr) + "&"))).Text <> Data Then
+
+            REG(Integer.Parse(Val("&H" + (Addr) + "&"))).Text = Data
+            REG(Integer.Parse(Val("&H" + (Addr) + "&"))).ForeColor = Color.Red
+        Else
+            REG(Integer.Parse(Val("&H" + (Addr) + "&"))).ForeColor = Color.Empty
+        End If
+
+        '你的程式碼
+        'Catch ex As Exception
+        '出了錯該怎麼辦？
+        'End Try
+        'Val("&H" + (Addr) + "&")
     End Sub
     'Serial Port Receiving Code(Invoke) Ends Here ....
 
@@ -469,10 +515,10 @@ Public Class frmMain
 
     Private Sub Delay(ByVal ASecond As Integer)
         Dim before
-        before = Timer
+        before = Timer()
         Do
             DoEvents()
-        Loop Until (Int(Timer - before) = ASecond)
+        Loop Until (Int(Timer() - before) = ASecond)
     End Sub
     'Private Sub tbxASCII_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbxASCII.TextChanged
     '  If Me.ActiveControl Is sender Then
@@ -555,11 +601,11 @@ Public Class frmMain
         ElseIf idx = 21 Then
             Me.rtbReceived.Text = ""
             TextBox5.Text = "?" : CMD_Action = True
-            strbuff = "CMDR" + " " + TextBox6.Text + " " + TextBox2.Text + " " + Chr(13)  'CMD Read
+            strbuff = "CMDR" + " " + TextBox1.Text + " " + TextBox2.Text + " " + Chr(13)  'CMD Read
         ElseIf idx = 22 Then
             Me.rtbReceived.Text = ""
             TextBox5.Text = "?" : CMD_Action = True
-            strbuff = "CMDW" + " " + TextBox6.Text + " " + _
+            strbuff = "CMDW" + " " + TextBox1.Text + " " + _
                 TextBox3.Text + " " + TextBox4.Text + Chr(13)  'CMD Write
         End If
 
@@ -579,7 +625,7 @@ Public Class frmMain
         ' DEBUGTextBox1.Focus()
 
     End Sub
-   
+
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         SerialPort1.Close()
@@ -591,8 +637,8 @@ Public Class frmMain
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
         Me.rtbReceived.Text = ""
-        Me.DEBUGTextBox1.Text = ""
-        TextBox5.Text = "_"
+        'Me.DEBUGTextBox1.Text = ""
+        'TextBox5.Text = "_"
     End Sub
     Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
         Me.DEBUGTextBox1.Text = ""
@@ -755,26 +801,26 @@ Public Class frmMain
         SendCMD(7)
     End Sub
 
-    Private Sub TextBox6_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox6.KeyPress
+    Private Sub TextBox1_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox1.KeyPress
         ' If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
         Dim intNumber As Integer = 0
-        TextBox6.Text = UCase(TextBox6.Text)
+        TextBox1.Text = UCase(TextBox1.Text)
 
-        intNumber = Val("&H" + (TextBox6.Text) + "&")
+        intNumber = Val("&H" + (TextBox1.Text) + "&")
 
-        TextBox6.Text = Hex(intNumber)
+        TextBox1.Text = Hex(intNumber)
 
         If intNumber >= 255 Then
             intNumber = 255
-            TextBox6.Text = Hex(intNumber)
+            TextBox1.Text = Hex(intNumber)
         ElseIf intNumber <= 0 Then
             intNumber = 0
-            TextBox6.Text = Hex(intNumber)
+            TextBox1.Text = Hex(intNumber)
         End If
         '  End If
     End Sub
 
-   
+
     Private Sub TextBox2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
         ' If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
         Dim intNumber As Integer = 0
@@ -816,14 +862,145 @@ Public Class frmMain
     Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         If ComboBox2.SelectedIndex = 0 Then
-            TextBox6.Text = "40"
+            TextBox1.Text = "40"
         ElseIf ComboBox2.SelectedIndex = 1 Then
-            TextBox6.Text = "88"
+            TextBox1.Text = "88"
         ElseIf ComboBox2.SelectedIndex = 2 Then
-            TextBox6.Text = "A0"
+            TextBox1.Text = "A0"
         ElseIf ComboBox2.SelectedIndex = 3 Then
-            TextBox6.Text = "12"
+            TextBox1.Text = "12"
         End If
+
+    End Sub
+
+    Private Sub ComboBox4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox4.SelectedIndexChanged
+        If ComboBox4.SelectedIndex = 0 Then
+            Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox4.SelectedIndex = 1 Then
+            Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox4.SelectedIndex = 2 Then
+            Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox4.SelectedIndex = 3 Then
+            Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox4.SelectedIndex = 4 Then
+            Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox4.SelectedIndex = 5 Then
+            Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox4.SelectedIndex = 6 Then
+            Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Else
+            Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        End If
+    End Sub
+    Private Sub ComboBox5_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox5.SelectedIndexChanged
+        If ComboBox5.SelectedIndex = 0 Then
+            Me.DEBUGTextBox1.Font = New System.Drawing.Font("新細明體", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox5.SelectedIndex = 1 Then
+            Me.DEBUGTextBox1.Font = New System.Drawing.Font("新細明體", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox5.SelectedIndex = 2 Then
+            Me.DEBUGTextBox1.Font = New System.Drawing.Font("新細明體", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox5.SelectedIndex = 3 Then
+            Me.DEBUGTextBox1.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox5.SelectedIndex = 4 Then
+            Me.DEBUGTextBox1.Font = New System.Drawing.Font("新細明體", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox5.SelectedIndex = 5 Then
+            Me.DEBUGTextBox1.Font = New System.Drawing.Font("新細明體", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        ElseIf ComboBox5.SelectedIndex = 6 Then
+            Me.DEBUGTextBox1.Font = New System.Drawing.Font("新細明體", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Else
+            Me.DEBUGTextBox1.Font = New System.Drawing.Font("新細明體", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        End If
+    End Sub
+
+    Private Sub Button14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button14.Click
+        Dump_Start = 0
+        Dump_End = &HF&
+        Dump_Loop = Dump_Start
+        Dump_Action = True
+        TextBox2.Text = Hex(Dump_Loop)
+        SendCMD(21)
+    End Sub
+
+ 
+    Private Sub TextBox2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox2.TextChanged
+
+    End Sub
+
+    Private Sub frmMain_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+        If TabControl1.Enabled = True Then
+
+            If UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.F) Then
+                SendCMD(7)
+            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.M) Then
+                SendCMD(16)
+            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.J) Then
+                SendCMD(20)
+            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.S) Then
+                SendCMD(19)
+            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.U) Then
+                SendCMD(17)
+            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.D) Then
+                SendCMD(18)
+            End If
+        End If
+        If UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.E) Then
+            ExitAPP()
+        End If
+    End Sub
+    Sub ExitAPP()
+        SerialPort1.Close()
+        Timer2.Enabled = False
+        Timer1.Enabled = False
+        Timer3.Enabled = False
+        Me.Close()
+    End Sub
+
+    Private Sub Button15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button15.Click
+
+#Const FileModeAppend = 0
+
+        Dim REG() As TextBox = {REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F}
+        Dim FileNum As Integer
+        Dim strTemp As String
+        Dim DayString, TimeString As String '用來顯示日期與時間字串變數
+
+#If FileModeAppend = 0 Then  '新建資料存檔
+        FileNum = FreeFile()
+        FileOpen(FileNum, My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", OpenMode.Output)
+        DayString = Format(Now, "yyyy/MM/dd") '指定DayString為時間格式為有西元年的日期
+        TimeString = TimeOfDay.ToString("tt h:mm:ss ")
+        strTemp = DayString + Space(1) + TimeString '將結果Show在Label1(space(1)為空一格)
+        PrintLine(FileNum, strTemp)
+        For index As Integer = 0 To REG.Count - 1
+            strTemp = TextBox1.Text & " " & Mid(REG(index).Name, 4, 2) & " " & REG(index).Text
+            PrintLine(FileNum, strTemp)
+        Next
+        FileClose(FileNum)
+#Else    '增加資料存檔
+        DayString = Format(Now, "yyyy/MM/dd") '指定DayString為時間格式為有西元年的日期
+        TimeString = TimeOfDay.ToString("tt h:mm:ss ")
+
+        If Mid(TimeString, 1, 2) = "上午" Then
+            TimeString = "AM" & Mid(TimeString, 3, 9)
+        ElseIf Mid(TimeString, 1, 2) = "下午" Then
+            TimeString = "FM" & Mid(TimeString, 3, 9)
+        End If
+
+        strTemp = DayString + Space(1) + TimeString & vbNewLine '將結果Show在Label1(space(1)為空一格)
+        My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", strTemp, True)
+
+        For index As Integer = 0 To REG.Count - 1
+            strTemp = TextBox1.Text & " " & Mid(REG(index).Name, 4, 2) & " " & REG(index).Text & vbNewLine
+            My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", strTemp, True)
+        Next
+#End If
+        'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
+#If FileModeAppend = False Then
+        MsgBox("新建資料存檔完畢！")
+#Else
+        MsgBox("增加資料存檔完畢！")
+#End If
+
 
     End Sub
 
