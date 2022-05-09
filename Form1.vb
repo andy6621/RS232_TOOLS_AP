@@ -12,8 +12,13 @@ Public Class frmMain
 
     Const TAB_PAGE0 = 0
     Const TAB_PAGE1 = 1
+    Const REG_READ_MODE = 1
+    Const REG_WRITE_MODE = 2
 
     Dim myPort As Array
+
+    Private Property fileSaveName As Object
+
     Delegate Sub SetTextCallback(ByVal [text] As String)
     Dim act As Integer
     Dim AUTO_SEND As Integer = False
@@ -25,7 +30,13 @@ Public Class frmMain
     'Dump 設定
     Dim Dump_Start, Dump_End, Dump_Loop As Integer
     Dim Dump_Timer As Boolean = False
-    Dim Dump_Action As Boolean = False
+
+
+    'WriteREG 設定
+    Dim WriteREG_Start, WriteREG_End, WriteREG_Loop As Integer
+    Dim WriteREG_Timer As Boolean = False
+    Dim RW_REG_Action As Integer = 0
+
     'Page Load Code Starts Here....
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         myPort = IO.Ports.SerialPort.GetPortNames()
@@ -320,28 +331,45 @@ Public Class frmMain
             Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
             Me.rtbReceived.Focus()
 
-            Me.DEBUGTextBox1.Text = ""
+            'Me.DEBUGTextBox1.Text &= vbNewLine
             Str_number = InStr(1, Me.rtbReceived.Text, "STX")
 
             If Str_number > 0 Then
                 Me.DEBUGTextBox1.Text &= "STX ADDR=" & Str_number.ToString() & " "
                 If (InStr(1, Me.rtbReceived.Text, "ETX") = (Str_number + 11)) Then
-                    Me.DEBUGTextBox1.Text &= Mid(Me.rtbReceived.Text, Str_number + 3, 2)
+                    Me.DEBUGTextBox1.Text &= Mid(Me.rtbReceived.Text, Str_number + 3, 2) & vbNewLine
                     TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2)
 
                     GETREGDATA(Mid(Me.rtbReceived.Text, Str_number + 3, 2), TextBox5.Text)
 
-                    If Dump_Loop < Dump_End And Dump_Action = True Then
-                        Dump_Loop += 1
-                        TextBox2.Text = Hex(Dump_Loop)
-                        SendCMD(21)
-                    Else
-                        Dump_Action = False
-                        Button14.Enabled = True
-                        Button15.Enabled = True
-                        TabControl1.Enabled = True
+                    If RW_REG_Action = REG_READ_MODE Then
+                        If Dump_Loop < Dump_End Then
+                            Dump_Loop += 1
+                            TextBox2.Text = Hex(Dump_Loop)
+                            SendCMD(21)
+                        Else
+
+                            RW_REG_Action = 0
+                            Button14.Enabled = True
+                            Button15.Enabled = True
+                            TabControl1.Enabled = True
+                        End If
                     End If
 
+                    If RW_REG_Action = REG_WRITE_MODE Then
+
+                        If WriteREG_Loop < WriteREG_End Then
+                            WriteREG_Loop += 1
+                            WRITEREGDATA(WriteREG_Loop)
+                        Else
+
+                            RW_REG_Action = 0
+                            'Button14.Enabled = True
+                            'Button15.Enabled = True
+                            'TabControl1.Enabled = True
+                        End If
+
+                    End If
                     'If Val(TextBox5.Text) = 0 Then
                     '    TextBox5.Text = "0"
                     'Else
@@ -373,6 +401,9 @@ Public Class frmMain
             DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
             DEBUGTextBox1.Focus()
         End If
+    End Sub
+    Private Sub PRINT(ByVal str As String)
+        DEBUGTextBox1.Text &= str & vbNewLine
     End Sub
     Private Sub GETREGDATA(ByVal Addr As String, ByVal Data As String)
 
@@ -417,8 +448,34 @@ Public Class frmMain
             'End Try
             'Val("&H" + (Addr) + "&")
     End Sub
-    'Serial Port Receiving Code(Invoke) Ends Here ....
+    Private Sub WRITEREGDATA(ByVal Index As Integer)
 
+        Dim REG() As TextBox = { _
+       REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+       REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+       REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+       REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+       REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+       REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+       REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+       REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+       REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+       REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+       REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+       REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+       REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+       REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+       REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+       REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        TextBox3.Text = Hex(Index)
+        TextBox4.Text = REG(Index).Text
+        DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
+        SendCMD(22)
+
+    End Sub
+    'Serial Port Receiving Code(Invoke) Ends Here ....
     'Com Port Change Warning Code Starts Here ....
     Private Sub cmbPort_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPort.SelectedIndexChanged
         If SerialPort1.IsOpen = False Then
@@ -428,7 +485,6 @@ Public Class frmMain
         End If
     End Sub
     'Com Port Change Warning Code Ends Here ....
-
     'Baud Rate Change Warning Code Starts Here ....
     Private Sub cmbBaud_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBaud.SelectedIndexChanged
         If SerialPort1.IsOpen = False Then
@@ -438,7 +494,6 @@ Public Class frmMain
         End If
     End Sub
     'Baud Rate Change Warning Code Ends Here ....
-
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
 
         'If AUTO_SEND== True Then
@@ -812,7 +867,7 @@ Public Class frmMain
     End Sub
 
     Private Sub TextBox4_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox4.KeyPress
-        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+        If Asc(e.KeyChar) = 13 Then
             'MsgBox("輸入的值是" & TextBox2.Text)
             Dim intNumber As Integer = 0
 
@@ -850,7 +905,7 @@ Public Class frmMain
     End Sub
 
     Private Sub TextBox1_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox1.KeyPress
-        ' If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+        ' If e.KeyChar = Strings.ChrW(Keys.Return) Then
         Dim intNumber As Integer = 0
         TextBox1.Text = UCase(TextBox1.Text)
 
@@ -870,7 +925,7 @@ Public Class frmMain
 
 
     Private Sub TextBox2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
-        ' If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+        ' If e.KeyChar = Strings.ChrW(Keys.Return) Then
         Dim intNumber As Integer = 0
         TextBox2.Text = UCase(TextBox2.Text)
 
@@ -889,7 +944,7 @@ Public Class frmMain
     End Sub
 
     Private Sub TextBox3_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox3.KeyPress
-        ' If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+        ' If e.KeyChar = Strings.ChrW(Keys.Return) Then
         Dim intNumber As Integer = 0
         TextBox3.Text = UCase(TextBox3.Text)
 
@@ -966,7 +1021,7 @@ Public Class frmMain
         Dump_Start = 0
         Dump_End = &HFF&  '0~255
         Dump_Loop = Dump_Start
-        Dump_Action = True
+        RW_REG_Action = REG_READ_MODE  'dump mode
         TextBox2.Text = Hex(Dump_Loop)
         SendCMD(21)
         Button14.Enabled = False
@@ -974,29 +1029,25 @@ Public Class frmMain
         TabControl1.Enabled = False
     End Sub
 
- 
-    Private Sub TextBox2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox2.TextChanged
-
-    End Sub
 
     Private Sub frmMain_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         If TabControl1.Enabled = True Then
 
-            If UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.F) Then
+            If UCase(e.KeyChar) = Strings.ChrW(Keys.F) Then
                 SendCMD(7)
-            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.M) Then
+            ElseIf UCase(e.KeyChar) = Strings.ChrW(Keys.M) Then
                 SendCMD(16)
-            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.J) Then
+            ElseIf UCase(e.KeyChar) = Strings.ChrW(Keys.J) Then
                 SendCMD(20)
-            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.S) Then
+            ElseIf UCase(e.KeyChar) = Strings.ChrW(Keys.S) Then
                 SendCMD(19)
-            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.U) Then
+            ElseIf UCase(e.KeyChar) = Strings.ChrW(Keys.U) Then
                 SendCMD(17)
-            ElseIf UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.D) Then
+            ElseIf UCase(e.KeyChar) = Strings.ChrW(Keys.D) Then
                 SendCMD(18)
             End If
         End If
-        If UCase(e.KeyChar) = Microsoft.VisualBasic.ChrW(Keys.E) Then
+        If UCase(e.KeyChar) = Strings.ChrW(Keys.E) Then
             ExitAPP()
         End If
     End Sub
@@ -1011,7 +1062,7 @@ Public Class frmMain
     Private Sub Button15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button15.Click
 
 #Const FileModeAppend = 0
-
+        Dim intSaveFileFlag As Boolean = False
         Dim REG() As TextBox = { _
         REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
         REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
@@ -1033,6 +1084,7 @@ Public Class frmMain
 
         Dim FileNum As Integer
         Dim strTemp As String
+        Dim strTemp2 As String = ""
         Dim DayString, TimeString As String '用來顯示日期與時間字串變數
 
 #If FileModeAppend = 0 Then  '新建資料存檔
@@ -1042,11 +1094,36 @@ Public Class frmMain
         TimeString = TimeOfDay.ToString("tt h:mm:ss ")
         strTemp = "," + DayString + Space(1) + TimeString '將結果Show在Label1(space(1)為空一格)
         PrintLine(FileNum, strTemp)
+        strTemp2 &= strTemp & vbNewLine
         For index As Integer = 0 To REG.Count - 1
             strTemp = TextBox1.Text & "," & Mid(REG(index).Name, 4, 2) & "," & REG(index).Text
             PrintLine(FileNum, strTemp)
+            strTemp2 &= strTemp & vbNewLine
         Next
         FileClose(FileNum)
+
+        'fileSaveName = Application.GetSaveAsFilename(fileFilter:="Text Files (*.txt), *.txt")
+        'If fileSaveName <> False Then
+        '    MsgBox("Save as " & fileSaveName)
+        'End If
+
+        Dim myFile As String
+        Dim saveFileDialog1 As New SaveFileDialog()
+        saveFileDialog1.Title = "另存新檔"
+        saveFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
+        saveFileDialog1.ShowDialog()
+        Try
+            'myFile = My.Computer.FileSystem.CurrentDirectory() & "\dump.txt"
+            'My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, "123 test", True)
+            My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, strTemp2, False)
+            'rtbReceived.SaveFile(myFile, RichTextBoxStreamType.RichNoOleObjs)
+
+            'Me.Text = myFile
+            intSaveFileFlag = True
+
+        Catch ex As Exception
+            ' MsgBox("資料檔案未存檔")
+        End Try
 #Else    '增加資料存檔
         DayString = Format(Now, "yyyy/MM/dd") '指定DayString為時間格式為有西元年的日期
         TimeString = TimeOfDay.ToString("tt h:mm:ss ")
@@ -1065,9 +1142,13 @@ Public Class frmMain
             My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", strTemp, True)
         Next
 #End If
-        'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
+            'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
 #If FileModeAppend = False Then
-        MsgBox("新建資料存檔完畢！")
+        If intSaveFileFlag = False Then
+            MsgBox("資料檔案未存檔！")
+        Else
+            MsgBox("新建資料存檔完畢！")
+        End If
 #Else
         MsgBox("增加資料存檔完畢！")
 #End If
@@ -1095,6 +1176,7 @@ Public Class frmMain
                REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
 
         REG(Index).Text = UCase(REG(Index).Text)
+        REG(Index).ForeColor = Color.Blue
         TextBox3.Text = Hex(Index)
         TextBox2.Text = TextBox3.Text
         TextBox4.Text = REG(Index).Text
@@ -1110,10 +1192,143 @@ Public Class frmMain
 
     Private Sub REG31_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG31.KeyPress
 
-        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+        If Asc(e.KeyChar) = 13 Then   '13 =enter key
             REGKeyCheck(&H31&)
         End If
     End Sub
 
+ 
+    Private Sub Button16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button16.Click
+        Dim REG() As TextBox = { _
+                      REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+                      REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+                      REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+                      REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+                      REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+                      REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+                      REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+                      REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+                      REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+                      REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+                      REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+                      REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+                      REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+                      REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+                      REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+                      REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        ' 例：從 Test.txt 檔案中讀取資料
+        Dim FileNum As Integer
+        Dim strTemp As String = ""
+        Dim strTemp2 As String = ""
+        'FileNum = FreeFile()
+        'FileOpen(FileNum, My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", OpenMode.Input)
+        ''Do Until EOF(FileNum)
+        'strTemp &= LineInput(FileNum) & vbNewLine
+        ''Loop
+        'DEBUGTextBox1.Text &= strTemp
+        'FileClose(FileNum)
+
+        Dim myFile As String
+        Dim openFileDialog1 As New OpenFileDialog()
+        Dim intStringNumber As Integer = 0
+
+        openFileDialog1.Title = "開啟檔案"
+        openFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
+        openFileDialog1.ShowDialog()
+        Try
+            'myFile = My.Computer.FileSystem.CurrentDirectory() & "\dump.txt"
+            'My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, "123 test", True)
+            strTemp2 = My.Computer.FileSystem.ReadAllText(openFileDialog1.FileName)
+            'rtbReceived.SaveFile(myFile, RichTextBoxStreamType.RichNoOleObjs)
+
+            FileNum = FreeFile()
+            FileOpen(FileNum, openFileDialog1.FileName, OpenMode.Input)
+
+            Do Until EOF(FileNum)
+                strTemp = LineInput(FileNum) '& vbNewLine
+                intStringNumber = InStr(1, strTemp, TextBox1.Text)
+                If intStringNumber Then
+
+                    If REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).Text <> Mid(strTemp, 1 + 6, 2) Then
+                        REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).ForeColor = Color.Red
+                    Else
+                        REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).ForeColor = Color.Empty
+                    End If
+
+                    REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).Text = Mid(strTemp, 1 + 6, 2)
+
+                    'DEBUGTextBox1.Text &= Mid(strTemp, 1 + 3, 2) & " " & Mid(strTemp, 1 + 6, 2) & vbNewLine
+                    DEBUGTextBox1.Text &= strTemp & vbNewLine
+                End If
+            Loop
+
+            'DEBUGTextBox1.Text &= strTemp
+            FileClose(FileNum)
+
+            'DEBUGTextBox1.Text &= strTemp2
+
+            'Me.Text = myFile
+            ' intSaveFileFlag = True
+        Catch ex As Exception
+            ' MsgBox("資料檔案未存檔")
+        End Try
+
+
+
+    End Sub
+
+    Private Sub Button17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button17.Click
+
+        Dim REG() As TextBox = { _
+                      REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+                      REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+                      REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+                      REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+                      REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+                      REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+                      REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+                      REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+                      REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+                      REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+                      REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+                      REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+                      REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+                      REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+                      REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+                      REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+        For index As Integer = 0 To 255
+            REG(index).Text = "00"
+            REG(index).ForeColor = Color.Empty
+        Next
+
+    End Sub
+
+    Private Sub Button18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button18.Click
+        WriteREG_Start = 0
+        WriteREG_End = &HFF&  '0~255
+        WriteREG_Loop = WriteREG_Start
+        RW_REG_Action = REG_WRITE_MODE   'Write mode
+        TextBox3.Text = Hex(WriteREG_Loop)
+        TextBox4.Text = REG00.Text
+        DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
+        SendCMD(22)
+        'Button14.Enabled = False
+        'Button15.Enabled = False
+        'TabControl1.Enabled = False
+    End Sub
+
+    Private Sub REG02_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG02.KeyPress
+        If Asc(e.KeyChar) = 13 Then   '13 =enter key
+            WRITEREGDATA(2)
+        End If
+    End Sub
+    Private Sub REG00_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG00.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            WRITEREGDATA(0)
+        End If
+    End Sub
 End Class
 'Whole Code Ends Here ....
