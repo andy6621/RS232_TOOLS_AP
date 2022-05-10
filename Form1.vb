@@ -46,6 +46,7 @@ Public Class frmMain
 
     'Page Load Code Starts Here....
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         myPort = IO.Ports.SerialPort.GetPortNames()
         ' cmbBaud.Items.Add(9600)
         ' cmbBaud.Items.Add(19200)
@@ -82,7 +83,6 @@ Public Class frmMain
         Timer2.Enabled = True '啟動Timer2
 
         'TabControl1.SelectedIndex = 0
-
 
     End Sub
     Function ReceiveSerialData() As String
@@ -1059,7 +1059,7 @@ Public Class frmMain
 
 
     Private Sub frmMain_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
-        If TabControl1.Enabled = True Then
+        If TabControl1.Enabled = True And CheckBox1.Checked = True Then
 
             If UCase(e.KeyChar) = Strings.ChrW(Keys.F) Then
                 SendCMD(7)
@@ -1119,10 +1119,11 @@ Public Class frmMain
                 End If
                 SendCMD(22)
             End If
+            If UCase(e.KeyChar) = Strings.ChrW(Keys.E) Then
+                ExitAPP()
+            End If
         End If
-        If UCase(e.KeyChar) = Strings.ChrW(Keys.E) Then
-            ExitAPP()
-        End If
+
     End Sub
     Sub ExitAPP()
         SerialPort1.Close()
@@ -1180,7 +1181,7 @@ Public Class frmMain
         '    MsgBox("Save as " & fileSaveName)
         'End If
 
-        Dim myFile As String
+
         Dim saveFileDialog1 As New SaveFileDialog()
         saveFileDialog1.Title = "另存新檔"
         saveFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
@@ -1301,7 +1302,6 @@ Public Class frmMain
         'DEBUGTextBox1.Text &= strTemp
         'FileClose(FileNum)
 
-        Dim myFile As String
         Dim openFileDialog1 As New OpenFileDialog()
         Dim intStringNumber As Integer = 0
 
@@ -1425,6 +1425,18 @@ Public Class frmMain
             Timer5.Enabled = False
         End If
 
+    End Sub
+
+    Private Sub TextBox6_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox6.KeyPress
+        If Asc(e.KeyChar) = 13 Then            
+            If SerialPort1.IsOpen = True Then
+                SerialPort1.Write(TextBox6.Text + Chr(13))
+            End If
+        End If
+    End Sub
+
+    Private Sub TextBox6_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles TextBox6.MouseClick
+        TextBox6.Text = ""
     End Sub
 End Class
 'Whole Code Ends Here ....
