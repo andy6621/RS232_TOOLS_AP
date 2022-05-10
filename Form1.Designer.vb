@@ -79,13 +79,14 @@ Partial Class frmMain
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.btnREGGroup = New System.Windows.Forms.GroupBox()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button14 = New System.Windows.Forms.Button()
         Me.TextBox36 = New System.Windows.Forms.TextBox()
         Me.REG0F = New System.Windows.Forms.TextBox()
         Me.TextBox35 = New System.Windows.Forms.TextBox()
@@ -375,12 +376,15 @@ Partial Class frmMain
         Me.TextBox37 = New System.Windows.Forms.TextBox()
         Me.REG00 = New System.Windows.Forms.TextBox()
         Me.Timer4 = New System.Windows.Forms.Timer(Me.components)
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.btnREGGroup.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnConnect
@@ -523,6 +527,7 @@ Partial Class frmMain
         Me.DEBUGTextBox1.Location = New System.Drawing.Point(20, 21)
         Me.DEBUGTextBox1.MaxLength = 10
         Me.DEBUGTextBox1.Name = "DEBUGTextBox1"
+        Me.DEBUGTextBox1.ReadOnly = True
         Me.DEBUGTextBox1.Size = New System.Drawing.Size(364, 246)
         Me.DEBUGTextBox1.TabIndex = 0
         Me.DEBUGTextBox1.Text = ""
@@ -869,6 +874,7 @@ Partial Class frmMain
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(Me.Label15)
         Me.TabPage1.Controls.Add(Me.Label12)
         Me.TabPage1.Controls.Add(Me.Label11)
         Me.TabPage1.Controls.Add(Me.ComboBox5)
@@ -953,13 +959,9 @@ Partial Class frmMain
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage2.Controls.Add(Me.Button18)
-        Me.TabPage2.Controls.Add(Me.Button17)
-        Me.TabPage2.Controls.Add(Me.Button16)
+        Me.TabPage2.Controls.Add(Me.btnREGGroup)
         Me.TabPage2.Controls.Add(Me.Label14)
         Me.TabPage2.Controls.Add(Me.Label13)
-        Me.TabPage2.Controls.Add(Me.Button15)
-        Me.TabPage2.Controls.Add(Me.Button14)
         Me.TabPage2.Controls.Add(Me.TextBox36)
         Me.TabPage2.Controls.Add(Me.REG0F)
         Me.TabPage2.Controls.Add(Me.TextBox35)
@@ -1256,10 +1258,23 @@ Partial Class frmMain
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "REG.功能"
         '
+        'btnREGGroup
+        '
+        Me.btnREGGroup.Controls.Add(Me.Button18)
+        Me.btnREGGroup.Controls.Add(Me.Button17)
+        Me.btnREGGroup.Controls.Add(Me.Button14)
+        Me.btnREGGroup.Controls.Add(Me.Button16)
+        Me.btnREGGroup.Controls.Add(Me.Button15)
+        Me.btnREGGroup.Location = New System.Drawing.Point(128, 463)
+        Me.btnREGGroup.Name = "btnREGGroup"
+        Me.btnREGGroup.Size = New System.Drawing.Size(405, 59)
+        Me.btnREGGroup.TabIndex = 28
+        Me.btnREGGroup.TabStop = False
+        '
         'Button18
         '
         Me.Button18.Font = New System.Drawing.Font("微軟正黑體", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Button18.Location = New System.Drawing.Point(311, 480)
+        Me.Button18.Location = New System.Drawing.Point(174, 14)
         Me.Button18.Name = "Button18"
         Me.Button18.Size = New System.Drawing.Size(66, 40)
         Me.Button18.TabIndex = 8
@@ -1269,22 +1284,42 @@ Partial Class frmMain
         'Button17
         '
         Me.Button17.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Button17.Location = New System.Drawing.Point(143, 480)
+        Me.Button17.Location = New System.Drawing.Point(6, 14)
         Me.Button17.Name = "Button17"
         Me.Button17.Size = New System.Drawing.Size(54, 39)
         Me.Button17.TabIndex = 7
         Me.Button17.Text = "CLR "
         Me.Button17.UseVisualStyleBackColor = True
         '
+        'Button14
+        '
+        Me.Button14.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Button14.Location = New System.Drawing.Point(74, 14)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(94, 40)
+        Me.Button14.TabIndex = 1
+        Me.Button14.Text = "Read ALL"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
         'Button16
         '
         Me.Button16.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Button16.Location = New System.Drawing.Point(389, 480)
+        Me.Button16.Location = New System.Drawing.Point(252, 14)
         Me.Button16.Name = "Button16"
         Me.Button16.Size = New System.Drawing.Size(62, 40)
         Me.Button16.TabIndex = 6
         Me.Button16.Text = "Open"
         Me.Button16.UseVisualStyleBackColor = True
+        '
+        'Button15
+        '
+        Me.Button15.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button15.Location = New System.Drawing.Point(331, 14)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(65, 40)
+        Me.Button15.TabIndex = 2
+        Me.Button15.Text = "Save"
+        Me.Button15.UseVisualStyleBackColor = True
         '
         'Label14
         '
@@ -1305,26 +1340,6 @@ Partial Class frmMain
         Me.Label13.Size = New System.Drawing.Size(27, 16)
         Me.Label13.TabIndex = 4
         Me.Label13.Text = "IC:"
-        '
-        'Button15
-        '
-        Me.Button15.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button15.Location = New System.Drawing.Point(468, 480)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(65, 40)
-        Me.Button15.TabIndex = 2
-        Me.Button15.Text = "Save"
-        Me.Button15.UseVisualStyleBackColor = True
-        '
-        'Button14
-        '
-        Me.Button14.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Button14.Location = New System.Drawing.Point(211, 480)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(94, 40)
-        Me.Button14.TabIndex = 1
-        Me.Button14.Text = "Read ALL"
-        Me.Button14.UseVisualStyleBackColor = True
         '
         'TextBox36
         '
@@ -4558,11 +4573,24 @@ Partial Class frmMain
         Me.REG00.Text = "00"
         Me.REG00.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("微軟正黑體", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label15.Location = New System.Drawing.Point(86, 179)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(0, 35)
+        Me.Label15.TabIndex = 52
+        '
+        'Timer5
+        '
+        Me.Timer5.Interval = 1000
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 676)
+        Me.ClientSize = New System.Drawing.Size(984, 675)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnGroupBox)
         Me.Controls.Add(Me.Label4)
@@ -4592,6 +4620,7 @@ Partial Class frmMain
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
+        Me.btnREGGroup.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4947,5 +4976,8 @@ Partial Class frmMain
     Friend WithEvents Button16 As System.Windows.Forms.Button
     Friend WithEvents Button17 As System.Windows.Forms.Button
     Friend WithEvents Button18 As System.Windows.Forms.Button
+    Friend WithEvents btnREGGroup As System.Windows.Forms.GroupBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Timer5 As System.Windows.Forms.Timer
 
 End Class

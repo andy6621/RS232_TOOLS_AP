@@ -14,6 +14,10 @@ Public Class frmMain
     Const TAB_PAGE1 = 1
     Const REG_READ_MODE = 1
     Const REG_WRITE_MODE = 2
+    Const FW_TEST_NO = 0
+    Const FW_TEST_WAITING = 1
+    Const FW_TEST_NG = 2
+    Const FW_TEST_PASS = 3
 
     Dim myPort As Array
 
@@ -36,6 +40,9 @@ Public Class frmMain
     Dim WriteREG_Start, WriteREG_End, WriteREG_Loop As Integer
     Dim WriteREG_Timer As Boolean = False
     Dim RW_REG_Action As Integer = 0
+
+    'FW TEST FLAF
+    Dim FW_ACTION As Integer = 0
 
     'Page Load Code Starts Here....
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -160,7 +167,7 @@ Public Class frmMain
             cmbBaud.Enabled = False
 
 
-            Button14.Enabled = True 
+            Button14.Enabled = True
             Button15.Enabled = True
             TabControl1.Enabled = True
 
@@ -168,7 +175,7 @@ Public Class frmMain
             MsgBox(cmbPort.Text & " 有問題無法使用")
         End Try
 
-   
+
     End Sub
     'Connect Button Code Ends Here ....
 
@@ -207,7 +214,7 @@ Public Class frmMain
         Catch ex As Exception
             MsgBox(cmbPort.Text & " 有問題無法關閉")
         End Try
-    
+
 
     End Sub
     'Disconnect Button Code Ends Here ....
@@ -335,9 +342,9 @@ Public Class frmMain
             Str_number = InStr(1, Me.rtbReceived.Text, "STX")
 
             If Str_number > 0 Then
-                Me.DEBUGTextBox1.Text &= "STX ADDR=" & Str_number.ToString() & " "
+                '    Me.DEBUGTextBox1.Text &= "STX ADDR=" & Str_number.ToString() & " "
                 If (InStr(1, Me.rtbReceived.Text, "ETX") = (Str_number + 11)) Then
-                    Me.DEBUGTextBox1.Text &= Mid(Me.rtbReceived.Text, Str_number + 3, 2) & vbNewLine
+                    Me.DEBUGTextBox1.Text &= "R " & Mid(Me.rtbReceived.Text, Str_number + 3, 2) & " " & Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2) & vbNewLine
                     TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2)
 
                     GETREGDATA(Mid(Me.rtbReceived.Text, Str_number + 3, 2), TextBox5.Text)
@@ -352,7 +359,8 @@ Public Class frmMain
                             RW_REG_Action = 0
                             Button14.Enabled = True
                             Button15.Enabled = True
-                            TabControl1.Enabled = True
+                            'TabControl1.Enabled = True
+                            btnREGGroup.Enabled = True
                         End If
                     End If
 
@@ -360,10 +368,11 @@ Public Class frmMain
 
                         If WriteREG_Loop < WriteREG_End Then
                             WriteREG_Loop += 1
-                            WRITEREGDATA(WriteREG_Loop)
+                            WRITEREGDATA("REG" & Hex(WriteREG_Loop))
                         Else
 
                             RW_REG_Action = 0
+                            btnREGGroup.Enabled = True
                             'Button14.Enabled = True
                             'Button15.Enabled = True
                             'TabControl1.Enabled = True
@@ -383,11 +392,15 @@ Public Class frmMain
                 '   Me.DEBUGTextBox1.Text &= " " & "CMD not thing=" & Me.rtbReceived.Text
             End If
 
+            If InStr(1, Me.rtbReceived.Text, "FW") Then
+                FW_ACTION = FW_TEST_PASS
+            End If
+
             Me.DEBUGTextBox1.SelectionStart = Me.DEBUGTextBox1.Text.Length   '文本的选取长度
             Me.DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
             Me.DEBUGTextBox1.Focus()
             CMD_Action = False
-            End If
+        End If
 
 
     End Sub
@@ -442,13 +455,13 @@ Public Class frmMain
 
         End If
 
-            '你的程式碼
-            'Catch ex As Exception
-            '出了錯該怎麼辦？
-            'End Try
-            'Val("&H" + (Addr) + "&")
+        '你的程式碼
+        'Catch ex As Exception
+        '出了錯該怎麼辦？
+        'End Try
+        'Val("&H" + (Addr) + "&")
     End Sub
-    Private Sub WRITEREGDATA(ByVal Index As Integer)
+    Private Sub WRITEREGDATA(ByVal Str As String)
 
         Dim REG() As TextBox = { _
        REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
@@ -469,8 +482,9 @@ Public Class frmMain
        REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
        REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
 
-        TextBox3.Text = Hex(Index)
-        TextBox4.Text = REG(Index).Text
+        TextBox3.Text = Mid(Str, 4, 2)
+        TextBox2.Text = TextBox3.Text
+        TextBox4.Text = REG(Integer.Parse(Val("&H" + (Mid(Str, 4, 2)) + "&"))).Text
         DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
         SendCMD(22)
 
@@ -740,11 +754,13 @@ Public Class frmMain
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
         Me.rtbReceived.Text = ""
+        Label15.Text = ""
         'Me.DEBUGTextBox1.Text = ""
         'TextBox5.Text = "_"
     End Sub
     Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
         Me.DEBUGTextBox1.Text = ""
+        Label15.Text = ""
     End Sub
 
 
@@ -901,6 +917,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnMCUREV_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMCUREV.Click
+        FW_ACTION = FW_TEST_WAITING
+        Label15.Text = "WAITING"
+        Label15.ForeColor = Color.Empty
+        Timer5.Interval = 1000
+        Timer5.Enabled = True
         SendCMD(7)
     End Sub
 
@@ -925,41 +946,48 @@ Public Class frmMain
 
 
     Private Sub TextBox2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
-        ' If e.KeyChar = Strings.ChrW(Keys.Return) Then
-        Dim intNumber As Integer = 0
-        TextBox2.Text = UCase(TextBox2.Text)
 
-        intNumber = Val("&H" + (TextBox2.Text) + "&")
+        If Asc(e.KeyChar) = 13 Then
+            Dim intNumber As Integer = 0
+            TextBox2.Text = UCase(TextBox2.Text)
 
-        TextBox2.Text = Hex(intNumber)
+            intNumber = Val("&H" + (TextBox2.Text) + "&")
 
-        If intNumber >= 255 Then
-            intNumber = 255
             TextBox2.Text = Hex(intNumber)
-        ElseIf intNumber <= 0 Then
-            intNumber = 0
-            TextBox2.Text = Hex(intNumber)
+
+            If intNumber >= 255 Then
+                intNumber = 255
+                TextBox2.Text = Hex(intNumber)
+            ElseIf intNumber <= 0 Then
+                intNumber = 0
+                TextBox2.Text = Hex(intNumber)
+            End If
+
+            TextBox3.Text = TextBox2.Text
+            SendCMD(21)
+
         End If
-        '  End If
     End Sub
 
     Private Sub TextBox3_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox3.KeyPress
-        ' If e.KeyChar = Strings.ChrW(Keys.Return) Then
-        Dim intNumber As Integer = 0
-        TextBox3.Text = UCase(TextBox3.Text)
+        If Asc(e.KeyChar) = 13 Then
+            Dim intNumber As Integer = 0
+            TextBox3.Text = UCase(TextBox3.Text)
 
-        intNumber = Val("&H" + (TextBox3.Text) + "&")
+            intNumber = Val("&H" + (TextBox3.Text) + "&")
 
-        TextBox3.Text = Hex(intNumber)
-
-        If intNumber >= 255 Then
-            intNumber = 255
             TextBox3.Text = Hex(intNumber)
-        ElseIf intNumber <= 0 Then
-            intNumber = 0
-            TextBox3.Text = Hex(intNumber)
+
+            If intNumber >= 255 Then
+                intNumber = 255
+                TextBox3.Text = Hex(intNumber)
+            ElseIf intNumber <= 0 Then
+                intNumber = 0
+                TextBox3.Text = Hex(intNumber)
+            End If
+            TextBox2.Text = TextBox3.Text
+            SendCMD(22)
         End If
-        ' End If
     End Sub
 
     Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
@@ -1026,7 +1054,7 @@ Public Class frmMain
         SendCMD(21)
         Button14.Enabled = False
         Button15.Enabled = False
-        TabControl1.Enabled = False
+        btnREGGroup.Enabled = False
     End Sub
 
 
@@ -1035,6 +1063,11 @@ Public Class frmMain
 
             If UCase(e.KeyChar) = Strings.ChrW(Keys.F) Then
                 SendCMD(7)
+                FW_ACTION = FW_TEST_WAITING
+                Label15.Text = "WAITING"
+                Label15.ForeColor = Color.Empty
+                Timer5.Interval = 1000
+                Timer5.Enabled = True
             ElseIf UCase(e.KeyChar) = Strings.ChrW(Keys.M) Then
                 SendCMD(16)
             ElseIf UCase(e.KeyChar) = Strings.ChrW(Keys.J) Then
@@ -1045,6 +1078,46 @@ Public Class frmMain
                 SendCMD(17)
             ElseIf UCase(e.KeyChar) = Strings.ChrW(Keys.D) Then
                 SendCMD(18)
+            ElseIf Asc(e.KeyChar) = 46 Then   '.
+                Dim intNumber As Integer = 0
+                intNumber = Val("&H" + TextBox4.Text + "&")
+                If intNumber >= 255 Then
+                    intNumber = 255
+                    TextBox4.Text = Hex(intNumber)
+                Else
+                    TextBox4.Text = Hex(intNumber + 1)
+                End If
+                SendCMD(22)
+            ElseIf Asc(e.KeyChar) = 44 Then     ',
+                Dim intNumber As Integer = 0
+                intNumber = Val("&H" + TextBox4.Text + "&")
+                If intNumber <= 0 Then
+                    intNumber = 0
+                    TextBox4.Text = Hex(intNumber)
+                Else
+                    TextBox4.Text = Hex(intNumber - 1)
+                End If
+                SendCMD(22)
+            ElseIf Asc(e.KeyChar) = 60 Then     '<
+                Dim intNumber As Integer = 0
+                intNumber = Val("&H" + TextBox4.Text + "&")
+                If intNumber < 16 Then
+                    intNumber = 0
+                    TextBox4.Text = Hex(intNumber)
+                Else
+                    TextBox4.Text = Hex(intNumber - 16)
+                End If
+                SendCMD(22)
+            ElseIf Asc(e.KeyChar) = 62 Then     '>
+                Dim intNumber As Integer = 0
+                intNumber = Val("&H" + TextBox4.Text + "&")
+                If intNumber > 255 - 16 Then
+                    intNumber = 255
+                    TextBox4.Text = Hex(intNumber)
+                Else
+                    TextBox4.Text = Hex(intNumber + 16)
+                End If
+                SendCMD(22)
             End If
         End If
         If UCase(e.KeyChar) = Strings.ChrW(Keys.E) Then
@@ -1142,13 +1215,19 @@ Public Class frmMain
             My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", strTemp, True)
         Next
 #End If
-            'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
+        'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
 #If FileModeAppend = False Then
-        If intSaveFileFlag = False Then
-            MsgBox("資料檔案未存檔！")
-        Else
-            MsgBox("新建資料存檔完畢！")
-        End If
+        Try
+            If intSaveFileFlag = False Then
+                MsgBox("暫存器資料未存檔！", vbCritical)
+            Else
+
+                MsgBox("暫存器資料存檔完畢！", vbInformation)
+            End If
+        Catch ex As Exception
+
+        End Try
+
 #Else
         MsgBox("增加資料存檔完畢！")
 #End If
@@ -1186,18 +1265,10 @@ Public Class frmMain
 
         ' DEBUGTextBox1.Text &= REG(Index).Name & "W=" & REG(Index).Text & vbNewLine
 
-     
+
 
     End Sub
 
-    Private Sub REG31_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG31.KeyPress
-
-        If Asc(e.KeyChar) = 13 Then   '13 =enter key
-            REGKeyCheck(&H31&)
-        End If
-    End Sub
-
- 
     Private Sub Button16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button16.Click
         Dim REG() As TextBox = { _
                       REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
@@ -1313,6 +1384,7 @@ Public Class frmMain
         RW_REG_Action = REG_WRITE_MODE   'Write mode
         TextBox3.Text = Hex(WriteREG_Loop)
         TextBox4.Text = REG00.Text
+        btnREGGroup.Enabled = False
         DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
         SendCMD(22)
         'Button14.Enabled = False
@@ -1320,15 +1392,39 @@ Public Class frmMain
         'TabControl1.Enabled = False
     End Sub
 
-    Private Sub REG02_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG02.KeyPress
-        If Asc(e.KeyChar) = 13 Then   '13 =enter key
-            WRITEREGDATA(2)
-        End If
-    End Sub
-    Private Sub REG00_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG00.KeyPress
+    Private Sub REG00_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG00.KeyPress, REGFF.KeyPress, REGFE.KeyPress, REGFD.KeyPress, REGFC.KeyPress, REGFB.KeyPress, REGFA.KeyPress, REGF9.KeyPress, REGF8.KeyPress, REGF7.KeyPress, REGF6.KeyPress, REGF5.KeyPress, REGF4.KeyPress, REGF3.KeyPress, REGF2.KeyPress, REGF1.KeyPress, REGF0.KeyPress, REGEF.KeyPress, REGEE.KeyPress, REGED.KeyPress, REGEC.KeyPress, REGEB.KeyPress, REGEA.KeyPress, REGE9.KeyPress, REGE8.KeyPress, REGE7.KeyPress, REGE6.KeyPress, REGE5.KeyPress, REGE4.KeyPress, REGE3.KeyPress, REGE2.KeyPress, REGE1.KeyPress, REGE0.KeyPress, REGDF.KeyPress, REGDE.KeyPress, REGDD.KeyPress, REGDC.KeyPress, REGDB.KeyPress, REGDA.KeyPress, REGD9.KeyPress, REGD8.KeyPress, REGD7.KeyPress, REGD6.KeyPress, REGD5.KeyPress, REGD4.KeyPress, REGD3.KeyPress, REGD2.KeyPress, REGD1.KeyPress, REGD0.KeyPress, REGCF.KeyPress, REGCE.KeyPress, REGCD.KeyPress, REGCC.KeyPress, REGCB.KeyPress, REGCA.KeyPress, REGC9.KeyPress, REGC8.KeyPress, REGC7.KeyPress, REGC6.KeyPress, REGC5.KeyPress, REGC4.KeyPress, REGC3.KeyPress, REGC2.KeyPress, REGC1.KeyPress, REGC0.KeyPress, REGBF.KeyPress, REGBE.KeyPress, REGBD.KeyPress, REGBC.KeyPress, REGBB.KeyPress, REGBA.KeyPress, REGB9.KeyPress, REGB8.KeyPress, REGB7.KeyPress, REGB6.KeyPress, REGB5.KeyPress, REGB4.KeyPress, REGB3.KeyPress, REGB2.KeyPress, REGB1.KeyPress, REGB0.KeyPress, REGAF.KeyPress, REGAE.KeyPress, REGAD.KeyPress, REGAC.KeyPress, REGAB.KeyPress, REGAA.KeyPress, REGA9.KeyPress, REGA8.KeyPress, REGA7.KeyPress, REGA6.KeyPress, REGA5.KeyPress, REGA4.KeyPress, REGA3.KeyPress, REGA2.KeyPress, REGA1.KeyPress, REGA0.KeyPress, REG9F.KeyPress, REG9E.KeyPress, REG9D.KeyPress, REG9C.KeyPress, REG9B.KeyPress, REG9A.KeyPress, REG99.KeyPress, REG98.KeyPress, REG97.KeyPress, REG96.KeyPress, REG95.KeyPress, REG94.KeyPress, REG93.KeyPress, REG92.KeyPress, REG91.KeyPress, REG90.KeyPress, REG8F.KeyPress, REG8E.KeyPress, REG8D.KeyPress, REG8C.KeyPress, REG8B.KeyPress, REG8A.KeyPress, REG89.KeyPress, REG88.KeyPress, REG87.KeyPress, REG86.KeyPress, REG85.KeyPress, REG84.KeyPress, REG83.KeyPress, REG82.KeyPress, REG81.KeyPress, REG80.KeyPress, REG7F.KeyPress, REG7E.KeyPress, REG7D.KeyPress, REG7C.KeyPress, REG7B.KeyPress, REG7A.KeyPress, REG79.KeyPress, REG78.KeyPress, REG77.KeyPress, REG76.KeyPress, REG75.KeyPress, REG74.KeyPress, REG73.KeyPress, REG72.KeyPress, REG71.KeyPress, REG70.KeyPress, REG6F.KeyPress, REG6E.KeyPress, REG6D.KeyPress, REG6C.KeyPress, REG6B.KeyPress, REG6A.KeyPress, REG69.KeyPress, REG68.KeyPress, REG67.KeyPress, REG66.KeyPress, REG65.KeyPress, REG64.KeyPress, REG63.KeyPress, REG62.KeyPress, REG61.KeyPress, REG60.KeyPress, REG5F.KeyPress, REG5E.KeyPress, REG5D.KeyPress, REG5C.KeyPress, REG5B.KeyPress, REG5A.KeyPress, REG59.KeyPress, REG58.KeyPress, REG57.KeyPress, REG56.KeyPress, REG55.KeyPress, REG54.KeyPress, REG53.KeyPress, REG52.KeyPress, REG51.KeyPress, REG50.KeyPress, REG4F.KeyPress, REG4E.KeyPress, REG4D.KeyPress, REG4C.KeyPress, REG4B.KeyPress, REG4A.KeyPress, REG49.KeyPress, REG48.KeyPress, REG47.KeyPress, REG46.KeyPress, REG45.KeyPress, REG44.KeyPress, REG43.KeyPress, REG42.KeyPress, REG41.KeyPress, REG40.KeyPress, REG3F.KeyPress, REG3E.KeyPress, REG3D.KeyPress, REG3C.KeyPress, REG3B.KeyPress, REG3A.KeyPress, REG39.KeyPress, REG38.KeyPress, REG37.KeyPress, REG36.KeyPress, REG35.KeyPress, REG34.KeyPress, REG33.KeyPress, REG32.KeyPress, REG31.KeyPress, REG30.KeyPress, REG2F.KeyPress, REG2E.KeyPress, REG2D.KeyPress, REG2C.KeyPress, REG2B.KeyPress, REG2A.KeyPress, REG29.KeyPress, REG28.KeyPress, REG27.KeyPress, REG26.KeyPress, REG25.KeyPress, REG24.KeyPress, REG23.KeyPress, REG22.KeyPress, REG21.KeyPress, REG20.KeyPress, REG1F.KeyPress, REG1E.KeyPress, REG1D.KeyPress, REG1C.KeyPress, REG1B.KeyPress, REG1A.KeyPress, REG19.KeyPress, REG18.KeyPress, REG17.KeyPress, REG16.KeyPress, REG15.KeyPress, REG14.KeyPress, REG13.KeyPress, REG12.KeyPress, REG11.KeyPress, REG10.KeyPress, REG0F.KeyPress, REG0E.KeyPress, REG0D.KeyPress, REG0C.KeyPress, REG0B.KeyPress, REG0A.KeyPress, REG09.KeyPress, REG08.KeyPress, REG07.KeyPress, REG06.KeyPress, REG05.KeyPress, REG04.KeyPress, REG03.KeyPress, REG02.KeyPress, REG01.KeyPress
+
+        '接著就是把該物件的Id顯示出來
+        Dim txt As TextBox = CType(sender, TextBox)
+        'PRINT(txt.Name)
         If Asc(e.KeyChar) = 13 Then
-            WRITEREGDATA(0)
+            WRITEREGDATA(txt.Name)
         End If
+
+
+
+
+    End Sub
+
+
+    Private Sub Timer5_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer5.Tick
+        If FW_ACTION = FW_TEST_WAITING Then
+            Label15.Text = "NG"
+            Label15.ForeColor = Color.Red
+            FW_ACTION = FW_TEST_NG
+            Timer5.Interval = 5000
+        ElseIf FW_ACTION = FW_TEST_PASS Then
+            Label15.Text = "PASS"
+            Label15.ForeColor = Color.Green
+            FW_ACTION = FW_TEST_NO
+            Timer5.Interval = 5000
+        Else
+            Label15.Text = ""
+            Label15.ForeColor = Color.Empty
+            Timer5.Interval = 1000
+            Timer5.Enabled = False
+        End If
+
     End Sub
 End Class
 'Whole Code Ends Here ....
