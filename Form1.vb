@@ -335,8 +335,10 @@ Public Class frmMain
 
             Me.rtbReceived.Text &= [text]
             Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
-            Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-            Me.rtbReceived.Focus()
+            'Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+            'Me.rtbReceived.Focus()
+
+            'Me.rtbReceived.Select(Me.rtbReceived.Text.Length, 0)
 
             'Me.DEBUGTextBox1.Text &= vbNewLine
             Str_number = InStr(1, Me.rtbReceived.Text, "STX")
@@ -396,9 +398,9 @@ Public Class frmMain
                 FW_ACTION = FW_TEST_PASS
             End If
 
-            Me.DEBUGTextBox1.SelectionStart = Me.DEBUGTextBox1.Text.Length   '文本的选取长度
-            Me.DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-            Me.DEBUGTextBox1.Focus()
+            'Me.DEBUGTextBox1.SelectionStart = Me.DEBUGTextBox1.Text.Length   '文本的选取长度
+            'Me.DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+            'Me.DEBUGTextBox1.Focus()
             CMD_Action = False
         End If
 
@@ -546,8 +548,10 @@ Public Class frmMain
     End Sub
 
     Private Sub rtbReceived_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rtbReceived.TextChanged
-        '    If rtbReceived.Lines.Length > 2 Then
+
         rtbReceived.SelectionStart = Len(rtbReceived.Text)
+
+        '    If rtbReceived.Lines.Length > 2 Then
         'Dim temp As String = ""
         'temp = rtbReceived.Text.Remove(0, rtbReceived.Lines(0).Length + 2) '去除第一行和換行符號
         'rtbReceived.Text = "" '清空
@@ -1437,6 +1441,19 @@ Public Class frmMain
 
     Private Sub TextBox6_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles TextBox6.MouseClick
         TextBox6.Text = ""
+    End Sub
+
+    Private Sub rtbReceived_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles rtbReceived.KeyPress
+
+        If Asc(e.KeyChar) = 13 Then
+            SerialPort1.Write(TextBox6.Text + Chr(13))
+            TextBox6.Text = ""
+        ElseIf Asc(e.KeyChar) = 8 And Len(TextBox6.Text) <> 0 Then
+            TextBox6.Text = Mid(TextBox6.Text, 1, Len(TextBox6.Text) - 1)
+        Else
+            TextBox6.Text &= e.KeyChar
+        End If
+
     End Sub
 End Class
 'Whole Code Ends Here ....

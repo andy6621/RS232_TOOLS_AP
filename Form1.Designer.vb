@@ -74,6 +74,9 @@ Partial Class frmMain
         Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -378,9 +381,6 @@ Partial Class frmMain
         Me.REG00 = New System.Windows.Forms.TextBox()
         Me.Timer4 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -499,9 +499,7 @@ Partial Class frmMain
         Me.rtbReceived.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.rtbReceived.ForeColor = System.Drawing.Color.White
         Me.rtbReceived.Location = New System.Drawing.Point(20, 21)
-        Me.rtbReceived.MaxLength = 10
         Me.rtbReceived.Name = "rtbReceived"
-        Me.rtbReceived.ReadOnly = True
         Me.rtbReceived.Size = New System.Drawing.Size(364, 257)
         Me.rtbReceived.TabIndex = 0
         Me.rtbReceived.Text = ""
@@ -920,6 +918,35 @@ Partial Class frmMain
         Me.TabPage1.Size = New System.Drawing.Size(544, 525)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "控制功能"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label16.Location = New System.Drawing.Point(59, 459)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(103, 21)
+        Me.Label16.TabIndex = 55
+        Me.Label16.Text = "TX Message"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(383, 456)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(97, 25)
+        Me.CheckBox1.TabIndex = 54
+        Me.CheckBox1.Text = "HOT KEY"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.TextBox6.Location = New System.Drawing.Point(168, 456)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(142, 29)
+        Me.TextBox6.TabIndex = 53
         '
         'Label15
         '
@@ -4592,35 +4619,6 @@ Partial Class frmMain
         'Timer5
         '
         Me.Timer5.Interval = 1000
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(168, 456)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(142, 29)
-        Me.TextBox6.TabIndex = 53
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(383, 456)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(97, 25)
-        Me.CheckBox1.TabIndex = 54
-        Me.CheckBox1.Text = "HOT KEY"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label16.Location = New System.Drawing.Point(59, 459)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(103, 21)
-        Me.Label16.TabIndex = 55
-        Me.Label16.Text = "TX Message"
         '
         'frmMain
         '
