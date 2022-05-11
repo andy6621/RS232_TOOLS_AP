@@ -83,14 +83,13 @@ Partial Class frmMain
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.btnREGGroup = New System.Windows.Forms.GroupBox()
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
         Me.Button15 = New System.Windows.Forms.Button()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.TextBox36 = New System.Windows.Forms.TextBox()
         Me.REG0F = New System.Windows.Forms.TextBox()
         Me.TextBox35 = New System.Windows.Forms.TextBox()
@@ -1002,9 +1001,8 @@ Partial Class frmMain
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage2.Controls.Add(Me.ComboBox6)
         Me.TabPage2.Controls.Add(Me.btnREGGroup)
-        Me.TabPage2.Controls.Add(Me.Label14)
-        Me.TabPage2.Controls.Add(Me.Label13)
         Me.TabPage2.Controls.Add(Me.TextBox36)
         Me.TabPage2.Controls.Add(Me.REG0F)
         Me.TabPage2.Controls.Add(Me.TextBox35)
@@ -1301,6 +1299,17 @@ Partial Class frmMain
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "REG.功能"
         '
+        'ComboBox6
+        '
+        Me.ComboBox6.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.ComboBox6.ForeColor = System.Drawing.Color.Fuchsia
+        Me.ComboBox6.FormattingEnabled = True
+        Me.ComboBox6.Items.AddRange(New Object() {"VS4210", "TP2824", "EEPROM", "VS8812"})
+        Me.ComboBox6.Location = New System.Drawing.Point(21, 482)
+        Me.ComboBox6.Name = "ComboBox6"
+        Me.ComboBox6.Size = New System.Drawing.Size(101, 29)
+        Me.ComboBox6.TabIndex = 29
+        '
         'btnREGGroup
         '
         Me.btnREGGroup.Controls.Add(Me.Button18)
@@ -1363,26 +1372,6 @@ Partial Class frmMain
         Me.Button15.TabIndex = 2
         Me.Button15.Text = "Save"
         Me.Button15.UseVisualStyleBackColor = True
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label14.ForeColor = System.Drawing.Color.Red
-        Me.Label14.Location = New System.Drawing.Point(60, 486)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(70, 21)
-        Me.Label14.TabIndex = 5
-        Me.Label14.Text = "VS4210"
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(27, 488)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(27, 16)
-        Me.Label13.TabIndex = 4
-        Me.Label13.Text = "IC:"
         '
         'TextBox36
         '
@@ -4642,7 +4631,6 @@ Partial Class frmMain
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.Text = "ML076Q TEST TOOL"
         Me.GroupBox1.ResumeLayout(False)
@@ -5005,8 +4993,6 @@ Partial Class frmMain
     Friend WithEvents REG19 As System.Windows.Forms.TextBox
     Friend WithEvents REG11 As System.Windows.Forms.TextBox
     Friend WithEvents REG18 As System.Windows.Forms.TextBox
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Button16 As System.Windows.Forms.Button
     Friend WithEvents Button17 As System.Windows.Forms.Button
     Friend WithEvents Button18 As System.Windows.Forms.Button
@@ -5016,5 +5002,6 @@ Partial Class frmMain
     Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox6 As System.Windows.Forms.ComboBox
 
 End Class

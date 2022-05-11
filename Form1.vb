@@ -83,7 +83,7 @@ Public Class frmMain
         Timer2.Enabled = True '啟動Timer2
 
         'TabControl1.SelectedIndex = 0
-
+        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
     End Sub
     Function ReceiveSerialData() As String
         ' Receive strings from a serial port.
@@ -334,7 +334,7 @@ Public Class frmMain
             Str = [text]
 
             Me.rtbReceived.Text &= [text]
-            Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
+            'Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
             'Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
             'Me.rtbReceived.Focus()
 
@@ -347,6 +347,11 @@ Public Class frmMain
                 '    Me.DEBUGTextBox1.Text &= "STX ADDR=" & Str_number.ToString() & " "
                 If (InStr(1, Me.rtbReceived.Text, "ETX") = (Str_number + 11)) Then
                     Me.DEBUGTextBox1.Text &= "R " & Mid(Me.rtbReceived.Text, Str_number + 3, 2) & " " & Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2) & vbNewLine
+
+                    DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
+                    DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+                    DEBUGTextBox1.Focus()
+
                     TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2)
 
                     GETREGDATA(Mid(Me.rtbReceived.Text, Str_number + 3, 2), TextBox5.Text)
@@ -488,6 +493,11 @@ Public Class frmMain
         TextBox2.Text = TextBox3.Text
         TextBox4.Text = REG(Integer.Parse(Val("&H" + (Mid(Str, 4, 2)) + "&"))).Text
         DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
+
+        'DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
+        'DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+        'DEBUGTextBox1.Focus()
+
         SendCMD(22)
 
     End Sub
@@ -1006,7 +1016,7 @@ Public Class frmMain
             TextBox1.Text = "12"
         End If
 
-        Label14.Text = ComboBox2.Text
+        ComboBox6.Text = ComboBox2.Text
 
     End Sub
 
@@ -1298,6 +1308,7 @@ Public Class frmMain
         Dim FileNum As Integer
         Dim strTemp As String = ""
         Dim strTemp2 As String = ""
+        Dim I2CAddr As String = ""
         'FileNum = FreeFile()
         'FileOpen(FileNum, My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", OpenMode.Input)
         ''Do Until EOF(FileNum)
@@ -1307,7 +1318,7 @@ Public Class frmMain
         'FileClose(FileNum)
 
         Dim openFileDialog1 As New OpenFileDialog()
-        Dim intStringNumber As Integer = 0
+        Dim intStringNumber As Integer = 1
 
         openFileDialog1.Title = "開啟檔案"
         openFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
@@ -1323,7 +1334,30 @@ Public Class frmMain
 
             Do Until EOF(FileNum)
                 strTemp = LineInput(FileNum) '& vbNewLine
-                intStringNumber = InStr(1, strTemp, TextBox1.Text)
+                ' intStringNumber = InStr(1, strTemp, TextBox1.Text)
+                I2CAddr = Mid(strTemp, 1, 2)
+                intStringNumber = 1
+                Select Case I2CAddr
+                    Case "40"
+                        TextBox1.Text = I2CAddr
+                        ComboBox2.SelectedIndex = 0
+                        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+                    Case "88"
+                        TextBox1.Text = I2CAddr
+                        ComboBox2.SelectedIndex = 1
+                        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+                    Case "A0"
+                        TextBox1.Text = I2CAddr
+                        ComboBox2.SelectedIndex = 2
+                        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+                    Case "12"
+                        TextBox1.Text = I2CAddr
+                        ComboBox2.SelectedIndex = 3
+                        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+                    Case Else
+                        intStringNumber = 0
+                End Select
+
                 If intStringNumber Then
 
                     If REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).Text <> Mid(strTemp, 1 + 6, 2) Then
@@ -1454,6 +1488,20 @@ Public Class frmMain
             TextBox6.Text &= e.KeyChar
         End If
 
+    End Sub
+
+    Private Sub ComboBox6_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox6.SelectedIndexChanged
+        If ComboBox6.SelectedIndex = 0 Then
+            TextBox1.Text = "40"
+        ElseIf ComboBox6.SelectedIndex = 1 Then
+            TextBox1.Text = "88"
+        ElseIf ComboBox6.SelectedIndex = 2 Then
+            TextBox1.Text = "A0"
+        ElseIf ComboBox6.SelectedIndex = 3 Then
+            TextBox1.Text = "12"
+        End If
+
+        ComboBox2.SelectedIndex = ComboBox6.SelectedIndex
     End Sub
 End Class
 'Whole Code Ends Here ....
