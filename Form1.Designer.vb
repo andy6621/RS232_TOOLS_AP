@@ -380,6 +380,7 @@ Partial Class frmMain
         Me.REG00 = New System.Windows.Forms.TextBox()
         Me.Timer4 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -502,6 +503,7 @@ Partial Class frmMain
         Me.rtbReceived.Size = New System.Drawing.Size(364, 257)
         Me.rtbReceived.TabIndex = 0
         Me.rtbReceived.Text = ""
+        Me.rtbReceived.WordWrap = False
         '
         'SerialPort1
         '
@@ -518,7 +520,7 @@ Partial Class frmMain
         Me.GroupBox3.Size = New System.Drawing.Size(400, 273)
         Me.GroupBox3.TabIndex = 8
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "RX Message"
+        Me.GroupBox3.Text = "Debug Message"
         '
         'DEBUGTextBox1
         '
@@ -4609,6 +4611,10 @@ Partial Class frmMain
         '
         Me.Timer5.Interval = 1000
         '
+        'Timer6
+        '
+        Me.Timer6.Interval = 8000
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -5003,5 +5009,6 @@ Partial Class frmMain
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents ComboBox6 As System.Windows.Forms.ComboBox
+    Friend WithEvents Timer6 As System.Windows.Forms.Timer
 
 End Class

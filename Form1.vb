@@ -84,6 +84,49 @@ Public Class frmMain
 
         'TabControl1.SelectedIndex = 0
         ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+
+        BootStartup()
+
+    End Sub
+    Sub BootStartup()
+
+        Dim REG() As TextBox = { _
+        REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+        REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+        REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+        REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+        REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+        REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+        REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+        REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+        REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+        REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+        REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+        REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+        REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+        REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+        REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+        REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        Try
+            Dim FileNum As Integer
+            Dim strTemp As String
+            FileNum = FreeFile()
+            FileOpen(FileNum, My.Computer.FileSystem.CurrentDirectory() & "\RS232.ini", OpenMode.Input)
+
+            Do Until EOF(FileNum)
+                strTemp = LineInput(FileNum)
+                If InStr(1, strTemp, "CheckBox1=True") Then
+                    CheckBox1.Checked = True
+                ElseIf InStr(1, strTemp, "REG") Then
+                    REG(Integer.Parse(Val("&H" + Mid(strTemp, 4, 2) + "&"))).BackColor = Color.Yellow
+                End If
+            Loop
+            FileClose(FileNum)
+        Catch ex As Exception
+
+        End Try
     End Sub
     Function ReceiveSerialData() As String
         ' Receive strings from a serial port.
@@ -334,10 +377,12 @@ Public Class frmMain
             Str = [text]
 
             Me.rtbReceived.Text &= [text]
-            'Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
-            'Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-            'Me.rtbReceived.Focus()
+            Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
+            Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+            Me.rtbReceived.Focus()
+            Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
 
+            'Alignment
             'Me.rtbReceived.Select(Me.rtbReceived.Text.Length, 0)
 
             'Me.DEBUGTextBox1.Text &= vbNewLine
@@ -350,7 +395,8 @@ Public Class frmMain
 
                     DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
                     DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-                    DEBUGTextBox1.Focus()
+                    Me.DEBUGTextBox1.SelectionAlignment = 0
+                    'DEBUGTextBox1.Focus()
 
                     TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2)
 
@@ -423,7 +469,13 @@ Public Class frmMain
         End If
     End Sub
     Private Sub PRINT(ByVal str As String)
+
         DEBUGTextBox1.Text &= str & vbNewLine
+        DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
+        DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+        'DEBUGTextBox1.Focus()
+        DEBUGTextBox1.SelectionAlignment = 0
+
     End Sub
     Private Sub GETREGDATA(ByVal Addr As String, ByVal Data As String)
 
@@ -468,35 +520,41 @@ Public Class frmMain
         'End Try
         'Val("&H" + (Addr) + "&")
     End Sub
-    Private Sub WRITEREGDATA(ByVal Str As String)
+    'Private Sub WRITEREGDATA(ByVal Str As String)
+    Private Sub WRITEREGDATA(ByVal REG As Object)
+        '       Dim REG() As TextBox = { _
+        '      REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+        '      REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+        '      REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+        '      REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+        '      REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+        '      REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+        '      REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+        '      REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+        '_
+        '      REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+        '      REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+        '      REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+        '      REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+        '      REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+        '      REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+        '      REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+        '      REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
 
-        Dim REG() As TextBox = { _
-       REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
-       REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
-       REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
-       REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
-       REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
-       REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
-       REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
-       REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
- _
-       REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
-       REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
-       REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
-       REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
-       REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
-       REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
-       REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
-       REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
-
-        TextBox3.Text = Mid(Str, 4, 2)
-        TextBox2.Text = TextBox3.Text
-        TextBox4.Text = REG(Integer.Parse(Val("&H" + (Mid(Str, 4, 2)) + "&"))).Text
-        DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
+        '       TextBox3.Text = Mid(Str, 4, 2)
+        '       TextBox2.Text = TextBox3.Text
+        '       TextBox4.Text = REG(Integer.Parse(Val("&H" + (Mid(Str, 4, 2)) + "&"))).Text
+        '       DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
 
         'DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
         'DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
         'DEBUGTextBox1.Focus()
+        'Dim txt As TextBox = CType(REG, TextBox)
+
+        TextBox3.Text = Mid(REG.Name, 4, 2)
+        TextBox2.Text = TextBox3.Text
+        TextBox4.Text = REG.Text
+        DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
 
         SendCMD(22)
 
@@ -759,13 +817,64 @@ Public Class frmMain
 
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+        ExitSaveConfiguration()
+
         SerialPort1.Close()
         Timer2.Enabled = False
         Timer1.Enabled = False
         Timer3.Enabled = False
         Me.Close()
     End Sub
+    Sub ExitSaveConfiguration()
 
+        Dim intSaveFileFlag As Boolean = False
+        Dim REG() As TextBox = { _
+        REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+        REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+        REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+        REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+        REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+        REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+        REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+        REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+        REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+        REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+        REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+        REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+        REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+        REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+        REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+        REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        Dim FileNum As Integer
+        Dim strTemp As String
+        Dim strTemp2 As String = ""
+        Dim DayString, TimeString As String '用來顯示日期與時間字串變數
+        FileNum = FreeFile()
+        FileOpen(FileNum, My.Computer.FileSystem.CurrentDirectory() & "\RS232.ini", OpenMode.Output)
+        DayString = Format(Now, "yyyy/MM/dd") '指定DayString為時間格式為有西元年的日期
+        TimeString = TimeOfDay.ToString("tt h:mm:ss ")
+        strTemp = "," + DayString + Space(1) + TimeString '將結果Show在Label1(space(1)為空一格)
+        PrintLine(FileNum, strTemp)
+        strTemp2 &= strTemp & vbNewLine
+
+        If CheckBox1.Checked = True Then
+            strTemp = CheckBox1.Name & "=True"
+            PrintLine(FileNum, strTemp)
+        End If
+        For index As Integer = 0 To REG.Count - 1
+            If REG(index).BackColor = Color.Yellow Then
+                strTemp = REG(index).Name '& "=" & Mid(REG(index).Name, 4, 2) & "," & REG(index).Text
+                PrintLine(FileNum, strTemp)
+            End If
+            'strTemp = TextBox1.Text & "," & Mid(REG(index).Name, 4, 2) & "," & REG(index).Text
+            'PrintLine(FileNum, strTemp)
+            'strTemp2 &= strTemp & vbNewLine
+        Next
+        FileClose(FileNum)
+    End Sub
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
         Me.rtbReceived.Text = ""
         Label15.Text = ""
@@ -1066,9 +1175,10 @@ Public Class frmMain
         RW_REG_Action = REG_READ_MODE  'dump mode
         TextBox2.Text = Hex(Dump_Loop)
         SendCMD(21)
-        Button14.Enabled = False
-        Button15.Enabled = False
+        'Button14.Enabled = False
+        'Button15.Enabled = False
         btnREGGroup.Enabled = False
+        Timer6.Enabled = True
     End Sub
 
 
@@ -1140,6 +1250,9 @@ Public Class frmMain
 
     End Sub
     Sub ExitAPP()
+
+        ExitSaveConfiguration()
+
         SerialPort1.Close()
         Timer2.Enabled = False
         Timer1.Enabled = False
@@ -1411,6 +1524,7 @@ Public Class frmMain
         For index As Integer = 0 To 255
             REG(index).Text = "00"
             REG(index).ForeColor = Color.Empty
+            REG(index).BackColor = Color.Empty
         Next
 
     End Sub
@@ -1428,20 +1542,17 @@ Public Class frmMain
         'Button14.Enabled = False
         'Button15.Enabled = False
         'TabControl1.Enabled = False
+        Timer6.Enabled = True
     End Sub
 
     Private Sub REG00_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG00.KeyPress, REGFF.KeyPress, REGFE.KeyPress, REGFD.KeyPress, REGFC.KeyPress, REGFB.KeyPress, REGFA.KeyPress, REGF9.KeyPress, REGF8.KeyPress, REGF7.KeyPress, REGF6.KeyPress, REGF5.KeyPress, REGF4.KeyPress, REGF3.KeyPress, REGF2.KeyPress, REGF1.KeyPress, REGF0.KeyPress, REGEF.KeyPress, REGEE.KeyPress, REGED.KeyPress, REGEC.KeyPress, REGEB.KeyPress, REGEA.KeyPress, REGE9.KeyPress, REGE8.KeyPress, REGE7.KeyPress, REGE6.KeyPress, REGE5.KeyPress, REGE4.KeyPress, REGE3.KeyPress, REGE2.KeyPress, REGE1.KeyPress, REGE0.KeyPress, REGDF.KeyPress, REGDE.KeyPress, REGDD.KeyPress, REGDC.KeyPress, REGDB.KeyPress, REGDA.KeyPress, REGD9.KeyPress, REGD8.KeyPress, REGD7.KeyPress, REGD6.KeyPress, REGD5.KeyPress, REGD4.KeyPress, REGD3.KeyPress, REGD2.KeyPress, REGD1.KeyPress, REGD0.KeyPress, REGCF.KeyPress, REGCE.KeyPress, REGCD.KeyPress, REGCC.KeyPress, REGCB.KeyPress, REGCA.KeyPress, REGC9.KeyPress, REGC8.KeyPress, REGC7.KeyPress, REGC6.KeyPress, REGC5.KeyPress, REGC4.KeyPress, REGC3.KeyPress, REGC2.KeyPress, REGC1.KeyPress, REGC0.KeyPress, REGBF.KeyPress, REGBE.KeyPress, REGBD.KeyPress, REGBC.KeyPress, REGBB.KeyPress, REGBA.KeyPress, REGB9.KeyPress, REGB8.KeyPress, REGB7.KeyPress, REGB6.KeyPress, REGB5.KeyPress, REGB4.KeyPress, REGB3.KeyPress, REGB2.KeyPress, REGB1.KeyPress, REGB0.KeyPress, REGAF.KeyPress, REGAE.KeyPress, REGAD.KeyPress, REGAC.KeyPress, REGAB.KeyPress, REGAA.KeyPress, REGA9.KeyPress, REGA8.KeyPress, REGA7.KeyPress, REGA6.KeyPress, REGA5.KeyPress, REGA4.KeyPress, REGA3.KeyPress, REGA2.KeyPress, REGA1.KeyPress, REGA0.KeyPress, REG9F.KeyPress, REG9E.KeyPress, REG9D.KeyPress, REG9C.KeyPress, REG9B.KeyPress, REG9A.KeyPress, REG99.KeyPress, REG98.KeyPress, REG97.KeyPress, REG96.KeyPress, REG95.KeyPress, REG94.KeyPress, REG93.KeyPress, REG92.KeyPress, REG91.KeyPress, REG90.KeyPress, REG8F.KeyPress, REG8E.KeyPress, REG8D.KeyPress, REG8C.KeyPress, REG8B.KeyPress, REG8A.KeyPress, REG89.KeyPress, REG88.KeyPress, REG87.KeyPress, REG86.KeyPress, REG85.KeyPress, REG84.KeyPress, REG83.KeyPress, REG82.KeyPress, REG81.KeyPress, REG80.KeyPress, REG7F.KeyPress, REG7E.KeyPress, REG7D.KeyPress, REG7C.KeyPress, REG7B.KeyPress, REG7A.KeyPress, REG79.KeyPress, REG78.KeyPress, REG77.KeyPress, REG76.KeyPress, REG75.KeyPress, REG74.KeyPress, REG73.KeyPress, REG72.KeyPress, REG71.KeyPress, REG70.KeyPress, REG6F.KeyPress, REG6E.KeyPress, REG6D.KeyPress, REG6C.KeyPress, REG6B.KeyPress, REG6A.KeyPress, REG69.KeyPress, REG68.KeyPress, REG67.KeyPress, REG66.KeyPress, REG65.KeyPress, REG64.KeyPress, REG63.KeyPress, REG62.KeyPress, REG61.KeyPress, REG60.KeyPress, REG5F.KeyPress, REG5E.KeyPress, REG5D.KeyPress, REG5C.KeyPress, REG5B.KeyPress, REG5A.KeyPress, REG59.KeyPress, REG58.KeyPress, REG57.KeyPress, REG56.KeyPress, REG55.KeyPress, REG54.KeyPress, REG53.KeyPress, REG52.KeyPress, REG51.KeyPress, REG50.KeyPress, REG4F.KeyPress, REG4E.KeyPress, REG4D.KeyPress, REG4C.KeyPress, REG4B.KeyPress, REG4A.KeyPress, REG49.KeyPress, REG48.KeyPress, REG47.KeyPress, REG46.KeyPress, REG45.KeyPress, REG44.KeyPress, REG43.KeyPress, REG42.KeyPress, REG41.KeyPress, REG40.KeyPress, REG3F.KeyPress, REG3E.KeyPress, REG3D.KeyPress, REG3C.KeyPress, REG3B.KeyPress, REG3A.KeyPress, REG39.KeyPress, REG38.KeyPress, REG37.KeyPress, REG36.KeyPress, REG35.KeyPress, REG34.KeyPress, REG33.KeyPress, REG32.KeyPress, REG31.KeyPress, REG30.KeyPress, REG2F.KeyPress, REG2E.KeyPress, REG2D.KeyPress, REG2C.KeyPress, REG2B.KeyPress, REG2A.KeyPress, REG29.KeyPress, REG28.KeyPress, REG27.KeyPress, REG26.KeyPress, REG25.KeyPress, REG24.KeyPress, REG23.KeyPress, REG22.KeyPress, REG21.KeyPress, REG20.KeyPress, REG1F.KeyPress, REG1E.KeyPress, REG1D.KeyPress, REG1C.KeyPress, REG1B.KeyPress, REG1A.KeyPress, REG19.KeyPress, REG18.KeyPress, REG17.KeyPress, REG16.KeyPress, REG15.KeyPress, REG14.KeyPress, REG13.KeyPress, REG12.KeyPress, REG11.KeyPress, REG10.KeyPress, REG0F.KeyPress, REG0E.KeyPress, REG0D.KeyPress, REG0C.KeyPress, REG0B.KeyPress, REG0A.KeyPress, REG09.KeyPress, REG08.KeyPress, REG07.KeyPress, REG06.KeyPress, REG05.KeyPress, REG04.KeyPress, REG03.KeyPress, REG02.KeyPress, REG01.KeyPress
 
         '接著就是把該物件的Id顯示出來
-        Dim txt As TextBox = CType(sender, TextBox)
+        'Dim txt As TextBox = CType(sender, TextBox)
         'PRINT(txt.Name)
         If Asc(e.KeyChar) = 13 Then
-            WRITEREGDATA(txt.Name)
+            WRITEREGDATA(sender)
         End If
-
-
-
-
     End Sub
 
 
@@ -1502,6 +1613,117 @@ Public Class frmMain
         End If
 
         ComboBox2.SelectedIndex = ComboBox6.SelectedIndex
+    End Sub
+
+    Private Sub frmMain_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+
+        If TabControl1.Enabled = True And CheckBox1.Checked = False Then
+
+            If (e.KeyCode = Asc("F") Or e.KeyCode = Asc("f")) AndAlso e.Control Then
+                SendCMD(7)
+                FW_ACTION = FW_TEST_WAITING
+                Label15.Text = "WAITING"
+                Label15.ForeColor = Color.Empty
+                Timer5.Interval = 1000
+                Timer5.Enabled = True
+            ElseIf (e.KeyCode = Asc("M") Or e.KeyCode = Asc("m")) AndAlso e.Control Then
+                SendCMD(16)
+            ElseIf (e.KeyCode = Asc("J") Or e.KeyCode = Asc("j")) AndAlso e.Control Then
+                SendCMD(20)
+            ElseIf (e.KeyCode = Asc("S") Or e.KeyCode = Asc("s")) AndAlso e.Control Then
+                SendCMD(19)
+            ElseIf (e.KeyCode = Asc("U") Or e.KeyCode = Asc("u")) AndAlso e.Control Then
+                SendCMD(17)
+            ElseIf (e.KeyCode = Asc("D") Or e.KeyCode = Asc("d")) AndAlso e.Control Then
+                SendCMD(18)
+            ElseIf Asc(e.KeyCode) = 46 Then   '.
+                Dim intNumber As Integer = 0
+                intNumber = Val("&H" + TextBox4.Text + "&")
+                If intNumber >= 255 Then
+                    intNumber = 255
+                    TextBox4.Text = Hex(intNumber)
+                Else
+                    TextBox4.Text = Hex(intNumber + 1)
+                End If
+                SendCMD(22)
+            ElseIf e.KeyCode = Asc(",") Then     ',
+                Dim intNumber As Integer = 0
+                intNumber = Val("&H" + TextBox4.Text + "&")
+                If intNumber <= 0 Then
+                    intNumber = 0
+                    TextBox4.Text = Hex(intNumber)
+                Else
+                    TextBox4.Text = Hex(intNumber - 1)
+                End If
+                SendCMD(22)
+            ElseIf e.KeyCode = Asc("<") Then     '<
+                Dim intNumber As Integer = 0
+                intNumber = Val("&H" + TextBox4.Text + "&")
+                If intNumber < 16 Then
+                    intNumber = 0
+                    TextBox4.Text = Hex(intNumber)
+                Else
+                    TextBox4.Text = Hex(intNumber - 16)
+                End If
+                SendCMD(22)
+            ElseIf e.KeyCode = Asc(">") Then     '>
+                Dim intNumber As Integer = 0
+                intNumber = Val("&H" + TextBox4.Text + "&")
+                If intNumber > 255 - 16 Then
+                    intNumber = 255
+                    TextBox4.Text = Hex(intNumber)
+                Else
+                    TextBox4.Text = Hex(intNumber + 16)
+                End If
+                SendCMD(22)
+            End If
+            If (e.KeyCode = Asc("E") Or e.KeyCode = Asc("e")) AndAlso e.Control Then
+                ExitAPP()
+            End If
+            PRINT("Key=" & Asc(e.KeyCode))
+        End If
+    End Sub
+
+    Private Sub REG00_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles REGFF.MouseDoubleClick, REGFE.MouseDoubleClick, REGFD.MouseDoubleClick, REGFC.MouseDoubleClick, REGFB.MouseDoubleClick, REGFA.MouseDoubleClick, REGF9.MouseDoubleClick, REGF8.MouseDoubleClick, REGF7.MouseDoubleClick, REGF6.MouseDoubleClick, REGF5.MouseDoubleClick, REGF4.MouseDoubleClick, REGF3.MouseDoubleClick, REGF2.MouseDoubleClick, REGF1.MouseDoubleClick, REGF0.MouseDoubleClick, REGEF.MouseDoubleClick, REGEE.MouseDoubleClick, REGED.MouseDoubleClick, REGEC.MouseDoubleClick, REGEB.MouseDoubleClick, REGEA.MouseDoubleClick, REGE9.MouseDoubleClick, REGE8.MouseDoubleClick, REGE7.MouseDoubleClick, REGE6.MouseDoubleClick, REGE5.MouseDoubleClick, REGE4.MouseDoubleClick, REGE3.MouseDoubleClick, REGE2.MouseDoubleClick, REGE1.MouseDoubleClick, REGE0.MouseDoubleClick, REGDF.MouseDoubleClick, REGDE.MouseDoubleClick, REGDD.MouseDoubleClick, REGDC.MouseDoubleClick, REGDB.MouseDoubleClick, REGDA.MouseDoubleClick, REGD9.MouseDoubleClick, REGD8.MouseDoubleClick, REGD7.MouseDoubleClick, REGD6.MouseDoubleClick, REGD5.MouseDoubleClick, REGD4.MouseDoubleClick, REGD3.MouseDoubleClick, REGD2.MouseDoubleClick, REGD1.MouseDoubleClick, REGD0.MouseDoubleClick, REGCF.MouseDoubleClick, REGCE.MouseDoubleClick, REGCD.MouseDoubleClick, REGCC.MouseDoubleClick, REGCB.MouseDoubleClick, REGCA.MouseDoubleClick, REGC9.MouseDoubleClick, REGC8.MouseDoubleClick, REGC7.MouseDoubleClick, REGC6.MouseDoubleClick, REGC5.MouseDoubleClick, REGC4.MouseDoubleClick, REGC3.MouseDoubleClick, REGC2.MouseDoubleClick, REGC1.MouseDoubleClick, REGC0.MouseDoubleClick, REGBF.MouseDoubleClick, REGBE.MouseDoubleClick, REGBD.MouseDoubleClick, REGBC.MouseDoubleClick, REGBB.MouseDoubleClick, REGBA.MouseDoubleClick, REGB9.MouseDoubleClick, REGB8.MouseDoubleClick, REGB7.MouseDoubleClick, REGB6.MouseDoubleClick, REGB5.MouseDoubleClick, REGB4.MouseDoubleClick, REGB3.MouseDoubleClick, REGB2.MouseDoubleClick, REGB1.MouseDoubleClick, REGB0.MouseDoubleClick, REGAF.MouseDoubleClick, REGAE.MouseDoubleClick, REGAD.MouseDoubleClick, REGAC.MouseDoubleClick, REGAB.MouseDoubleClick, REGAA.MouseDoubleClick, REGA9.MouseDoubleClick, REGA8.MouseDoubleClick, REGA7.MouseDoubleClick, REGA6.MouseDoubleClick, REGA5.MouseDoubleClick, REGA4.MouseDoubleClick, REGA3.MouseDoubleClick, REGA2.MouseDoubleClick, REGA1.MouseDoubleClick, REGA0.MouseDoubleClick, REG9F.MouseDoubleClick, REG9E.MouseDoubleClick, REG9D.MouseDoubleClick, REG9C.MouseDoubleClick, REG9B.MouseDoubleClick, REG9A.MouseDoubleClick, REG99.MouseDoubleClick, REG98.MouseDoubleClick, REG97.MouseDoubleClick, REG96.MouseDoubleClick, REG95.MouseDoubleClick, REG94.MouseDoubleClick, REG93.MouseDoubleClick, REG92.MouseDoubleClick, REG91.MouseDoubleClick, REG90.MouseDoubleClick, REG8F.MouseDoubleClick, REG8E.MouseDoubleClick, REG8D.MouseDoubleClick, REG8C.MouseDoubleClick, REG8B.MouseDoubleClick, REG8A.MouseDoubleClick, REG89.MouseDoubleClick, REG88.MouseDoubleClick, REG87.MouseDoubleClick, REG86.MouseDoubleClick, REG85.MouseDoubleClick, REG84.MouseDoubleClick, REG83.MouseDoubleClick, REG82.MouseDoubleClick, REG81.MouseDoubleClick, REG80.MouseDoubleClick, REG7F.MouseDoubleClick, REG7E.MouseDoubleClick, REG7D.MouseDoubleClick, REG7C.MouseDoubleClick, REG7B.MouseDoubleClick, REG7A.MouseDoubleClick, REG79.MouseDoubleClick, REG78.MouseDoubleClick, REG77.MouseDoubleClick, REG76.MouseDoubleClick, REG75.MouseDoubleClick, REG74.MouseDoubleClick, REG73.MouseDoubleClick, REG72.MouseDoubleClick, REG71.MouseDoubleClick, REG70.MouseDoubleClick, REG6F.MouseDoubleClick, REG6E.MouseDoubleClick, REG6D.MouseDoubleClick, REG6C.MouseDoubleClick, REG6B.MouseDoubleClick, REG6A.MouseDoubleClick, REG69.MouseDoubleClick, REG68.MouseDoubleClick, REG67.MouseDoubleClick, REG66.MouseDoubleClick, REG65.MouseDoubleClick, REG64.MouseDoubleClick, REG63.MouseDoubleClick, REG62.MouseDoubleClick, REG61.MouseDoubleClick, REG60.MouseDoubleClick, REG5F.MouseDoubleClick, REG5E.MouseDoubleClick, REG5D.MouseDoubleClick, REG5C.MouseDoubleClick, REG5B.MouseDoubleClick, REG5A.MouseDoubleClick, REG59.MouseDoubleClick, REG58.MouseDoubleClick, REG57.MouseDoubleClick, REG56.MouseDoubleClick, REG55.MouseDoubleClick, REG54.MouseDoubleClick, REG53.MouseDoubleClick, REG52.MouseDoubleClick, REG51.MouseDoubleClick, REG50.MouseDoubleClick, REG4F.MouseDoubleClick, REG4E.MouseDoubleClick, REG4D.MouseDoubleClick, REG4C.MouseDoubleClick, REG4B.MouseDoubleClick, REG4A.MouseDoubleClick, REG49.MouseDoubleClick, REG48.MouseDoubleClick, REG47.MouseDoubleClick, REG46.MouseDoubleClick, REG45.MouseDoubleClick, REG44.MouseDoubleClick, REG43.MouseDoubleClick, REG42.MouseDoubleClick, REG41.MouseDoubleClick, REG40.MouseDoubleClick, REG3F.MouseDoubleClick, REG3E.MouseDoubleClick, REG3D.MouseDoubleClick, REG3C.MouseDoubleClick, REG3B.MouseDoubleClick, REG3A.MouseDoubleClick, REG39.MouseDoubleClick, REG38.MouseDoubleClick, REG37.MouseDoubleClick, REG36.MouseDoubleClick, REG35.MouseDoubleClick, REG34.MouseDoubleClick, REG33.MouseDoubleClick, REG32.MouseDoubleClick, REG31.MouseDoubleClick, REG30.MouseDoubleClick, REG2F.MouseDoubleClick, REG2E.MouseDoubleClick, REG2D.MouseDoubleClick, REG2C.MouseDoubleClick, REG2B.MouseDoubleClick, REG2A.MouseDoubleClick, REG29.MouseDoubleClick, REG28.MouseDoubleClick, REG27.MouseDoubleClick, REG26.MouseDoubleClick, REG25.MouseDoubleClick, REG24.MouseDoubleClick, REG23.MouseDoubleClick, REG22.MouseDoubleClick, REG21.MouseDoubleClick, REG20.MouseDoubleClick, REG1F.MouseDoubleClick, REG1E.MouseDoubleClick, REG1D.MouseDoubleClick, REG1C.MouseDoubleClick, REG1B.MouseDoubleClick, REG1A.MouseDoubleClick, REG19.MouseDoubleClick, REG18.MouseDoubleClick, REG17.MouseDoubleClick, REG16.MouseDoubleClick, REG15.MouseDoubleClick, REG14.MouseDoubleClick, REG13.MouseDoubleClick, REG12.MouseDoubleClick, REG11.MouseDoubleClick, REG10.MouseDoubleClick, REG0F.MouseDoubleClick, REG0E.MouseDoubleClick, REG0D.MouseDoubleClick, REG0C.MouseDoubleClick, REG0B.MouseDoubleClick, REG0A.MouseDoubleClick, REG09.MouseDoubleClick, REG08.MouseDoubleClick, REG07.MouseDoubleClick, REG06.MouseDoubleClick, REG05.MouseDoubleClick, REG04.MouseDoubleClick, REG03.MouseDoubleClick, REG02.MouseDoubleClick, REG01.MouseDoubleClick, REG00.MouseDoubleClick
+        SetBoardColor(sender)
+    End Sub
+
+    Sub SetBoardColor(ByVal REG As Object)
+
+        If REG.BackColor = Color.Yellow Then
+            REG.BackColor = Color.Empty
+        Else
+            REG.BackColor = Color.Yellow
+        End If
+
+        ' TabControl1.Focus()
+
+    End Sub
+
+    Protected Overrides Sub Finalize()
+        MyBase.Finalize()
+    End Sub
+
+    Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        ExitSaveConfiguration()
+
+        SerialPort1.Close()
+        Timer2.Enabled = False
+        Timer1.Enabled = False
+        Timer3.Enabled = False
+        'Me.Close()
+    End Sub
+
+    Private Sub Timer6_Tick(sender As Object, e As EventArgs) Handles Timer6.Tick
+        If RW_REG_Action = REG_READ_MODE Then
+            PRINT("REG_READ_MODE = NG")
+        ElseIf RW_REG_Action = REG_WRITE_MODE Then
+            PRINT("REG_WRITE_MODE = NG")
+        End If
+
+        RW_REG_Action = 0
+        Timer6.Enabled = False
+        btnREGGroup.Enabled = True
     End Sub
 End Class
 'Whole Code Ends Here ....
