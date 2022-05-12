@@ -44,19 +44,27 @@ Public Class frmMain
     'FW TEST FLAF
     Dim FW_ACTION As Integer = 0
 
+    Dim strWorKCOMPort As String = ""
+
     'Page Load Code Starts Here....
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        myPort = IO.Ports.SerialPort.GetPortNames()
-        ' cmbBaud.Items.Add(9600)
-        ' cmbBaud.Items.Add(19200)
-        'cmbBaud.Items.Add(38400)
-        'cmbBaud.Items.Add(57600)
-        cmbBaud.Items.Add(115200)
+        Try
+            myPort = IO.Ports.SerialPort.GetPortNames()
+            ' cmbBaud.Items.Add(9600)
+            ' cmbBaud.Items.Add(19200)
+            'cmbBaud.Items.Add(38400)
+            'cmbBaud.Items.Add(57600)
+            cmbBaud.Items.Add(115200)
 
-        For i = 0 To UBound(myPort)
-            cmbPort.Items.Add(myPort(i))
-        Next
+            For i = 0 To UBound(myPort)
+                cmbPort.Items.Add(myPort(i))
+            Next
+        Catch ex As Exception
+            MsgBox("無任何COM PORT可使用")
+            cmbPort.Enabled = False
+            btnConnect.Enabled = False
+        End Try
 
         'Call GetSerialPortNames()
 
@@ -121,6 +129,9 @@ Public Class frmMain
                     CheckBox1.Checked = True
                 ElseIf InStr(1, strTemp, "REG") Then
                     REG(Integer.Parse(Val("&H" + Mid(strTemp, 4, 2) + "&"))).BackColor = Color.Yellow
+                    'ElseIf InStr(1, strTemp, "COM") Then
+                    '    strWorKCOMPort = strTemp
+                    '    UART_CONNECT_INIT()
                 End If
             Loop
             FileClose(FileNum)
@@ -171,7 +182,69 @@ Public Class frmMain
 
     'Connect Button Code Starts Here ....
     Private Sub btnConnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConnect.Click
+
         SerialPort1.PortName = cmbPort.Text
+        SerialPort1.BaudRate = cmbBaud.Text
+        SerialPort1.Parity = IO.Ports.Parity.None
+        SerialPort1.StopBits = IO.Ports.StopBits.One
+        SerialPort1.DataBits = 8
+
+        Me.SerialPort1.ReadBufferSize = 4096
+        Me.SerialPort1.ReadTimeout = -1
+        'me.serialport1.receivedbytesthreshold = 1
+        Me.SerialPort1.RtsEnable = Enabled
+        Me.SerialPort1.WriteBufferSize = 2048
+        Me.SerialPort1.WriteTimeout = -1
+        Me.SerialPort1.DtrEnable = Enabled
+
+        ' uart_connect_init()
+
+        Try
+            SerialPort1.Open()
+
+            btnConnect.Enabled = False
+            btnDisconnect.Enabled = True
+
+            GroupBox2.Enabled = True
+            btnGroupBox.Enabled = True
+            GroupBox3.Enabled = True
+            GroupBox1.Enabled = True
+            TabControl1.Enabled = True
+            Button8.Enabled = True
+            Label4.Visible = True
+
+            cmbPort.Enabled = False
+
+            Timer2.Interval = 1000 '設timer2的時間間隔為1000毫秒，也就是1秒
+            Timer2.Enabled = True '啟動timer2
+
+            Timer3.Interval = 500 '設timer5的時間間隔為500毫秒，也就是0.5秒
+            Timer3.Enabled = True '啟動timer2
+
+            cmbBaud.Enabled = False
+
+
+            Button14.Enabled = True
+            Button15.Enabled = True
+            TabControl1.Enabled = True
+
+            strWorKCOMPort = cmbPort.Text
+        Catch ex As Exception
+            MsgBox(cmbPort.Text & " 有問題無法使用")
+        End Try
+
+
+    End Sub
+    Sub UART_CONNECT_INIT()
+
+        If strWorKCOMPort <> "" Then
+            SerialPort1.PortName = strWorKCOMPort
+            cmbPort.Text = strWorKCOMPort
+            'Else
+            '    SerialPort1.PortName = cmbPort.Text
+            '    strWorKCOMPort = cmbPort.Text
+        End If
+
         SerialPort1.BaudRate = cmbBaud.Text
         SerialPort1.Parity = IO.Ports.Parity.None
         SerialPort1.StopBits = IO.Ports.StopBits.One
@@ -214,16 +287,26 @@ Public Class frmMain
             Button15.Enabled = True
             TabControl1.Enabled = True
 
+
+
         Catch ex As Exception
-            MsgBox(cmbPort.Text & " 有問題無法使用")
+            If strWorKCOMPort <> "" Then
+                MsgBox(strWorKCOMPort & " 有問題無法使用")
+                strWorKCOMPort = ""
+
+            Else
+                MsgBox(cmbPort.Text & " 有問題無法使用")
+
+            End If
+            cmbPort.Text = cmbPort.Items(0)
         End Try
-
-
     End Sub
     'Connect Button Code Ends Here ....
 
     'Disconnect Button Code Starts Here ....
     Private Sub btnDisconnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDisconnect.Click
+
+        'strWorKCOMPort = ""
 
         Try
             SerialPort1.Close()
@@ -873,6 +956,12 @@ Public Class frmMain
             'PrintLine(FileNum, strTemp)
             'strTemp2 &= strTemp & vbNewLine
         Next
+
+        'If strWorKCOMPort <> "" Then
+        '    strTemp = strWorKCOMPort
+        '    PrintLine(FileNum, strTemp)
+        'End If
+
         FileClose(FileNum)
     End Sub
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
