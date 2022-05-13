@@ -378,9 +378,17 @@ Partial Class frmMain
         Me.TextBox21 = New System.Windows.Forms.TextBox()
         Me.TextBox37 = New System.Windows.Forms.TextBox()
         Me.REG00 = New System.Windows.Forms.TextBox()
-        Me.Timer4 = New System.Windows.Forms.Timer(Me.components)
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -388,6 +396,7 @@ Partial Class frmMain
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.btnREGGroup.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnConnect
@@ -868,6 +877,7 @@ Partial Class frmMain
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Location = New System.Drawing.Point(14, 118)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -4607,19 +4617,111 @@ Partial Class frmMain
         Me.REG00.Text = "00"
         Me.REG00.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'TabPage3
+        '
+        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage3.Controls.Add(Me.ComboBox9)
+        Me.TabPage3.Controls.Add(Me.ComboBox8)
+        Me.TabPage3.Controls.Add(Me.ComboBox7)
+        Me.TabPage3.Controls.Add(Me.Label18)
+        Me.TabPage3.Controls.Add(Me.Label17)
+        Me.TabPage3.Controls.Add(Me.Label14)
+        Me.TabPage3.Controls.Add(Me.Label13)
+        Me.TabPage3.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Size = New System.Drawing.Size(544, 525)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "VS4210"
+        '
+        'ComboBox9
+        '
+        Me.ComboBox9.FormattingEnabled = True
+        Me.ComboBox9.Items.AddRange(New Object() {"0 white frame", "1 magenta", "2 increase in the horizontal direction", "3 increase in the vertical direction", "4 grid line", "5 diagontal line", "6 color bar", "OFF"})
+        Me.ComboBox9.Location = New System.Drawing.Point(120, 76)
+        Me.ComboBox9.Name = "ComboBox9"
+        Me.ComboBox9.Size = New System.Drawing.Size(202, 20)
+        Me.ComboBox9.TabIndex = 6
+        Me.ComboBox9.Text = "無"
+        '
+        'ComboBox8
+        '
+        Me.ComboBox8.FormattingEnabled = True
+        Me.ComboBox8.Items.AddRange(New Object() {"0 Pure color", "1 Horizontal increment value line", "2 Vertical increment value line", "3 Boundary and center line", "4 Grid line", "5 Color bar of horizontal direction", "6 Diagonal line", "7 OFF"})
+        Me.ComboBox8.Location = New System.Drawing.Point(120, 102)
+        Me.ComboBox8.Name = "ComboBox8"
+        Me.ComboBox8.Size = New System.Drawing.Size(204, 20)
+        Me.ComboBox8.TabIndex = 5
+        Me.ComboBox8.Text = "無"
+        '
+        'ComboBox7
+        '
+        Me.ComboBox7.FormattingEnabled = True
+        Me.ComboBox7.Items.AddRange(New Object() {"0 white frame", "1 magenta", "2 increase in the horizontal direction", "3 increase in the vertical direction", "4 grid line", "5 diagontal line", "6 color bar", "OFF"})
+        Me.ComboBox7.Location = New System.Drawing.Point(120, 46)
+        Me.ComboBox7.Name = "ComboBox7"
+        Me.ComboBox7.Size = New System.Drawing.Size(204, 20)
+        Me.ComboBox7.TabIndex = 4
+        Me.ComboBox7.Text = "無"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(45, 21)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(80, 12)
+        Me.Label18.TabIndex = 3
+        Me.Label18.Text = "PATTERN測試"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(45, 110)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(69, 12)
+        Me.Label17.TabIndex = 2
+        Me.Label17.Text = "OUTPUT(F0)"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(45, 80)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(51, 12)
+        Me.Label14.TabIndex = 1
+        Me.Label14.Text = "PADJ(45)"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(45, 49)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(60, 12)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "INPUT(1A)"
+        '
         'Timer5
         '
         Me.Timer5.Interval = 1000
         '
         'Timer6
         '
-        Me.Timer6.Interval = 8000
+        Me.Timer6.Interval = 10000
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Location = New System.Drawing.Point(401, 686)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(77, 40)
+        Me.RichTextBox1.TabIndex = 28
+        Me.RichTextBox1.Text = ""
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(984, 675)
+        Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnGroupBox)
         Me.Controls.Add(Me.Label4)
@@ -4649,6 +4751,8 @@ Partial Class frmMain
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.btnREGGroup.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4725,7 +4829,6 @@ Partial Class frmMain
     Friend WithEvents REG09 As System.Windows.Forms.TextBox
     Friend WithEvents REG01 As System.Windows.Forms.TextBox
     Friend WithEvents REG08 As System.Windows.Forms.TextBox
-    Friend WithEvents Timer4 As System.Windows.Forms.Timer
     Friend WithEvents Button15 As System.Windows.Forms.Button
     Friend WithEvents REG30 As System.Windows.Forms.TextBox
     Friend WithEvents REG20 As System.Windows.Forms.TextBox
@@ -5010,5 +5113,14 @@ Partial Class frmMain
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents ComboBox6 As System.Windows.Forms.ComboBox
     Friend WithEvents Timer6 As System.Windows.Forms.Timer
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox7 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBox8 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBox9 As System.Windows.Forms.ComboBox
+    Friend WithEvents RichTextBox1 As System.Windows.Forms.RichTextBox
 
 End Class

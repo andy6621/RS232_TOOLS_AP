@@ -391,53 +391,7 @@ Public Class frmMain
 
             SerialPort1.Read(buff, 0, buff.Length)
 
-            '  strbuff = Me.rtbReceived.Text
-
-            'For i As Integer = 0 To buff.Length - 1
-            ' s += buff(i).ToString("X2") & ","
-            'temp = buff(i)
-            's += UnicodeBytesToString(buff)
-
-            '  If j < 22 Then
-            'j = j + 1
-            '  End If
-
-            '     Next
-            ' rtbReceived.Text = rtbReceived.Text & s & vbCrLf
-
-            ' For Each c In buff
-            's = s & Chr(c)
-            'Next c
-            'For i As Integer = 0 To buff.Length - 1
-            '    s += buff(i).ToString("X2")
-            '    If j < 22 Then
-            '        j = j + 1
-            '    End If
-            'Next
-
             s = ByteArrayToStr(buff)
-            ' DEBUGTextBox1.Text = fw
-            'ReceivedText(s)
-
-            'strbuf = s
-
-            '    x = s.IndexOf("Curr.FW:")
-
-
-            '        Me.DEBUGTextBox1.Text = AsciiStringoHexString(s)
-
-            'x = s.IndexOf("FW:")
-            '   If x > 1 Then
-            's.CopyTo(x, fw, 0, 1)
-            'Debug.Print("TEST")
-            '      arrayA = s.ToCharArray
-            'str1 = "aabbccddeeff"
-            ' s.CopyTo(x + 3, arrayA, 0, 4 - 1)
-            ' act = 1
-            '       s += "Rev:" + arrayA(10).ToString + arrayA(11).ToString + arrayA(12).ToString + arrayA(13).ToString
-            '        ReceivedText(s)
-            '     Else
-            ' ReceivedText2(s)
 
             ReceivedText(s)
 
@@ -452,6 +406,9 @@ Public Class frmMain
         Dim Str2 As String = ""
         Dim Str_number As Integer
         Dim Data As Integer = 0
+        Dim strCRC As String = ""
+        Dim intValue2 As Integer = 0
+
         If Me.rtbReceived.InvokeRequired Then
             Dim x As New SetTextCallback(AddressOf ReceivedText)
             Me.Invoke(x, New Object() {(text)})
@@ -460,30 +417,44 @@ Public Class frmMain
             Str = [text]
 
             Me.rtbReceived.Text &= [text]
-            Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
-            Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-            Me.rtbReceived.Focus()
-            Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
+            Me.RichTextBox1.Text &= [text]
+            'Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
+            'Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+            ''Me.rtbReceived.Focus()
+            'Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
 
             'Alignment
             'Me.rtbReceived.Select(Me.rtbReceived.Text.Length, 0)
 
             'Me.DEBUGTextBox1.Text &= vbNewLine
-            Str_number = InStr(1, Me.rtbReceived.Text, "STX")
+            Str_number = InStr(1, RichTextBox1.Text, "STX")
 
             If Str_number > 0 Then
                 '    Me.DEBUGTextBox1.Text &= "STX ADDR=" & Str_number.ToString() & " "
-                If (InStr(1, Me.rtbReceived.Text, "ETX") = (Str_number + 11)) Then
-                    Me.DEBUGTextBox1.Text &= "R " & Mid(Me.rtbReceived.Text, Str_number + 3, 2) & " " & Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2) & vbNewLine
 
-                    DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
-                    DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-                    Me.DEBUGTextBox1.SelectionAlignment = 0
+                If (InStr(1, RichTextBox1.Text, "ETX") = (Str_number + 11)) Then
+                    Me.DEBUGTextBox1.Text &= "R " & Mid(RichTextBox1.Text, Str_number + 3, 2) & " " & Mid(RichTextBox1.Text, Str_number + 3 + 2, 2) & vbNewLine
+
+                    'CRC check
+                    intValue2 = Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3, 2)) _
+                        Xor Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3 + 2, 2)) _
+                    Xor Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3 + 2 + 2, 2))
+
+                    If intValue2 = Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 9, 2)) Then
+                        PRINT("CMD CRC OK = " & Hex(intValue2))
+                    Else
+                        PRINT("CMD CRC NG = " & Hex(intValue2))
+                        ' Exit Sub
+                    End If
+
+                    'DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
+                    'DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+                    ' Me.DEBUGTextBox1.SelectionAlignment = 0
                     'DEBUGTextBox1.Focus()
 
-                    TextBox5.Text = Mid(Me.rtbReceived.Text, Str_number + 3 + 2, 2)
+                    TextBox5.Text = Mid(RichTextBox1.Text, Str_number + 3 + 2, 2)
 
-                    GETREGDATA(Mid(Me.rtbReceived.Text, Str_number + 3, 2), TextBox5.Text)
+                    GETREGDATA(Mid(RichTextBox1.Text, Str_number + 3, 2), TextBox5.Text)
 
                     If RW_REG_Action = REG_READ_MODE Then
                         If Dump_Loop < Dump_End Then
@@ -495,8 +466,14 @@ Public Class frmMain
                             RW_REG_Action = 0
                             Button14.Enabled = True
                             Button15.Enabled = True
-                            'TabControl1.Enabled = True
                             btnREGGroup.Enabled = True
+
+                            PRINT("READ ALL OK!!")
+
+                            Timer6.Stop()
+                            Timer6.Enabled = False
+                            Timer6.Stop()
+                            Timer6.Start()
                         End If
                     End If
 
@@ -505,59 +482,56 @@ Public Class frmMain
                         If WriteREG_Loop < WriteREG_End Then
                             WriteREG_Loop += 1
                             WRITEREGDATA("REG" & Hex(WriteREG_Loop))
+
                         Else
 
                             RW_REG_Action = 0
                             btnREGGroup.Enabled = True
-                            'Button14.Enabled = True
-                            'Button15.Enabled = True
-                            'TabControl1.Enabled = True
+                            PRINT("WRITE ALL OK!!")
+
+                            Timer6.Stop()
+                            Timer6.Enabled = False
+                            Timer6.Stop()
+                            Timer6.Start()
                         End If
 
                     End If
-                    'If Val(TextBox5.Text) = 0 Then
-                    '    TextBox5.Text = "0"
-                    'Else
-                    '    TextBox5.Text = TextBox5.Text.TrimStart("0")
-                    'End If
+
                     TextBox4.Text = TextBox5.Text
-                    'Else
-                    '   Me.DEBUGTextBox1.Text &= " " & "Error CMD"
+
+                    RichTextBox1.Text = ""
                 End If
-                'Else
-                '   Me.DEBUGTextBox1.Text &= " " & "CMD not thing=" & Me.rtbReceived.Text
+               
             End If
 
-            If InStr(1, Me.rtbReceived.Text, "FW") Then
+            If InStr(1, RichTextBox1.Text, "FW") Then
                 FW_ACTION = FW_TEST_PASS
+                RichTextBox1.Text = ""
             End If
 
-            'Me.DEBUGTextBox1.SelectionStart = Me.DEBUGTextBox1.Text.Length   '文本的选取长度
-            'Me.DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-            'Me.DEBUGTextBox1.Focus()
             CMD_Action = False
         End If
 
 
     End Sub
-    Private Sub ReceivedText2(ByVal Str As String)
-        If Me.DEBUGTextBox1.InvokeRequired Then
-            Dim x As New SetTextCallback(AddressOf ReceivedText2)
-            Me.Invoke(x, New Object() {(Text)})
-        Else
-            DEBUGTextBox1.Text &= Str
-            DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
-            DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-            DEBUGTextBox1.Focus()
-        End If
-    End Sub
+    'Private Sub ReceivedText2(ByVal Str As String)
+    '    If Me.DEBUGTextBox1.InvokeRequired Then
+    '        Dim x As New SetTextCallback(AddressOf ReceivedText2)
+    '        Me.Invoke(x, New Object() {(Text)})
+    '    Else
+    '        DEBUGTextBox1.Text &= Str
+    '        DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
+    '        DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+    '        'DEBUGTextBox1.Focus()
+    '    End If
+    'End Sub
     Private Sub PRINT(ByVal str As String)
 
         DEBUGTextBox1.Text &= str & vbNewLine
-        DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
-        DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-        'DEBUGTextBox1.Focus()
-        DEBUGTextBox1.SelectionAlignment = 0
+        'DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
+        'DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+        ''DEBUGTextBox1.Focus()
+        'DEBUGTextBox1.SelectionAlignment = 0
 
     End Sub
     Private Sub GETREGDATA(ByVal Addr As String, ByVal Data As String)
@@ -603,41 +577,41 @@ Public Class frmMain
         'End Try
         'Val("&H" + (Addr) + "&")
     End Sub
-    'Private Sub WRITEREGDATA(ByVal Str As String)
-    Private Sub WRITEREGDATA(ByVal REG As Object)
-        '       Dim REG() As TextBox = { _
-        '      REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
-        '      REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
-        '      REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
-        '      REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
-        '      REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
-        '      REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
-        '      REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
-        '      REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
-        '_
-        '      REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
-        '      REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
-        '      REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
-        '      REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
-        '      REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
-        '      REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
-        '      REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
-        '      REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+    Private Sub WRITEREGDATA(ByVal Str As String)
+        '   Private Sub WRITEREGDATA(ByVal REG As Object)
+        Dim REG() As TextBox = { _
+       REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+       REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+       REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+       REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+       REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+       REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+       REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+       REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+       REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+       REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+       REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+       REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+       REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+       REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+       REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+       REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
 
-        '       TextBox3.Text = Mid(Str, 4, 2)
-        '       TextBox2.Text = TextBox3.Text
-        '       TextBox4.Text = REG(Integer.Parse(Val("&H" + (Mid(Str, 4, 2)) + "&"))).Text
-        '       DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
+        TextBox3.Text = Mid(Str, 4, 2)
+        TextBox2.Text = TextBox3.Text
+        TextBox4.Text = REG(Integer.Parse(Val("&H" + (Mid(Str, 4, 2)) + "&"))).Text
+        DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
 
         'DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
         'DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
         'DEBUGTextBox1.Focus()
         'Dim txt As TextBox = CType(REG, TextBox)
 
-        TextBox3.Text = Mid(REG.Name, 4, 2)
-        TextBox2.Text = TextBox3.Text
-        TextBox4.Text = REG.Text
-        DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
+        'TextBox3.Text = Mid(REG.Name, 4, 2)
+        'TextBox2.Text = TextBox3.Text
+        'TextBox4.Text = REG.Text
+        'DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
 
         SendCMD(22)
 
@@ -700,19 +674,11 @@ Public Class frmMain
 
     Private Sub rtbReceived_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rtbReceived.TextChanged
 
-        rtbReceived.SelectionStart = Len(rtbReceived.Text)
 
-        '    If rtbReceived.Lines.Length > 2 Then
-        'Dim temp As String = ""
-        'temp = rtbReceived.Text.Remove(0, rtbReceived.Lines(0).Length + 2) '去除第一行和換行符號
-        'rtbReceived.Text = "" '清空
-        ' rtbReceived.AppendText(temp) '附加文字 ，其游標會自動再最後一行
-        'rtbReceived.Focus() '取得焦點
-        '        Else
-        'Me.DEBUGTextBox1.Text &= ">"
+        Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+        Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
+        Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
 
-        '       rtbReceived.SelStart = Len(rtbReceived.Text)
-        '  End If
     End Sub
     Private Function UnicodeBytesToString(ByVal bytes() As Byte) As String
         Return System.Text.Encoding.Unicode.GetString(bytes)
@@ -874,11 +840,13 @@ Public Class frmMain
             Me.rtbReceived.Text = ""
             TextBox5.Text = "?" : CMD_Action = True
             strbuff = "CMDR" + " " + TextBox1.Text + " " + TextBox2.Text + " " + Chr(13)  'CMD Read
+            PRINT("CMDR" + " " + TextBox1.Text + " " + TextBox2.Text)
         ElseIf idx = 22 Then
             Me.rtbReceived.Text = ""
             TextBox5.Text = "?" : CMD_Action = True
             strbuff = "CMDW" + " " + TextBox1.Text + " " + _
                 TextBox3.Text + " " + TextBox4.Text + Chr(13)  'CMD Write
+            PRINT("CMDW" + " " + TextBox1.Text + " " + TextBox3.Text + " " + TextBox4.Text)
         End If
 
         '  buff = HexStr2ByteArray(strbuff)
@@ -889,7 +857,7 @@ Public Class frmMain
 
         'Me.DEBUGTextBox1.Text &= ByteArrayToHex(buff)
         'txtTransmit.Text = ByteArrayToHex(buff)
-        txtTransmit.Text = strbuff 'ByteArrayToHex(buff)
+        'txtTransmit.Text = strbuff 'ByteArrayToHex(buff)
 
         '   DEBUGTextBox1.Text = AsciiStringToHexString(strbuff)
         '   DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
@@ -1258,8 +1226,9 @@ Public Class frmMain
     End Sub
 
     Private Sub Button14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button14.Click
+        DEBUGTextBox1.Text = ""
         Dump_Start = 0
-        Dump_End = &HFF&  '0~255
+        Dump_End = &HFF '&  '0~255
         Dump_Loop = Dump_Start
         RW_REG_Action = REG_READ_MODE  'dump mode
         TextBox2.Text = Hex(Dump_Loop)
@@ -1267,7 +1236,9 @@ Public Class frmMain
         'Button14.Enabled = False
         'Button15.Enabled = False
         btnREGGroup.Enabled = False
+        Timer6.Interval = 10000
         Timer6.Enabled = True
+        Timer6.Start()
     End Sub
 
 
@@ -1619,8 +1590,9 @@ Public Class frmMain
     End Sub
 
     Private Sub Button18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button18.Click
+        DEBUGTextBox1.Text = ""
         WriteREG_Start = 0
-        WriteREG_End = &HFF&  '0~255
+        WriteREG_End = &HFF  '0~255
         WriteREG_Loop = WriteREG_Start
         RW_REG_Action = REG_WRITE_MODE   'Write mode
         TextBox3.Text = Hex(WriteREG_Loop)
@@ -1631,7 +1603,10 @@ Public Class frmMain
         'Button14.Enabled = False
         'Button15.Enabled = False
         'TabControl1.Enabled = False
+        Timer6.Interval = 10000
         Timer6.Enabled = True
+        Timer6.Start()
+
     End Sub
 
     Private Sub REG00_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles REG00.KeyPress, REGFF.KeyPress, REGFE.KeyPress, REGFD.KeyPress, REGFC.KeyPress, REGFB.KeyPress, REGFA.KeyPress, REGF9.KeyPress, REGF8.KeyPress, REGF7.KeyPress, REGF6.KeyPress, REGF5.KeyPress, REGF4.KeyPress, REGF3.KeyPress, REGF2.KeyPress, REGF1.KeyPress, REGF0.KeyPress, REGEF.KeyPress, REGEE.KeyPress, REGED.KeyPress, REGEC.KeyPress, REGEB.KeyPress, REGEA.KeyPress, REGE9.KeyPress, REGE8.KeyPress, REGE7.KeyPress, REGE6.KeyPress, REGE5.KeyPress, REGE4.KeyPress, REGE3.KeyPress, REGE2.KeyPress, REGE1.KeyPress, REGE0.KeyPress, REGDF.KeyPress, REGDE.KeyPress, REGDD.KeyPress, REGDC.KeyPress, REGDB.KeyPress, REGDA.KeyPress, REGD9.KeyPress, REGD8.KeyPress, REGD7.KeyPress, REGD6.KeyPress, REGD5.KeyPress, REGD4.KeyPress, REGD3.KeyPress, REGD2.KeyPress, REGD1.KeyPress, REGD0.KeyPress, REGCF.KeyPress, REGCE.KeyPress, REGCD.KeyPress, REGCC.KeyPress, REGCB.KeyPress, REGCA.KeyPress, REGC9.KeyPress, REGC8.KeyPress, REGC7.KeyPress, REGC6.KeyPress, REGC5.KeyPress, REGC4.KeyPress, REGC3.KeyPress, REGC2.KeyPress, REGC1.KeyPress, REGC0.KeyPress, REGBF.KeyPress, REGBE.KeyPress, REGBD.KeyPress, REGBC.KeyPress, REGBB.KeyPress, REGBA.KeyPress, REGB9.KeyPress, REGB8.KeyPress, REGB7.KeyPress, REGB6.KeyPress, REGB5.KeyPress, REGB4.KeyPress, REGB3.KeyPress, REGB2.KeyPress, REGB1.KeyPress, REGB0.KeyPress, REGAF.KeyPress, REGAE.KeyPress, REGAD.KeyPress, REGAC.KeyPress, REGAB.KeyPress, REGAA.KeyPress, REGA9.KeyPress, REGA8.KeyPress, REGA7.KeyPress, REGA6.KeyPress, REGA5.KeyPress, REGA4.KeyPress, REGA3.KeyPress, REGA2.KeyPress, REGA1.KeyPress, REGA0.KeyPress, REG9F.KeyPress, REG9E.KeyPress, REG9D.KeyPress, REG9C.KeyPress, REG9B.KeyPress, REG9A.KeyPress, REG99.KeyPress, REG98.KeyPress, REG97.KeyPress, REG96.KeyPress, REG95.KeyPress, REG94.KeyPress, REG93.KeyPress, REG92.KeyPress, REG91.KeyPress, REG90.KeyPress, REG8F.KeyPress, REG8E.KeyPress, REG8D.KeyPress, REG8C.KeyPress, REG8B.KeyPress, REG8A.KeyPress, REG89.KeyPress, REG88.KeyPress, REG87.KeyPress, REG86.KeyPress, REG85.KeyPress, REG84.KeyPress, REG83.KeyPress, REG82.KeyPress, REG81.KeyPress, REG80.KeyPress, REG7F.KeyPress, REG7E.KeyPress, REG7D.KeyPress, REG7C.KeyPress, REG7B.KeyPress, REG7A.KeyPress, REG79.KeyPress, REG78.KeyPress, REG77.KeyPress, REG76.KeyPress, REG75.KeyPress, REG74.KeyPress, REG73.KeyPress, REG72.KeyPress, REG71.KeyPress, REG70.KeyPress, REG6F.KeyPress, REG6E.KeyPress, REG6D.KeyPress, REG6C.KeyPress, REG6B.KeyPress, REG6A.KeyPress, REG69.KeyPress, REG68.KeyPress, REG67.KeyPress, REG66.KeyPress, REG65.KeyPress, REG64.KeyPress, REG63.KeyPress, REG62.KeyPress, REG61.KeyPress, REG60.KeyPress, REG5F.KeyPress, REG5E.KeyPress, REG5D.KeyPress, REG5C.KeyPress, REG5B.KeyPress, REG5A.KeyPress, REG59.KeyPress, REG58.KeyPress, REG57.KeyPress, REG56.KeyPress, REG55.KeyPress, REG54.KeyPress, REG53.KeyPress, REG52.KeyPress, REG51.KeyPress, REG50.KeyPress, REG4F.KeyPress, REG4E.KeyPress, REG4D.KeyPress, REG4C.KeyPress, REG4B.KeyPress, REG4A.KeyPress, REG49.KeyPress, REG48.KeyPress, REG47.KeyPress, REG46.KeyPress, REG45.KeyPress, REG44.KeyPress, REG43.KeyPress, REG42.KeyPress, REG41.KeyPress, REG40.KeyPress, REG3F.KeyPress, REG3E.KeyPress, REG3D.KeyPress, REG3C.KeyPress, REG3B.KeyPress, REG3A.KeyPress, REG39.KeyPress, REG38.KeyPress, REG37.KeyPress, REG36.KeyPress, REG35.KeyPress, REG34.KeyPress, REG33.KeyPress, REG32.KeyPress, REG31.KeyPress, REG30.KeyPress, REG2F.KeyPress, REG2E.KeyPress, REG2D.KeyPress, REG2C.KeyPress, REG2B.KeyPress, REG2A.KeyPress, REG29.KeyPress, REG28.KeyPress, REG27.KeyPress, REG26.KeyPress, REG25.KeyPress, REG24.KeyPress, REG23.KeyPress, REG22.KeyPress, REG21.KeyPress, REG20.KeyPress, REG1F.KeyPress, REG1E.KeyPress, REG1D.KeyPress, REG1C.KeyPress, REG1B.KeyPress, REG1A.KeyPress, REG19.KeyPress, REG18.KeyPress, REG17.KeyPress, REG16.KeyPress, REG15.KeyPress, REG14.KeyPress, REG13.KeyPress, REG12.KeyPress, REG11.KeyPress, REG10.KeyPress, REG0F.KeyPress, REG0E.KeyPress, REG0D.KeyPress, REG0C.KeyPress, REG0B.KeyPress, REG0A.KeyPress, REG09.KeyPress, REG08.KeyPress, REG07.KeyPress, REG06.KeyPress, REG05.KeyPress, REG04.KeyPress, REG03.KeyPress, REG02.KeyPress, REG01.KeyPress
@@ -1666,7 +1641,7 @@ Public Class frmMain
     End Sub
 
     Private Sub TextBox6_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox6.KeyPress
-        If Asc(e.KeyChar) = 13 Then            
+        If Asc(e.KeyChar) = 13 Then
             If SerialPort1.IsOpen = True Then
                 SerialPort1.Write(TextBox6.Text + Chr(13))
             End If
@@ -1769,7 +1744,7 @@ Public Class frmMain
             If (e.KeyCode = Asc("E") Or e.KeyCode = Asc("e")) AndAlso e.Control Then
                 ExitAPP()
             End If
-            PRINT("Key=" & Asc(e.KeyCode))
+            '  PRINT("Key=" & Asc(e.KeyCode))
         End If
     End Sub
 
@@ -1811,8 +1786,99 @@ Public Class frmMain
         End If
 
         RW_REG_Action = 0
+        Timer6.Stop()
         Timer6.Enabled = False
+        Timer6.Stop()
+        Timer6.Start()
         btnREGGroup.Enabled = True
     End Sub
+
+    Private Sub ComboBox7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox7.SelectedIndexChanged
+
+        Dim intValue2 As Integer = Conversion.Val("&H" & REG1A.Text) And &HF0
+
+        'PRINT("1st=" & Hex(intValue2))
+
+        If ComboBox7.SelectedIndex < 7 Then
+            intValue2 = intValue2 + (ComboBox7.SelectedIndex) Or &H8
+            'PRINT("1A=" & Hex(intValue2))
+        End If
+
+        If intValue2 < &H10 Then
+            REG1A.Text = "0" & Hex(intValue2)
+        Else
+            REG1A.Text = Hex(intValue2)
+        End If
+
+        TextBox3.Text = "1A"
+        TextBox2.Text = TextBox3.Text
+        TextBox4.Text = REG1A.Text
+        SendCMD(22)
+    End Sub
+
+    Private Sub ComboBox8_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox8.SelectedIndexChanged
+        Dim intValue2 As Integer = Conversion.Val("&H" & REGF0.Text) And &H70
+
+        'PRINT("1st=" & Hex(intValue2))
+
+        If ComboBox8.SelectedIndex < 7 Then
+            intValue2 = intValue2 + (ComboBox8.SelectedIndex) Or &H80
+            'PRINT("1A=" & Hex(intValue2))
+        End If
+
+        If intValue2 < &H10 Then
+            REGF0.Text = "0" & Hex(intValue2)
+        Else
+            REGF0.Text = Hex(intValue2)
+        End If
+
+        TextBox3.Text = "F0"
+        TextBox2.Text = TextBox3.Text
+        TextBox4.Text = REGF0.Text
+        SendCMD(22)
+    End Sub
+
+    Private Sub ComboBox9_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox9.SelectedIndexChanged
+
+        Dim objTEMP As TextBox = CType(REG45, TextBox)
+        Dim intValue2 As Integer = Conversion.Val("&H" & objTEMP.Text) And &H70
+
+        'PRINT("1st=" & Hex(intValue2))
+
+        If ComboBox9.SelectedIndex < 7 Then
+            intValue2 = intValue2 + (ComboBox9.SelectedIndex) Or &H8
+            'PRINT("1A=" & Hex(intValue2))
+        End If
+
+        If intValue2 < &H10 Then
+            objTEMP.Text = "0" & Hex(intValue2)
+        Else
+            objTEMP.Text = Hex(intValue2)
+        End If
+
+        TextBox3.Text = "45"
+        TextBox2.Text = TextBox3.Text
+        TextBox4.Text = objTEMP.Text
+        SendCMD(22)
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+
+        If TabControl1.SelectedIndex = 2 Then
+            TextBox1.Text = "40"
+            ComboBox2.SelectedIndex = 0
+            ComboBox6.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    Private Sub DEBUGTextBox1_TextChanged(sender As Object, e As EventArgs) Handles DEBUGTextBox1.TextChanged
+        DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
+        DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+        'DEBUGTextBox1.Focus()
+        DEBUGTextBox1.SelectionAlignment = 0
+
+    End Sub
+
 End Class
 'Whole Code Ends Here ....
