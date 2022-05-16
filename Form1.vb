@@ -46,6 +46,8 @@ Public Class frmMain
 
     Dim strWorKCOMPort As String = ""
 
+    Dim btnINTFlag As Boolean = False
+
     'Page Load Code Starts Here....
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -306,9 +308,18 @@ Public Class frmMain
     'Disconnect Button Code Starts Here ....
     Private Sub btnDisconnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDisconnect.Click
 
-        'strWorKCOMPort = ""
+        If RW_REG_Action Then
+            PRINT("COM PORT 使 用 中 無 法 中 斷 !!")
+            ' Delay(1)  '暫停1秒
+            btnINTFlag = True
+            Dump_Loop = 255
+            WriteREG_Loop = 255
+
+            Exit Sub
+        End If
 
         Try
+
             SerialPort1.Close()
 
             btnConnect.Enabled = True
@@ -337,6 +348,15 @@ Public Class frmMain
             cmbBaud.Enabled = True
 
             Button3.BackColor = Color.Empty
+
+            Timer5.Enabled = False
+            RW_REG_Action = 0
+            Timer6.Stop()
+            Timer6.Enabled = False
+            'Timer6.Stop()
+            'Timer6.Start()
+            '  btnREGGroup.Enabled = True
+
         Catch ex As Exception
             MsgBox(cmbPort.Text & " 有問題無法關閉")
         End Try
@@ -418,10 +438,10 @@ Public Class frmMain
 
             Me.rtbReceived.Text &= [text]
             Me.RichTextBox1.Text &= [text]
-            'Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
-            'Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+            Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
+            Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
             ''Me.rtbReceived.Focus()
-            'Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
+            Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
 
             'Alignment
             'Me.rtbReceived.Select(Me.rtbReceived.Text.Length, 0)
@@ -440,11 +460,11 @@ Public Class frmMain
                         Xor Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3 + 2, 2)) _
                     Xor Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3 + 2 + 2, 2))
 
-                    If intValue2 = Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 9, 2)) Then
-                        PRINT("CMD CRC OK = " & Hex(intValue2))
-                    Else
+                    If intValue2 <> Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 9, 2)) Then
+                        'PRINT("CMD CRC OK = " & Hex(intValue2))
+                        'Else
                         PRINT("CMD CRC NG = " & Hex(intValue2))
-                        ' Exit Sub
+                        Exit Sub
                     End If
 
                     'DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
@@ -486,6 +506,8 @@ Public Class frmMain
                         Else
 
                             RW_REG_Action = 0
+                            Button14.Enabled = True
+                            Button15.Enabled = True
                             btnREGGroup.Enabled = True
                             PRINT("WRITE ALL OK!!")
 
@@ -661,6 +683,53 @@ Public Class frmMain
         'TimeString = Format(Now, "AMPM(hh:mm:ss)") 'Format(Now, "AMPM hh:mm:ss") '指定TimeString為時間格式AMPM hh:mm:ss
         TimeString = TimeOfDay.ToString("tt h:mm:ss ")
         Label4.Text = DayString + Space(1) + TimeString '將結果Show在Label1(space(1)為空一格)
+        If btnINTFlag = True And RW_REG_Action = 0 Then
+
+            Try
+
+                SerialPort1.Close()
+
+                btnConnect.Enabled = True
+                btnDisconnect.Enabled = False
+
+                GroupBox2.Enabled = False
+                btnGroupBox.Enabled = False
+                GroupBox3.Enabled = False
+                GroupBox1.Enabled = False
+                TabControl1.Enabled = False
+                Button8.Enabled = False
+                Label4.Visible = False
+
+                Timer2.Enabled = False
+                Timer1.Enabled = False
+                Timer3.Enabled = False
+                ComboBox1.SelectedIndex = 0
+                Button3.Text = "開始"
+
+                txtTransmit.Text = ""
+                rtbReceived.Text = ""
+                DEBUGTextBox1.Text = ""
+                'TextBox1.Text = "MENU"
+
+                cmbPort.Enabled = True
+                cmbBaud.Enabled = True
+
+                Button3.BackColor = Color.Empty
+
+                Timer5.Enabled = False
+                RW_REG_Action = 0
+                Timer6.Stop()
+                Timer6.Enabled = False
+                'Timer6.Stop()
+                'Timer6.Start()
+                '  btnREGGroup.Enabled = True
+
+                btnINTFlag = False
+            Catch ex As Exception
+                MsgBox(cmbPort.Text & " 有問題無法關閉")
+            End Try
+
+        End If
     End Sub
     Private Sub Timer3_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer3.Tick
         If Timer1.Enabled = True Then
@@ -674,10 +743,9 @@ Public Class frmMain
 
     Private Sub rtbReceived_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rtbReceived.TextChanged
 
-
         Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-        Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
         Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
+        Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
 
     End Sub
     Private Function UnicodeBytesToString(ByVal bytes() As Byte) As String
@@ -750,13 +818,13 @@ Public Class frmMain
         Dim encoding As New System.Text.ASCIIEncoding()
         Return encoding.GetString(bt)
     End Function
-
+    '暫停 ASecond 秒
     Private Sub Delay(ByVal ASecond As Integer)
-        Dim before
-        before = Timer()
-        Do
-            DoEvents()
-        Loop Until (Int(Timer() - before) = ASecond)
+        '讓CPU去做其它事情，畫面才不會感覺死當。
+        Application.DoEvents()
+        '暫停 ASecond *1000 毫秒
+        System.Threading.Thread.Sleep(ASecond * 1000)
+
     End Sub
     'Private Sub tbxASCII_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbxASCII.TextChanged
     '  If Me.ActiveControl Is sender Then
@@ -1603,7 +1671,7 @@ Public Class frmMain
         'Button14.Enabled = False
         'Button15.Enabled = False
         'TabControl1.Enabled = False
-        Timer6.Interval = 10000
+        Timer6.Interval = 15000
         Timer6.Enabled = True
         Timer6.Start()
 
@@ -1615,7 +1683,7 @@ Public Class frmMain
         'Dim txt As TextBox = CType(sender, TextBox)
         'PRINT(txt.Name)
         If Asc(e.KeyChar) = 13 Then
-            WRITEREGDATA(sender)
+            WRITEREGDATA(sender.Name)
         End If
     End Sub
 
@@ -1700,7 +1768,7 @@ Public Class frmMain
                 SendCMD(17)
             ElseIf (e.KeyCode = Asc("D") Or e.KeyCode = Asc("d")) AndAlso e.Control Then
                 SendCMD(18)
-            ElseIf Asc(e.KeyCode) = 46 Then   '.
+            ElseIf e.KeyCode = 190 Then   '.
                 Dim intNumber As Integer = 0
                 intNumber = Val("&H" + TextBox4.Text + "&")
                 If intNumber >= 255 Then
@@ -1710,7 +1778,7 @@ Public Class frmMain
                     TextBox4.Text = Hex(intNumber + 1)
                 End If
                 SendCMD(22)
-            ElseIf e.KeyCode = Asc(",") Then     ',
+            ElseIf e.KeyCode = 188 Then     ',
                 Dim intNumber As Integer = 0
                 intNumber = Val("&H" + TextBox4.Text + "&")
                 If intNumber <= 0 Then
@@ -1720,7 +1788,7 @@ Public Class frmMain
                     TextBox4.Text = Hex(intNumber - 1)
                 End If
                 SendCMD(22)
-            ElseIf e.KeyCode = Asc("<") Then     '<
+            ElseIf e.KeyCode = 186 Then     '<
                 Dim intNumber As Integer = 0
                 intNumber = Val("&H" + TextBox4.Text + "&")
                 If intNumber < 16 Then
@@ -1730,7 +1798,7 @@ Public Class frmMain
                     TextBox4.Text = Hex(intNumber - 16)
                 End If
                 SendCMD(22)
-            ElseIf e.KeyCode = Asc(">") Then     '>
+            ElseIf e.KeyCode = 222 Then     '>
                 Dim intNumber As Integer = 0
                 intNumber = Val("&H" + TextBox4.Text + "&")
                 If intNumber > 255 - 16 Then
@@ -1744,7 +1812,10 @@ Public Class frmMain
             If (e.KeyCode = Asc("E") Or e.KeyCode = Asc("e")) AndAlso e.Control Then
                 ExitAPP()
             End If
-            '  PRINT("Key=" & Asc(e.KeyCode))
+            'PRINT("Key=" & e.KeyCode) 'Asc(",")
+            ' PRINT("Key=." & Chr(".")) 'Asc(",")
+            'PRINT("Key(,)=" & Asc(",")) 'Asc(",")
+            'PRINT("Key(.)=" & Asc(".")) 'Asc(",")
         End If
     End Sub
 
@@ -1780,9 +1851,9 @@ Public Class frmMain
 
     Private Sub Timer6_Tick(sender As Object, e As EventArgs) Handles Timer6.Tick
         If RW_REG_Action = REG_READ_MODE Then
-            PRINT("REG_READ_MODE = NG")
+            PRINT("TIME OUT REG_READ_MODE = NG")
         ElseIf RW_REG_Action = REG_WRITE_MODE Then
-            PRINT("REG_WRITE_MODE = NG")
+            PRINT("TIME OUT REG_WRITE_MODE = NG")
         End If
 
         RW_REG_Action = 0
@@ -1880,5 +1951,8 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub REG00_MouseClick(sender As Object, e As MouseEventArgs) Handles REG00.MouseClick, REGFF.MouseClick, REGFE.MouseClick, REGFD.MouseClick, REGFC.MouseClick, REGFB.MouseClick, REGFA.MouseClick, REGF9.MouseClick, REGF8.MouseClick, REGF7.MouseClick, REGF6.MouseClick, REGF5.MouseClick, REGF4.MouseClick, REGF3.MouseClick, REGF2.MouseClick, REGF1.MouseClick, REGF0.MouseClick, REGEF.MouseClick, REGEE.MouseClick, REGED.MouseClick, REGEC.MouseClick, REGEB.MouseClick, REGEA.MouseClick, REGE9.MouseClick, REGE8.MouseClick, REGE7.MouseClick, REGE6.MouseClick, REGE5.MouseClick, REGE4.MouseClick, REGE3.MouseClick, REGE2.MouseClick, REGE1.MouseClick, REGE0.MouseClick, REGDF.MouseClick, REGDE.MouseClick, REGDD.MouseClick, REGDC.MouseClick, REGDB.MouseClick, REGDA.MouseClick, REGD9.MouseClick, REGD8.MouseClick, REGD7.MouseClick, REGD6.MouseClick, REGD5.MouseClick, REGD4.MouseClick, REGD3.MouseClick, REGD2.MouseClick, REGD1.MouseClick, REGD0.MouseClick, REGCF.MouseClick, REGCE.MouseClick, REGCD.MouseClick, REGCC.MouseClick, REGCB.MouseClick, REGCA.MouseClick, REGC9.MouseClick, REGC8.MouseClick, REGC7.MouseClick, REGC6.MouseClick, REGC5.MouseClick, REGC4.MouseClick, REGC3.MouseClick, REGC2.MouseClick, REGC1.MouseClick, REGC0.MouseClick, REGBF.MouseClick, REGBE.MouseClick, REGBD.MouseClick, REGBC.MouseClick, REGBB.MouseClick, REGBA.MouseClick, REGB9.MouseClick, REGB8.MouseClick, REGB7.MouseClick, REGB6.MouseClick, REGB5.MouseClick, REGB4.MouseClick, REGB3.MouseClick, REGB2.MouseClick, REGB1.MouseClick, REGB0.MouseClick, REGAF.MouseClick, REGAE.MouseClick, REGAD.MouseClick, REGAC.MouseClick, REGAB.MouseClick, REGAA.MouseClick, REGA9.MouseClick, REGA8.MouseClick, REGA7.MouseClick, REGA6.MouseClick, REGA5.MouseClick, REGA4.MouseClick, REGA3.MouseClick, REGA2.MouseClick, REGA1.MouseClick, REGA0.MouseClick, REG9F.MouseClick, REG9E.MouseClick, REG9D.MouseClick, REG9C.MouseClick, REG9B.MouseClick, REG9A.MouseClick, REG99.MouseClick, REG98.MouseClick, REG97.MouseClick, REG96.MouseClick, REG95.MouseClick, REG94.MouseClick, REG93.MouseClick, REG92.MouseClick, REG91.MouseClick, REG90.MouseClick, REG8F.MouseClick, REG8E.MouseClick, REG8D.MouseClick, REG8C.MouseClick, REG8B.MouseClick, REG8A.MouseClick, REG89.MouseClick, REG88.MouseClick, REG87.MouseClick, REG86.MouseClick, REG85.MouseClick, REG84.MouseClick, REG83.MouseClick, REG82.MouseClick, REG81.MouseClick, REG80.MouseClick, REG7F.MouseClick, REG7E.MouseClick, REG7D.MouseClick, REG7C.MouseClick, REG7B.MouseClick, REG7A.MouseClick, REG79.MouseClick, REG78.MouseClick, REG77.MouseClick, REG76.MouseClick, REG75.MouseClick, REG74.MouseClick, REG73.MouseClick, REG72.MouseClick, REG71.MouseClick, REG70.MouseClick, REG6F.MouseClick, REG6E.MouseClick, REG6D.MouseClick, REG6C.MouseClick, REG6B.MouseClick, REG6A.MouseClick, REG69.MouseClick, REG68.MouseClick, REG67.MouseClick, REG66.MouseClick, REG65.MouseClick, REG64.MouseClick, REG63.MouseClick, REG62.MouseClick, REG61.MouseClick, REG60.MouseClick, REG5F.MouseClick, REG5E.MouseClick, REG5D.MouseClick, REG5C.MouseClick, REG5B.MouseClick, REG5A.MouseClick, REG59.MouseClick, REG58.MouseClick, REG57.MouseClick, REG56.MouseClick, REG55.MouseClick, REG54.MouseClick, REG53.MouseClick, REG52.MouseClick, REG51.MouseClick, REG50.MouseClick, REG4F.MouseClick, REG4E.MouseClick, REG4D.MouseClick, REG4C.MouseClick, REG4B.MouseClick, REG4A.MouseClick, REG49.MouseClick, REG48.MouseClick, REG47.MouseClick, REG46.MouseClick, REG45.MouseClick, REG44.MouseClick, REG43.MouseClick, REG42.MouseClick, REG41.MouseClick, REG40.MouseClick, REG3F.MouseClick, REG3E.MouseClick, REG3D.MouseClick, REG3C.MouseClick, REG3B.MouseClick, REG3A.MouseClick, REG39.MouseClick, REG38.MouseClick, REG37.MouseClick, REG36.MouseClick, REG35.MouseClick, REG34.MouseClick, REG33.MouseClick, REG32.MouseClick, REG31.MouseClick, REG30.MouseClick, REG2F.MouseClick, REG2E.MouseClick, REG2D.MouseClick, REG2C.MouseClick, REG2B.MouseClick, REG2A.MouseClick, REG29.MouseClick, REG28.MouseClick, REG27.MouseClick, REG26.MouseClick, REG25.MouseClick, REG24.MouseClick, REG23.MouseClick, REG22.MouseClick, REG21.MouseClick, REG20.MouseClick, REG1F.MouseClick, REG1E.MouseClick, REG1D.MouseClick, REG1C.MouseClick, REG1B.MouseClick, REG1A.MouseClick, REG19.MouseClick, REG18.MouseClick, REG17.MouseClick, REG16.MouseClick, REG15.MouseClick, REG14.MouseClick, REG13.MouseClick, REG12.MouseClick, REG11.MouseClick, REG10.MouseClick, REG0F.MouseClick, REG0E.MouseClick, REG0D.MouseClick, REG0C.MouseClick, REG0B.MouseClick, REG0A.MouseClick, REG09.MouseClick, REG08.MouseClick, REG07.MouseClick, REG06.MouseClick, REG05.MouseClick, REG04.MouseClick, REG03.MouseClick, REG02.MouseClick, REG01.MouseClick
+        WRITEREGDATA(sender.Name)
+    End Sub
 End Class
 'Whole Code Ends Here ....
