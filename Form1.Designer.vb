@@ -86,6 +86,7 @@ Partial Class frmMain
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.btnREGGroup = New System.Windows.Forms.GroupBox()
         Me.Button18 = New System.Windows.Forms.Button()
+        Me.Button19 = New System.Windows.Forms.Button()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
@@ -379,6 +380,8 @@ Partial Class frmMain
         Me.TextBox37 = New System.Windows.Forms.TextBox()
         Me.REG00 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TESTOutput = New System.Windows.Forms.TextBox()
+        Me.btnTEST = New System.Windows.Forms.Button()
         Me.ComboBox9 = New System.Windows.Forms.ComboBox()
         Me.ComboBox8 = New System.Windows.Forms.ComboBox()
         Me.ComboBox7 = New System.Windows.Forms.ComboBox()
@@ -389,6 +392,7 @@ Partial Class frmMain
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -1325,6 +1329,7 @@ Partial Class frmMain
         'btnREGGroup
         '
         Me.btnREGGroup.Controls.Add(Me.Button18)
+        Me.btnREGGroup.Controls.Add(Me.Button19)
         Me.btnREGGroup.Controls.Add(Me.Button17)
         Me.btnREGGroup.Controls.Add(Me.Button14)
         Me.btnREGGroup.Controls.Add(Me.Button16)
@@ -1338,29 +1343,39 @@ Partial Class frmMain
         'Button18
         '
         Me.Button18.Font = New System.Drawing.Font("微軟正黑體", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Button18.Location = New System.Drawing.Point(174, 14)
+        Me.Button18.Location = New System.Drawing.Point(183, 14)
         Me.Button18.Name = "Button18"
         Me.Button18.Size = New System.Drawing.Size(66, 40)
         Me.Button18.TabIndex = 8
         Me.Button18.Text = "Write ALL"
         Me.Button18.UseVisualStyleBackColor = True
         '
+        'Button19
+        '
+        Me.Button19.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Button19.Location = New System.Drawing.Point(56, 14)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(45, 39)
+        Me.Button19.TabIndex = 7
+        Me.Button19.Text = "FF"
+        Me.Button19.UseVisualStyleBackColor = True
+        '
         'Button17
         '
-        Me.Button17.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Button17.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Button17.Location = New System.Drawing.Point(6, 14)
         Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(54, 39)
+        Me.Button17.Size = New System.Drawing.Size(45, 39)
         Me.Button17.TabIndex = 7
-        Me.Button17.Text = "CLR "
+        Me.Button17.Text = "00" & Global.Microsoft.VisualBasic.ChrW(10)
         Me.Button17.UseVisualStyleBackColor = True
         '
         'Button14
         '
-        Me.Button14.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Button14.Location = New System.Drawing.Point(74, 14)
+        Me.Button14.Font = New System.Drawing.Font("微軟正黑體", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Button14.Location = New System.Drawing.Point(111, 14)
         Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(94, 40)
+        Me.Button14.Size = New System.Drawing.Size(66, 40)
         Me.Button14.TabIndex = 1
         Me.Button14.Text = "Read ALL"
         Me.Button14.UseVisualStyleBackColor = True
@@ -1368,7 +1383,7 @@ Partial Class frmMain
         'Button16
         '
         Me.Button16.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Button16.Location = New System.Drawing.Point(252, 14)
+        Me.Button16.Location = New System.Drawing.Point(263, 14)
         Me.Button16.Name = "Button16"
         Me.Button16.Size = New System.Drawing.Size(62, 40)
         Me.Button16.TabIndex = 6
@@ -4620,6 +4635,8 @@ Partial Class frmMain
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage3.Controls.Add(Me.TESTOutput)
+        Me.TabPage3.Controls.Add(Me.btnTEST)
         Me.TabPage3.Controls.Add(Me.ComboBox9)
         Me.TabPage3.Controls.Add(Me.ComboBox8)
         Me.TabPage3.Controls.Add(Me.ComboBox7)
@@ -4633,6 +4650,23 @@ Partial Class frmMain
         Me.TabPage3.Size = New System.Drawing.Size(544, 525)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "VS4210"
+        '
+        'TESTOutput
+        '
+        Me.TESTOutput.Location = New System.Drawing.Point(233, 191)
+        Me.TESTOutput.Name = "TESTOutput"
+        Me.TESTOutput.Size = New System.Drawing.Size(222, 22)
+        Me.TESTOutput.TabIndex = 8
+        Me.TESTOutput.Text = "STXSTX40112233ETX"
+        '
+        'btnTEST
+        '
+        Me.btnTEST.Location = New System.Drawing.Point(131, 189)
+        Me.btnTEST.Name = "btnTEST"
+        Me.btnTEST.Size = New System.Drawing.Size(75, 23)
+        Me.btnTEST.TabIndex = 7
+        Me.btnTEST.Text = " 測試"
+        Me.btnTEST.UseVisualStyleBackColor = True
         '
         'ComboBox9
         '
@@ -4706,7 +4740,7 @@ Partial Class frmMain
         '
         'Timer6
         '
-        Me.Timer6.Interval = 10000
+        Me.Timer6.Interval = 15000
         '
         'RichTextBox1
         '
@@ -4715,6 +4749,11 @@ Partial Class frmMain
         Me.RichTextBox1.Size = New System.Drawing.Size(77, 40)
         Me.RichTextBox1.TabIndex = 28
         Me.RichTextBox1.Text = ""
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = " "
+        Me.OpenFileDialog1.Filter = """文字檔案(*.txt)|*.txt|逗號分隔檔案(*.csv)|*.csv"""
         '
         'frmMain
         '
@@ -5122,5 +5161,9 @@ Partial Class frmMain
     Friend WithEvents ComboBox8 As System.Windows.Forms.ComboBox
     Friend WithEvents ComboBox9 As System.Windows.Forms.ComboBox
     Friend WithEvents RichTextBox1 As System.Windows.Forms.RichTextBox
+    Friend WithEvents Button19 As System.Windows.Forms.Button
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents TESTOutput As System.Windows.Forms.TextBox
+    Friend WithEvents btnTEST As System.Windows.Forms.Button
 
 End Class

@@ -24,6 +24,7 @@ Public Class frmMain
     Private Property fileSaveName As Object
 
     Delegate Sub SetTextCallback(ByVal [text] As String)
+
     Dim act As Integer
     Dim AUTO_SEND As Integer = False
     Dim Gbuff() As Byte
@@ -464,6 +465,7 @@ Public Class frmMain
                         'PRINT("CMD CRC OK = " & Hex(intValue2))
                         'Else
                         PRINT("CMD CRC NG = " & Hex(intValue2))
+                        RichTextBox1.Text = ""
                         Exit Sub
                     End If
 
@@ -522,8 +524,18 @@ Public Class frmMain
                     TextBox4.Text = TextBox5.Text
 
                     RichTextBox1.Text = ""
+                Else
+                    'PRINT("GOT STX ,ETX =NG" & " ,LEN=" & Len(RichTextBox1.Text))
+                    'RichTextBox1.Text = Mid(RichTextBox1.Text, Str_number + 3, Len(RichTextBox1.Text) - 3)
+                    If Len(RichTextBox1.Text) > 50 Then
+                        RichTextBox1.Text = ""
+                    End If
+
                 End If
-               
+            Else
+                If Len(RichTextBox1.Text) > 50 Then
+                    RichTextBox1.Text = ""
+                End If
             End If
 
             If InStr(1, RichTextBox1.Text, "FW") Then
@@ -624,16 +636,6 @@ Public Class frmMain
         TextBox2.Text = TextBox3.Text
         TextBox4.Text = REG(Integer.Parse(Val("&H" + (Mid(Str, 4, 2)) + "&"))).Text
         DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
-
-        'DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
-        'DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-        'DEBUGTextBox1.Focus()
-        'Dim txt As TextBox = CType(REG, TextBox)
-
-        'TextBox3.Text = Mid(REG.Name, 4, 2)
-        'TextBox2.Text = TextBox3.Text
-        'TextBox4.Text = REG.Text
-        'DEBUGTextBox1.Text &= "W " & TextBox3.Text & " " & TextBox4.Text & " "
 
         SendCMD(22)
 
@@ -1238,6 +1240,10 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub ComboBox2_RegionChanged(sender As Object, e As EventArgs) Handles ComboBox2.RegionChanged
+
+    End Sub
+
     Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         If ComboBox2.SelectedIndex = 0 Then
@@ -1304,7 +1310,7 @@ Public Class frmMain
         'Button14.Enabled = False
         'Button15.Enabled = False
         btnREGGroup.Enabled = False
-        Timer6.Interval = 10000
+        Timer6.Interval = 15000
         Timer6.Enabled = True
         Timer6.Start()
     End Sub
@@ -1439,7 +1445,8 @@ Public Class frmMain
 
         Dim saveFileDialog1 As New SaveFileDialog()
         saveFileDialog1.Title = "另存新檔"
-        saveFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
+        'saveFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
+        saveFileDialog1.Filter = "文字檔案(*.txt)|*.txt|逗號分隔檔案(*.csv)|*.csv"
         saveFileDialog1.ShowDialog()
         Try
             'myFile = My.Computer.FileSystem.CurrentDirectory() & "\dump.txt"
@@ -1558,12 +1565,13 @@ Public Class frmMain
         'DEBUGTextBox1.Text &= strTemp
         'FileClose(FileNum)
 
-        Dim openFileDialog1 As New OpenFileDialog()
+        ' Dim openFileDialog1 As New OpenFileDialog()
         Dim intStringNumber As Integer = 1
 
-        openFileDialog1.Title = "開啟檔案"
-        openFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
-        openFileDialog1.ShowDialog()
+        OpenFileDialog1.Title = "開啟檔案"
+        'OpenFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
+        OpenFileDialog1.Filter = "文字檔案(*.txt)|*.txt|逗號分隔檔案(*.csv)|*.csv"
+        OpenFileDialog1.ShowDialog()
         Try
             'myFile = My.Computer.FileSystem.CurrentDirectory() & "\dump.txt"
             'My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, "123 test", True)
@@ -1571,7 +1579,7 @@ Public Class frmMain
             'rtbReceived.SaveFile(myFile, RichTextBoxStreamType.RichNoOleObjs)
 
             FileNum = FreeFile()
-            FileOpen(FileNum, openFileDialog1.FileName, OpenMode.Input)
+            FileOpen(FileNum, OpenFileDialog1.FileName, OpenMode.Input)
 
             Do Until EOF(FileNum)
                 strTemp = LineInput(FileNum) '& vbNewLine
@@ -1629,7 +1637,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub Button17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button17.Click
+    Private Sub Button17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button17.Click, Button19.Click
 
         Dim REG() As TextBox = { _
                       REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
@@ -1650,7 +1658,11 @@ Public Class frmMain
                       REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
                       REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
         For index As Integer = 0 To 255
-            REG(index).Text = "00"
+            If sender.Name = Button17.Name Then
+                REG(index).Text = "00"
+            Else
+                REG(index).Text = "FF"
+            End If
             REG(index).ForeColor = Color.Empty
             REG(index).BackColor = Color.Empty
         Next
@@ -1954,5 +1966,103 @@ Public Class frmMain
     Private Sub REG00_MouseClick(sender As Object, e As MouseEventArgs) Handles REG00.MouseClick, REGFF.MouseClick, REGFE.MouseClick, REGFD.MouseClick, REGFC.MouseClick, REGFB.MouseClick, REGFA.MouseClick, REGF9.MouseClick, REGF8.MouseClick, REGF7.MouseClick, REGF6.MouseClick, REGF5.MouseClick, REGF4.MouseClick, REGF3.MouseClick, REGF2.MouseClick, REGF1.MouseClick, REGF0.MouseClick, REGEF.MouseClick, REGEE.MouseClick, REGED.MouseClick, REGEC.MouseClick, REGEB.MouseClick, REGEA.MouseClick, REGE9.MouseClick, REGE8.MouseClick, REGE7.MouseClick, REGE6.MouseClick, REGE5.MouseClick, REGE4.MouseClick, REGE3.MouseClick, REGE2.MouseClick, REGE1.MouseClick, REGE0.MouseClick, REGDF.MouseClick, REGDE.MouseClick, REGDD.MouseClick, REGDC.MouseClick, REGDB.MouseClick, REGDA.MouseClick, REGD9.MouseClick, REGD8.MouseClick, REGD7.MouseClick, REGD6.MouseClick, REGD5.MouseClick, REGD4.MouseClick, REGD3.MouseClick, REGD2.MouseClick, REGD1.MouseClick, REGD0.MouseClick, REGCF.MouseClick, REGCE.MouseClick, REGCD.MouseClick, REGCC.MouseClick, REGCB.MouseClick, REGCA.MouseClick, REGC9.MouseClick, REGC8.MouseClick, REGC7.MouseClick, REGC6.MouseClick, REGC5.MouseClick, REGC4.MouseClick, REGC3.MouseClick, REGC2.MouseClick, REGC1.MouseClick, REGC0.MouseClick, REGBF.MouseClick, REGBE.MouseClick, REGBD.MouseClick, REGBC.MouseClick, REGBB.MouseClick, REGBA.MouseClick, REGB9.MouseClick, REGB8.MouseClick, REGB7.MouseClick, REGB6.MouseClick, REGB5.MouseClick, REGB4.MouseClick, REGB3.MouseClick, REGB2.MouseClick, REGB1.MouseClick, REGB0.MouseClick, REGAF.MouseClick, REGAE.MouseClick, REGAD.MouseClick, REGAC.MouseClick, REGAB.MouseClick, REGAA.MouseClick, REGA9.MouseClick, REGA8.MouseClick, REGA7.MouseClick, REGA6.MouseClick, REGA5.MouseClick, REGA4.MouseClick, REGA3.MouseClick, REGA2.MouseClick, REGA1.MouseClick, REGA0.MouseClick, REG9F.MouseClick, REG9E.MouseClick, REG9D.MouseClick, REG9C.MouseClick, REG9B.MouseClick, REG9A.MouseClick, REG99.MouseClick, REG98.MouseClick, REG97.MouseClick, REG96.MouseClick, REG95.MouseClick, REG94.MouseClick, REG93.MouseClick, REG92.MouseClick, REG91.MouseClick, REG90.MouseClick, REG8F.MouseClick, REG8E.MouseClick, REG8D.MouseClick, REG8C.MouseClick, REG8B.MouseClick, REG8A.MouseClick, REG89.MouseClick, REG88.MouseClick, REG87.MouseClick, REG86.MouseClick, REG85.MouseClick, REG84.MouseClick, REG83.MouseClick, REG82.MouseClick, REG81.MouseClick, REG80.MouseClick, REG7F.MouseClick, REG7E.MouseClick, REG7D.MouseClick, REG7C.MouseClick, REG7B.MouseClick, REG7A.MouseClick, REG79.MouseClick, REG78.MouseClick, REG77.MouseClick, REG76.MouseClick, REG75.MouseClick, REG74.MouseClick, REG73.MouseClick, REG72.MouseClick, REG71.MouseClick, REG70.MouseClick, REG6F.MouseClick, REG6E.MouseClick, REG6D.MouseClick, REG6C.MouseClick, REG6B.MouseClick, REG6A.MouseClick, REG69.MouseClick, REG68.MouseClick, REG67.MouseClick, REG66.MouseClick, REG65.MouseClick, REG64.MouseClick, REG63.MouseClick, REG62.MouseClick, REG61.MouseClick, REG60.MouseClick, REG5F.MouseClick, REG5E.MouseClick, REG5D.MouseClick, REG5C.MouseClick, REG5B.MouseClick, REG5A.MouseClick, REG59.MouseClick, REG58.MouseClick, REG57.MouseClick, REG56.MouseClick, REG55.MouseClick, REG54.MouseClick, REG53.MouseClick, REG52.MouseClick, REG51.MouseClick, REG50.MouseClick, REG4F.MouseClick, REG4E.MouseClick, REG4D.MouseClick, REG4C.MouseClick, REG4B.MouseClick, REG4A.MouseClick, REG49.MouseClick, REG48.MouseClick, REG47.MouseClick, REG46.MouseClick, REG45.MouseClick, REG44.MouseClick, REG43.MouseClick, REG42.MouseClick, REG41.MouseClick, REG40.MouseClick, REG3F.MouseClick, REG3E.MouseClick, REG3D.MouseClick, REG3C.MouseClick, REG3B.MouseClick, REG3A.MouseClick, REG39.MouseClick, REG38.MouseClick, REG37.MouseClick, REG36.MouseClick, REG35.MouseClick, REG34.MouseClick, REG33.MouseClick, REG32.MouseClick, REG31.MouseClick, REG30.MouseClick, REG2F.MouseClick, REG2E.MouseClick, REG2D.MouseClick, REG2C.MouseClick, REG2B.MouseClick, REG2A.MouseClick, REG29.MouseClick, REG28.MouseClick, REG27.MouseClick, REG26.MouseClick, REG25.MouseClick, REG24.MouseClick, REG23.MouseClick, REG22.MouseClick, REG21.MouseClick, REG20.MouseClick, REG1F.MouseClick, REG1E.MouseClick, REG1D.MouseClick, REG1C.MouseClick, REG1B.MouseClick, REG1A.MouseClick, REG19.MouseClick, REG18.MouseClick, REG17.MouseClick, REG16.MouseClick, REG15.MouseClick, REG14.MouseClick, REG13.MouseClick, REG12.MouseClick, REG11.MouseClick, REG10.MouseClick, REG0F.MouseClick, REG0E.MouseClick, REG0D.MouseClick, REG0C.MouseClick, REG0B.MouseClick, REG0A.MouseClick, REG09.MouseClick, REG08.MouseClick, REG07.MouseClick, REG06.MouseClick, REG05.MouseClick, REG04.MouseClick, REG03.MouseClick, REG02.MouseClick, REG01.MouseClick
         WRITEREGDATA(sender.Name)
     End Sub
+
+   
+    Private Sub btnTEST_Click(sender As Object, e As EventArgs) Handles btnTEST.Click
+
+        Dim Str As String = ""
+        Dim Str2 As String = ""
+        Dim Str_number As Integer
+        Dim Data As Integer = 0
+        Dim strCRC As String = ""
+        Dim strTEST As String = TESTOutput.Text
+        Dim intValue2 As Integer = 0
+
+
+        Str_number = InStr(1, strTEST, "STX")
+
+        If Str_number > 0 Then
+            '    Me.DEBUGTextBox1.Text &= "STX ADDR=" & Str_number.ToString() & " "
+
+            If (InStr(1, strTEST, "ETX") = (Str_number + 11)) Then
+                '  Me.DEBUGTextBox1.Text &= "R " & Mid(strTEST, Str_number + 3, 2) & " " & Mid(strTEST, Str_number + 3 + 2, 2) & vbNewLine
+                PRINT("GOT STX , AND ETX OK" & " ,LEN=" & Len(strTEST))
+
+                'CRC check
+                'intValue2 = Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3, 2)) _
+                '    Xor Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3 + 2, 2)) _
+                'Xor Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3 + 2 + 2, 2))
+
+                'If intValue2 <> Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 9, 2)) Then
+                '    'PRINT("CMD CRC OK = " & Hex(intValue2))
+                '    'Else
+                '    PRINT("CMD CRC NG = " & Hex(intValue2))
+                '    Exit Sub
+                'End If
+
+                'DEBUGTextBox1.SelectionStart = DEBUGTextBox1.Text.Length   '文本的选取长度
+                'DEBUGTextBox1.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
+                ' Me.DEBUGTextBox1.SelectionAlignment = 0
+                'DEBUGTextBox1.Focus()
+
+                'TextBox5.Text = Mid(RichTextBox1.Text, Str_number + 3 + 2, 2)
+
+                'GETREGDATA(Mid(RichTextBox1.Text, Str_number + 3, 2), TextBox5.Text)
+
+                'If RW_REG_Action = REG_READ_MODE Then
+                '    If Dump_Loop < Dump_End Then
+                '        Dump_Loop += 1
+                '        TextBox2.Text = Hex(Dump_Loop)
+                '        SendCMD(21)
+                '    Else
+
+                '        RW_REG_Action = 0
+                '        Button14.Enabled = True
+                '        Button15.Enabled = True
+                '        btnREGGroup.Enabled = True
+
+                '        PRINT("READ ALL OK!!")
+
+                '        Timer6.Stop()
+                '        Timer6.Enabled = False
+                '        Timer6.Stop()
+                '        Timer6.Start()
+                '    End If
+                'End If
+
+                'If RW_REG_Action = REG_WRITE_MODE Then
+
+                '    If WriteREG_Loop < WriteREG_End Then
+                '        WriteREG_Loop += 1
+                '        WRITEREGDATA("REG" & Hex(WriteREG_Loop))
+
+                '    Else
+
+                '        RW_REG_Action = 0
+                '        Button14.Enabled = True
+                '        Button15.Enabled = True
+                '        btnREGGroup.Enabled = True
+                '        PRINT("WRITE ALL OK!!")
+
+                '        Timer6.Stop()
+                '        Timer6.Enabled = False
+                '        Timer6.Stop()
+                '        Timer6.Start()
+                '    End If
+
+                'End If
+
+                'TextBox4.Text = TextBox5.Text
+
+                'RichTextBox1.Text = ""
+            Else
+                PRINT("GOT STX ,ETX =NG" & " ,LEN=" & Len(strTEST))
+                TESTOutput.Text = Mid(strTEST, Str_number + 3, Len(strTEST) - 3)
+            End If
+        Else
+            PRINT("NO STX = NG" & " ,LEN=" & Len(strTEST))
+        End If
+    End Sub
+
 End Class
 'Whole Code Ends Here ....
