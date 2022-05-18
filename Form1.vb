@@ -80,6 +80,7 @@ Public Class frmMain
         GroupBox3.Enabled = False
         GroupBox1.Enabled = False
         TabControl1.Enabled = False
+
         btnGroupBox.Enabled = False
 
         SerialPort1.BaudRate = "115200"
@@ -97,6 +98,8 @@ Public Class frmMain
         ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
 
         BootStartup()
+
+        ToolStripStatusLabel1.Text = "工作目錄：" & Application.StartupPath
 
     End Sub
     Sub BootStartup()
@@ -128,13 +131,24 @@ Public Class frmMain
 
             Do Until EOF(FileNum)
                 strTemp = LineInput(FileNum)
-                If InStr(1, strTemp, "CheckBox1=True") Then
+
+                If InStr(1, strTemp, "COMPORTSAVE=True") Then
+                    COMPORTSAVE.Checked = True
+                ElseIf InStr(1, strTemp, "CheckBox1=True") Then
                     CheckBox1.Checked = True
                 ElseIf InStr(1, strTemp, "REG") Then
-                    REG(Integer.Parse(Val("&H" + Mid(strTemp, 4, 2) + "&"))).BackColor = Color.Yellow
-                    'ElseIf InStr(1, strTemp, "COM") Then
-                    '    strWorKCOMPort = strTemp
-                    '    UART_CONNECT_INIT()
+                    If InStr(1, strTemp, "Color.Yellow") Then
+                        REG(Integer.Parse(Val("&H" + Mid(strTemp, 4, 2) + "&"))).BackColor = Color.Yellow
+                    ElseIf InStr(1, strTemp, "Color.Pink") Then
+                        REG(Integer.Parse(Val("&H" + Mid(strTemp, 4, 2) + "&"))).BackColor = Color.Pink
+                    ElseIf InStr(1, strTemp, "Color.LightBlue") Then
+                        REG(Integer.Parse(Val("&H" + Mid(strTemp, 4, 2) + "&"))).BackColor = Color.LightBlue                    
+                    End If
+                ElseIf InStr(1, strTemp, "COM") And COMPORTSAVE.Checked = True Then
+                    strWorKCOMPort = strTemp
+                    UART_CONNECT_INIT()
+                ElseIf InStr(1, strTemp, "TabControl1.SelectedIndex") Then
+                    TabControl1.SelectedIndex = Conversion.Val(Mid(strTemp, 27, 1))
                 End If
             Loop
             FileClose(FileNum)
@@ -985,20 +999,50 @@ Public Class frmMain
             strTemp = CheckBox1.Name & "=True"
             PrintLine(FileNum, strTemp)
         End If
+
+        If COMPORTSAVE.Checked = True Then
+            strTemp = COMPORTSAVE.Name & "=True"
+            PrintLine(FileNum, strTemp)
+        End If
+
+        If strWorKCOMPort <> "" Then
+            strTemp = strWorKCOMPort
+            PrintLine(FileNum, strTemp)
+        End If
+
+        Select Case (TabControl1.SelectedIndex)
+            Case 0
+                strTemp = "TabControl1.SelectedIndex=0"
+                PrintLine(FileNum, strTemp)
+            Case 1
+                strTemp = "TabControl1.SelectedIndex=1"
+                PrintLine(FileNum, strTemp)
+            Case 2
+                strTemp = "TabControl1.SelectedIndex=2"
+                PrintLine(FileNum, strTemp)
+        End Select
+
         For index As Integer = 0 To REG.Count - 1
             If REG(index).BackColor = Color.Yellow Then
-                strTemp = REG(index).Name '& "=" & Mid(REG(index).Name, 4, 2) & "," & REG(index).Text
+                strTemp = REG(index).Name & "=" & "Color.Yellow"
                 PrintLine(FileNum, strTemp)
+            ElseIf REG(index).BackColor = Color.Pink Then
+                strTemp = REG(index).Name & "=" & "Color.Pink"
+                PrintLine(FileNum, strTemp)
+            ElseIf REG(index).BackColor = Color.LightBlue Then
+                strTemp = REG(index).Name & "=" & "Color.LightBlue"
+                PrintLine(FileNum, strTemp)
+                'ElseIf REG(index).BackColor = Color.Empty Then
+                '    strTemp = REG(index).Name
+                '    PrintLine(FileNum, strTemp)
             End If
             'strTemp = TextBox1.Text & "," & Mid(REG(index).Name, 4, 2) & "," & REG(index).Text
             'PrintLine(FileNum, strTemp)
             'strTemp2 &= strTemp & vbNewLine
         Next
 
-        'If strWorKCOMPort <> "" Then
-        '    strTemp = strWorKCOMPort
-        '    PrintLine(FileNum, strTemp)
-        'End If
+
+
 
         FileClose(FileNum)
     End Sub
@@ -1423,6 +1467,7 @@ Public Class frmMain
         Dim DayString, TimeString As String '用來顯示日期與時間字串變數
 
 #If FileModeAppend = 0 Then  '新建資料存檔
+
         FileNum = FreeFile()
         FileOpen(FileNum, My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", OpenMode.Output)
         DayString = Format(Now, "yyyy/MM/dd") '指定DayString為時間格式為有西元年的日期
@@ -1442,24 +1487,32 @@ Public Class frmMain
         '    MsgBox("Save as " & fileSaveName)
         'End If
 
-
-        Dim saveFileDialog1 As New SaveFileDialog()
-        saveFileDialog1.Title = "另存新檔"
+        'Dim saveFileDialog1 As New SaveFileDialog()
+        SaveFileDialog1.Title = "另存新檔"
         'saveFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
-        saveFileDialog1.Filter = "文字檔案(*.txt)|*.txt|逗號分隔檔案(*.csv)|*.csv"
-        saveFileDialog1.ShowDialog()
-        Try
-            'myFile = My.Computer.FileSystem.CurrentDirectory() & "\dump.txt"
-            'My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, "123 test", True)
-            My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, strTemp2, False)
-            'rtbReceived.SaveFile(myFile, RichTextBoxStreamType.RichNoOleObjs)
+        SaveFileDialog1.Filter = "文字檔案(*.txt)|*.txt|逗號分隔檔案(*.csv)|*.csv|任意檔案(*.*)|*.*"
 
-            'Me.Text = myFile
-            intSaveFileFlag = True
+        SaveFileDialog1.InitialDirectory = Application.StartupPath
 
-        Catch ex As Exception
-            ' MsgBox("資料檔案未存檔")
-        End Try
+        Dim result As DialogResult = SaveFileDialog1.ShowDialog()
+
+        If result = Windows.Forms.DialogResult.OK Then
+
+            Try
+                'myFile = My.Computer.FileSystem.CurrentDirectory() & "\dump.txt"
+                'My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, "123 test", True)
+                My.Computer.FileSystem.WriteAllText(SaveFileDialog1.FileName, strTemp2, False)
+                'rtbReceived.SaveFile(myFile, RichTextBoxStreamType.RichNoOleObjs)
+
+                'Me.Text = myFile
+                intSaveFileFlag = True
+
+                ToolStripStatusLabel1.Text = "已儲存檔案：" & SaveFileDialog1.FileName
+            Catch ex As Exception
+                ' MsgBox("資料檔案未存檔")
+            End Try
+
+        End If
 #Else    '增加資料存檔
         DayString = Format(Now, "yyyy/MM/dd") '指定DayString為時間格式為有西元年的日期
         TimeString = TimeOfDay.ToString("tt h:mm:ss ")
@@ -1478,18 +1531,18 @@ Public Class frmMain
             My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", strTemp, True)
         Next
 #End If
-        'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
+            'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
 #If FileModeAppend = False Then
-        Try
-            If intSaveFileFlag = False Then
-                MsgBox("暫存器資料未存檔！", vbCritical)
-            Else
+            Try
+                If intSaveFileFlag = False Then
+                    MsgBox("暫存器資料未存檔！", vbCritical)
+                Else
 
-                MsgBox("暫存器資料存檔完畢！", vbInformation)
-            End If
-        Catch ex As Exception
+                    MsgBox("暫存器資料存檔完畢！", vbInformation)
+                End If
+            Catch ex As Exception
 
-        End Try
+            End Try
 
 #Else
         MsgBox("增加資料存檔完畢！")
@@ -1570,69 +1623,88 @@ Public Class frmMain
 
         OpenFileDialog1.Title = "開啟檔案"
         'OpenFileDialog1.Filter = "TXT Files (*.txt*)|*.txt" '"*.txt;*.rtf|*.txt;*.rtf"
-        OpenFileDialog1.Filter = "文字檔案(*.txt)|*.txt|逗號分隔檔案(*.csv)|*.csv"
-        OpenFileDialog1.ShowDialog()
-        Try
-            'myFile = My.Computer.FileSystem.CurrentDirectory() & "\dump.txt"
-            'My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, "123 test", True)
-            strTemp2 = My.Computer.FileSystem.ReadAllText(openFileDialog1.FileName)
-            'rtbReceived.SaveFile(myFile, RichTextBoxStreamType.RichNoOleObjs)
+        OpenFileDialog1.Filter = "文字檔案(*.txt)|*.txt|逗號分隔檔案(*.csv)|*.csv|任意檔案(*.*)|*.*"
+        ' OpenFileDialog1.ShowDialog()
+        OpenFileDialog1.InitialDirectory = Application.StartupPath
 
-            FileNum = FreeFile()
-            FileOpen(FileNum, OpenFileDialog1.FileName, OpenMode.Input)
+        Dim result As DialogResult = OpenFileDialog1.ShowDialog()
 
-            Do Until EOF(FileNum)
-                strTemp = LineInput(FileNum) '& vbNewLine
-                ' intStringNumber = InStr(1, strTemp, TextBox1.Text)
-                I2CAddr = Mid(strTemp, 1, 2)
-                intStringNumber = 1
-                Select Case I2CAddr
-                    Case "40"
-                        TextBox1.Text = I2CAddr
-                        ComboBox2.SelectedIndex = 0
-                        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
-                    Case "88"
-                        TextBox1.Text = I2CAddr
-                        ComboBox2.SelectedIndex = 1
-                        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
-                    Case "A0"
-                        TextBox1.Text = I2CAddr
-                        ComboBox2.SelectedIndex = 2
-                        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
-                    Case "12"
-                        TextBox1.Text = I2CAddr
-                        ComboBox2.SelectedIndex = 3
-                        ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
-                    Case Else
-                        intStringNumber = 0
-                End Select
+        If result = Windows.Forms.DialogResult.OK Then
 
-                If intStringNumber Then
+            ToolStripStatusLabel1.Text = "開啟檔案：" & OpenFileDialog1.FileName
 
-                    If REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).Text <> Mid(strTemp, 1 + 6, 2) Then
-                        REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).ForeColor = Color.Red
-                    Else
-                        REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).ForeColor = Color.Empty
+            '   PRINT("open result=" & result & "," & Windows.Forms.DialogResult.OK & "," & OpenFileDialog1.FileName)
+            Try
+
+                'myFile = My.Computer.FileSystem.CurrentDirectory() & "\dump.txt"
+                'My.Computer.FileSystem.WriteAllText(saveFileDialog1.FileName, "123 test", True)
+                strTemp2 = My.Computer.FileSystem.ReadAllText(OpenFileDialog1.FileName)
+                'rtbReceived.SaveFile(myFile, RichTextBoxStreamType.RichNoOleObjs)
+
+                FileNum = FreeFile()
+                FileOpen(FileNum, OpenFileDialog1.FileName, OpenMode.Input)
+
+
+                Do Until EOF(FileNum)
+
+
+                    strTemp = LineInput(FileNum) '& vbNewLine
+                    ' intStringNumber = InStr(1, strTemp, TextBox1.Text)
+                    I2CAddr = Mid(strTemp, 1, 2)
+                    intStringNumber = 1
+                    Select Case I2CAddr
+                        Case "40"
+                            TextBox1.Text = I2CAddr
+                            ComboBox2.SelectedIndex = 0
+                            ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+                        Case "88"
+                            TextBox1.Text = I2CAddr
+                            ComboBox2.SelectedIndex = 1
+                            ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+                        Case "A0"
+                            TextBox1.Text = I2CAddr
+                            ComboBox2.SelectedIndex = 2
+                            ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+                        Case "12"
+                            TextBox1.Text = I2CAddr
+                            ComboBox2.SelectedIndex = 3
+                            ComboBox6.SelectedIndex = ComboBox2.SelectedIndex
+                        Case Else
+                            intStringNumber = 0
+                    End Select
+
+
+
+                    If intStringNumber Then
+
+                        If REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).Text <> Mid(strTemp, 1 + 6, 2) Then
+                            REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).ForeColor = Color.Red
+                        Else
+                            REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).ForeColor = Color.Empty
+                        End If
+
+                        REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).Text = Mid(strTemp, 1 + 6, 2)
+
+                        'DEBUGTextBox1.Text &= Mid(strTemp, 1 + 3, 2) & " " & Mid(strTemp, 1 + 6, 2) & vbNewLine
+                        DEBUGTextBox1.Text &= strTemp & vbNewLine
                     End If
+                Loop
 
-                    REG(Integer.Parse(Val("&H" + Mid(strTemp, 1 + 3, 2) + "&"))).Text = Mid(strTemp, 1 + 6, 2)
 
-                    'DEBUGTextBox1.Text &= Mid(strTemp, 1 + 3, 2) & " " & Mid(strTemp, 1 + 6, 2) & vbNewLine
-                    DEBUGTextBox1.Text &= strTemp & vbNewLine
-                End If
-            Loop
 
-            'DEBUGTextBox1.Text &= strTemp
-            FileClose(FileNum)
+                'DEBUGTextBox1.Text &= strTemp
+                FileClose(FileNum)
 
-            'DEBUGTextBox1.Text &= strTemp2
+                'DEBUGTextBox1.Text &= strTemp2
 
-            'Me.Text = myFile
-            ' intSaveFileFlag = True
-        Catch ex As Exception
-            ' MsgBox("資料檔案未存檔")
-        End Try
-
+                'Me.Text = myFile
+                ' intSaveFileFlag = True
+            Catch ex As Exception
+                ' MsgBox("資料檔案未開啟")
+            End Try
+        Else
+            MsgBox("資料檔案未開啟", vbCritical)
+        End If
 
 
     End Sub
@@ -1661,11 +1733,12 @@ Public Class frmMain
             If sender.Name = Button17.Name Then
                 REG(index).Text = "00"
             Else
-                REG(index).Text = "FF"
+                REG(index).ForeColor = Color.Empty
+                REG(index).BackColor = Color.Empty
             End If
-            REG(index).ForeColor = Color.Empty
-            REG(index).BackColor = Color.Empty
         Next
+
+        ToolStripStatusLabel1.Text = "工作目錄：" & Application.StartupPath
 
     End Sub
 
@@ -1838,6 +1911,10 @@ Public Class frmMain
     Sub SetBoardColor(ByVal REG As Object)
 
         If REG.BackColor = Color.Yellow Then
+            REG.BackColor = Color.Pink
+        ElseIf REG.BackColor = Color.Pink Then
+            REG.BackColor = Color.LightBlue
+        ElseIf REG.BackColor = Color.LightBlue Then
             REG.BackColor = Color.Empty
         Else
             REG.BackColor = Color.Yellow
@@ -1978,7 +2055,6 @@ Public Class frmMain
         Dim strTEST As String = TESTOutput.Text
         Dim intValue2 As Integer = 0
 
-
         Str_number = InStr(1, strTEST, "STX")
 
         If Str_number > 0 Then
@@ -1987,7 +2063,8 @@ Public Class frmMain
             If (InStr(1, strTEST, "ETX") = (Str_number + 11)) Then
                 '  Me.DEBUGTextBox1.Text &= "R " & Mid(strTEST, Str_number + 3, 2) & " " & Mid(strTEST, Str_number + 3 + 2, 2) & vbNewLine
                 PRINT("GOT STX , AND ETX OK" & " ,LEN=" & Len(strTEST))
-
+                '命令執行完畢刪除命令
+                TESTOutput.Text = Mid(strTEST, Str_number + 14, strTEST.Length)
                 'CRC check
                 'intValue2 = Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3, 2)) _
                 '    Xor Conversion.Val("&H" & Mid(RichTextBox1.Text, Str_number + 3 + 2, 2)) _
@@ -2057,6 +2134,7 @@ Public Class frmMain
                 'RichTextBox1.Text = ""
             Else
                 PRINT("GOT STX ,ETX =NG" & " ,LEN=" & Len(strTEST))
+                '比對ETX錯誤,刪除STX 
                 TESTOutput.Text = Mid(strTEST, Str_number + 3, Len(strTEST) - 3)
             End If
         Else

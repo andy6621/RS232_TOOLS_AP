@@ -91,37 +91,21 @@ Partial Class frmMain
         Me.Button14 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
         Me.Button15 = New System.Windows.Forms.Button()
-        Me.TextBox36 = New System.Windows.Forms.TextBox()
         Me.REG0F = New System.Windows.Forms.TextBox()
-        Me.TextBox35 = New System.Windows.Forms.TextBox()
         Me.REG07 = New System.Windows.Forms.TextBox()
-        Me.TextBox34 = New System.Windows.Forms.TextBox()
         Me.REG0E = New System.Windows.Forms.TextBox()
-        Me.TextBox33 = New System.Windows.Forms.TextBox()
         Me.REG06 = New System.Windows.Forms.TextBox()
-        Me.TextBox32 = New System.Windows.Forms.TextBox()
         Me.REG0D = New System.Windows.Forms.TextBox()
-        Me.TextBox31 = New System.Windows.Forms.TextBox()
         Me.REG05 = New System.Windows.Forms.TextBox()
-        Me.TextBox30 = New System.Windows.Forms.TextBox()
         Me.REG0C = New System.Windows.Forms.TextBox()
-        Me.TextBox29 = New System.Windows.Forms.TextBox()
         Me.REG04 = New System.Windows.Forms.TextBox()
-        Me.TextBox28 = New System.Windows.Forms.TextBox()
         Me.REG0B = New System.Windows.Forms.TextBox()
-        Me.TextBox27 = New System.Windows.Forms.TextBox()
         Me.REG03 = New System.Windows.Forms.TextBox()
-        Me.TextBox26 = New System.Windows.Forms.TextBox()
         Me.REG0A = New System.Windows.Forms.TextBox()
-        Me.TextBox25 = New System.Windows.Forms.TextBox()
         Me.REG02 = New System.Windows.Forms.TextBox()
-        Me.TextBox24 = New System.Windows.Forms.TextBox()
         Me.REG09 = New System.Windows.Forms.TextBox()
-        Me.TextBox23 = New System.Windows.Forms.TextBox()
         Me.REG01 = New System.Windows.Forms.TextBox()
-        Me.TextBox22 = New System.Windows.Forms.TextBox()
         Me.REG08 = New System.Windows.Forms.TextBox()
-        Me.TextBox52 = New System.Windows.Forms.TextBox()
         Me.REGFF = New System.Windows.Forms.TextBox()
         Me.REGF7 = New System.Windows.Forms.TextBox()
         Me.REGFE = New System.Windows.Forms.TextBox()
@@ -138,7 +122,6 @@ Partial Class frmMain
         Me.REGF1 = New System.Windows.Forms.TextBox()
         Me.REGF8 = New System.Windows.Forms.TextBox()
         Me.REGF0 = New System.Windows.Forms.TextBox()
-        Me.TextBox51 = New System.Windows.Forms.TextBox()
         Me.REGDF = New System.Windows.Forms.TextBox()
         Me.REGD7 = New System.Windows.Forms.TextBox()
         Me.REGDE = New System.Windows.Forms.TextBox()
@@ -155,7 +138,6 @@ Partial Class frmMain
         Me.REGD1 = New System.Windows.Forms.TextBox()
         Me.REGD8 = New System.Windows.Forms.TextBox()
         Me.REGD0 = New System.Windows.Forms.TextBox()
-        Me.TextBox50 = New System.Windows.Forms.TextBox()
         Me.REGBF = New System.Windows.Forms.TextBox()
         Me.REGB7 = New System.Windows.Forms.TextBox()
         Me.REGBE = New System.Windows.Forms.TextBox()
@@ -172,7 +154,6 @@ Partial Class frmMain
         Me.REGB1 = New System.Windows.Forms.TextBox()
         Me.REGB8 = New System.Windows.Forms.TextBox()
         Me.REGB0 = New System.Windows.Forms.TextBox()
-        Me.TextBox49 = New System.Windows.Forms.TextBox()
         Me.REGEF = New System.Windows.Forms.TextBox()
         Me.REGE7 = New System.Windows.Forms.TextBox()
         Me.REGEE = New System.Windows.Forms.TextBox()
@@ -189,7 +170,6 @@ Partial Class frmMain
         Me.REGE1 = New System.Windows.Forms.TextBox()
         Me.REGE8 = New System.Windows.Forms.TextBox()
         Me.REGE0 = New System.Windows.Forms.TextBox()
-        Me.TextBox48 = New System.Windows.Forms.TextBox()
         Me.REGCF = New System.Windows.Forms.TextBox()
         Me.REGC7 = New System.Windows.Forms.TextBox()
         Me.REGCE = New System.Windows.Forms.TextBox()
@@ -206,7 +186,6 @@ Partial Class frmMain
         Me.REGC1 = New System.Windows.Forms.TextBox()
         Me.REGC8 = New System.Windows.Forms.TextBox()
         Me.REGC0 = New System.Windows.Forms.TextBox()
-        Me.TextBox47 = New System.Windows.Forms.TextBox()
         Me.REGAF = New System.Windows.Forms.TextBox()
         Me.REGA7 = New System.Windows.Forms.TextBox()
         Me.REGAE = New System.Windows.Forms.TextBox()
@@ -223,7 +202,6 @@ Partial Class frmMain
         Me.REGA1 = New System.Windows.Forms.TextBox()
         Me.REGA8 = New System.Windows.Forms.TextBox()
         Me.REGA0 = New System.Windows.Forms.TextBox()
-        Me.TextBox46 = New System.Windows.Forms.TextBox()
         Me.REG9F = New System.Windows.Forms.TextBox()
         Me.REG97 = New System.Windows.Forms.TextBox()
         Me.REG9E = New System.Windows.Forms.TextBox()
@@ -240,7 +218,6 @@ Partial Class frmMain
         Me.REG91 = New System.Windows.Forms.TextBox()
         Me.REG98 = New System.Windows.Forms.TextBox()
         Me.REG90 = New System.Windows.Forms.TextBox()
-        Me.TextBox45 = New System.Windows.Forms.TextBox()
         Me.REG8F = New System.Windows.Forms.TextBox()
         Me.REG87 = New System.Windows.Forms.TextBox()
         Me.REG8E = New System.Windows.Forms.TextBox()
@@ -257,7 +234,6 @@ Partial Class frmMain
         Me.REG81 = New System.Windows.Forms.TextBox()
         Me.REG88 = New System.Windows.Forms.TextBox()
         Me.REG80 = New System.Windows.Forms.TextBox()
-        Me.TextBox44 = New System.Windows.Forms.TextBox()
         Me.REG7F = New System.Windows.Forms.TextBox()
         Me.REG77 = New System.Windows.Forms.TextBox()
         Me.REG7E = New System.Windows.Forms.TextBox()
@@ -274,7 +250,6 @@ Partial Class frmMain
         Me.REG71 = New System.Windows.Forms.TextBox()
         Me.REG78 = New System.Windows.Forms.TextBox()
         Me.REG70 = New System.Windows.Forms.TextBox()
-        Me.TextBox43 = New System.Windows.Forms.TextBox()
         Me.REG6F = New System.Windows.Forms.TextBox()
         Me.REG67 = New System.Windows.Forms.TextBox()
         Me.REG6E = New System.Windows.Forms.TextBox()
@@ -291,7 +266,6 @@ Partial Class frmMain
         Me.REG61 = New System.Windows.Forms.TextBox()
         Me.REG68 = New System.Windows.Forms.TextBox()
         Me.REG60 = New System.Windows.Forms.TextBox()
-        Me.TextBox42 = New System.Windows.Forms.TextBox()
         Me.REG5F = New System.Windows.Forms.TextBox()
         Me.REG57 = New System.Windows.Forms.TextBox()
         Me.REG5E = New System.Windows.Forms.TextBox()
@@ -308,7 +282,6 @@ Partial Class frmMain
         Me.REG51 = New System.Windows.Forms.TextBox()
         Me.REG58 = New System.Windows.Forms.TextBox()
         Me.REG50 = New System.Windows.Forms.TextBox()
-        Me.TextBox41 = New System.Windows.Forms.TextBox()
         Me.REG4F = New System.Windows.Forms.TextBox()
         Me.REG47 = New System.Windows.Forms.TextBox()
         Me.REG4E = New System.Windows.Forms.TextBox()
@@ -325,7 +298,6 @@ Partial Class frmMain
         Me.REG41 = New System.Windows.Forms.TextBox()
         Me.REG48 = New System.Windows.Forms.TextBox()
         Me.REG40 = New System.Windows.Forms.TextBox()
-        Me.TextBox40 = New System.Windows.Forms.TextBox()
         Me.REG3F = New System.Windows.Forms.TextBox()
         Me.REG37 = New System.Windows.Forms.TextBox()
         Me.REG3E = New System.Windows.Forms.TextBox()
@@ -342,7 +314,6 @@ Partial Class frmMain
         Me.REG31 = New System.Windows.Forms.TextBox()
         Me.REG38 = New System.Windows.Forms.TextBox()
         Me.REG30 = New System.Windows.Forms.TextBox()
-        Me.TextBox39 = New System.Windows.Forms.TextBox()
         Me.REG2F = New System.Windows.Forms.TextBox()
         Me.REG27 = New System.Windows.Forms.TextBox()
         Me.REG2E = New System.Windows.Forms.TextBox()
@@ -359,7 +330,6 @@ Partial Class frmMain
         Me.REG21 = New System.Windows.Forms.TextBox()
         Me.REG28 = New System.Windows.Forms.TextBox()
         Me.REG20 = New System.Windows.Forms.TextBox()
-        Me.TextBox38 = New System.Windows.Forms.TextBox()
         Me.REG1F = New System.Windows.Forms.TextBox()
         Me.REG17 = New System.Windows.Forms.TextBox()
         Me.REG1E = New System.Windows.Forms.TextBox()
@@ -376,8 +346,6 @@ Partial Class frmMain
         Me.REG11 = New System.Windows.Forms.TextBox()
         Me.REG18 = New System.Windows.Forms.TextBox()
         Me.REG10 = New System.Windows.Forms.TextBox()
-        Me.TextBox21 = New System.Windows.Forms.TextBox()
-        Me.TextBox37 = New System.Windows.Forms.TextBox()
         Me.REG00 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TESTOutput = New System.Windows.Forms.TextBox()
@@ -393,6 +361,27 @@ Partial Class frmMain
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.COMPORTSAVE = New System.Windows.Forms.CheckBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -401,6 +390,7 @@ Partial Class frmMain
         Me.TabPage2.SuspendLayout()
         Me.btnREGGroup.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnConnect
@@ -471,7 +461,6 @@ Partial Class frmMain
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.btnSend)
-        Me.GroupBox1.Controls.Add(Me.txtTransmit)
         Me.GroupBox1.Location = New System.Drawing.Point(176, 623)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(213, 76)
@@ -491,7 +480,7 @@ Partial Class frmMain
         '
         'txtTransmit
         '
-        Me.txtTransmit.Location = New System.Drawing.Point(20, 49)
+        Me.txtTransmit.Location = New System.Drawing.Point(157, 686)
         Me.txtTransmit.Name = "txtTransmit"
         Me.txtTransmit.Size = New System.Drawing.Size(248, 22)
         Me.txtTransmit.TabIndex = 0
@@ -927,6 +916,7 @@ Partial Class frmMain
         Me.TabPage1.Controls.Add(Me.Button5)
         Me.TabPage1.Controls.Add(Me.Label9)
         Me.TabPage1.Controls.Add(Me.Button10)
+        Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -1017,39 +1007,40 @@ Partial Class frmMain
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage2.Controls.Add(Me.Label35)
+        Me.TabPage2.Controls.Add(Me.Label27)
+        Me.TabPage2.Controls.Add(Me.Label34)
+        Me.TabPage2.Controls.Add(Me.Label23)
+        Me.TabPage2.Controls.Add(Me.Label33)
+        Me.TabPage2.Controls.Add(Me.Label26)
+        Me.TabPage2.Controls.Add(Me.Label32)
+        Me.TabPage2.Controls.Add(Me.Label21)
+        Me.TabPage2.Controls.Add(Me.Label31)
+        Me.TabPage2.Controls.Add(Me.Label25)
+        Me.TabPage2.Controls.Add(Me.Label30)
+        Me.TabPage2.Controls.Add(Me.Label22)
+        Me.TabPage2.Controls.Add(Me.Label29)
+        Me.TabPage2.Controls.Add(Me.Label24)
+        Me.TabPage2.Controls.Add(Me.Label28)
+        Me.TabPage2.Controls.Add(Me.Label20)
+        Me.TabPage2.Controls.Add(Me.Label19)
         Me.TabPage2.Controls.Add(Me.ComboBox6)
         Me.TabPage2.Controls.Add(Me.btnREGGroup)
-        Me.TabPage2.Controls.Add(Me.TextBox36)
         Me.TabPage2.Controls.Add(Me.REG0F)
-        Me.TabPage2.Controls.Add(Me.TextBox35)
         Me.TabPage2.Controls.Add(Me.REG07)
-        Me.TabPage2.Controls.Add(Me.TextBox34)
         Me.TabPage2.Controls.Add(Me.REG0E)
-        Me.TabPage2.Controls.Add(Me.TextBox33)
         Me.TabPage2.Controls.Add(Me.REG06)
-        Me.TabPage2.Controls.Add(Me.TextBox32)
         Me.TabPage2.Controls.Add(Me.REG0D)
-        Me.TabPage2.Controls.Add(Me.TextBox31)
         Me.TabPage2.Controls.Add(Me.REG05)
-        Me.TabPage2.Controls.Add(Me.TextBox30)
         Me.TabPage2.Controls.Add(Me.REG0C)
-        Me.TabPage2.Controls.Add(Me.TextBox29)
         Me.TabPage2.Controls.Add(Me.REG04)
-        Me.TabPage2.Controls.Add(Me.TextBox28)
         Me.TabPage2.Controls.Add(Me.REG0B)
-        Me.TabPage2.Controls.Add(Me.TextBox27)
         Me.TabPage2.Controls.Add(Me.REG03)
-        Me.TabPage2.Controls.Add(Me.TextBox26)
         Me.TabPage2.Controls.Add(Me.REG0A)
-        Me.TabPage2.Controls.Add(Me.TextBox25)
         Me.TabPage2.Controls.Add(Me.REG02)
-        Me.TabPage2.Controls.Add(Me.TextBox24)
         Me.TabPage2.Controls.Add(Me.REG09)
-        Me.TabPage2.Controls.Add(Me.TextBox23)
         Me.TabPage2.Controls.Add(Me.REG01)
-        Me.TabPage2.Controls.Add(Me.TextBox22)
         Me.TabPage2.Controls.Add(Me.REG08)
-        Me.TabPage2.Controls.Add(Me.TextBox52)
         Me.TabPage2.Controls.Add(Me.REGFF)
         Me.TabPage2.Controls.Add(Me.REGF7)
         Me.TabPage2.Controls.Add(Me.REGFE)
@@ -1066,7 +1057,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REGF1)
         Me.TabPage2.Controls.Add(Me.REGF8)
         Me.TabPage2.Controls.Add(Me.REGF0)
-        Me.TabPage2.Controls.Add(Me.TextBox51)
         Me.TabPage2.Controls.Add(Me.REGDF)
         Me.TabPage2.Controls.Add(Me.REGD7)
         Me.TabPage2.Controls.Add(Me.REGDE)
@@ -1083,7 +1073,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REGD1)
         Me.TabPage2.Controls.Add(Me.REGD8)
         Me.TabPage2.Controls.Add(Me.REGD0)
-        Me.TabPage2.Controls.Add(Me.TextBox50)
         Me.TabPage2.Controls.Add(Me.REGBF)
         Me.TabPage2.Controls.Add(Me.REGB7)
         Me.TabPage2.Controls.Add(Me.REGBE)
@@ -1100,7 +1089,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REGB1)
         Me.TabPage2.Controls.Add(Me.REGB8)
         Me.TabPage2.Controls.Add(Me.REGB0)
-        Me.TabPage2.Controls.Add(Me.TextBox49)
         Me.TabPage2.Controls.Add(Me.REGEF)
         Me.TabPage2.Controls.Add(Me.REGE7)
         Me.TabPage2.Controls.Add(Me.REGEE)
@@ -1117,7 +1105,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REGE1)
         Me.TabPage2.Controls.Add(Me.REGE8)
         Me.TabPage2.Controls.Add(Me.REGE0)
-        Me.TabPage2.Controls.Add(Me.TextBox48)
         Me.TabPage2.Controls.Add(Me.REGCF)
         Me.TabPage2.Controls.Add(Me.REGC7)
         Me.TabPage2.Controls.Add(Me.REGCE)
@@ -1134,7 +1121,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REGC1)
         Me.TabPage2.Controls.Add(Me.REGC8)
         Me.TabPage2.Controls.Add(Me.REGC0)
-        Me.TabPage2.Controls.Add(Me.TextBox47)
         Me.TabPage2.Controls.Add(Me.REGAF)
         Me.TabPage2.Controls.Add(Me.REGA7)
         Me.TabPage2.Controls.Add(Me.REGAE)
@@ -1151,7 +1137,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REGA1)
         Me.TabPage2.Controls.Add(Me.REGA8)
         Me.TabPage2.Controls.Add(Me.REGA0)
-        Me.TabPage2.Controls.Add(Me.TextBox46)
         Me.TabPage2.Controls.Add(Me.REG9F)
         Me.TabPage2.Controls.Add(Me.REG97)
         Me.TabPage2.Controls.Add(Me.REG9E)
@@ -1168,7 +1153,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG91)
         Me.TabPage2.Controls.Add(Me.REG98)
         Me.TabPage2.Controls.Add(Me.REG90)
-        Me.TabPage2.Controls.Add(Me.TextBox45)
         Me.TabPage2.Controls.Add(Me.REG8F)
         Me.TabPage2.Controls.Add(Me.REG87)
         Me.TabPage2.Controls.Add(Me.REG8E)
@@ -1185,7 +1169,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG81)
         Me.TabPage2.Controls.Add(Me.REG88)
         Me.TabPage2.Controls.Add(Me.REG80)
-        Me.TabPage2.Controls.Add(Me.TextBox44)
         Me.TabPage2.Controls.Add(Me.REG7F)
         Me.TabPage2.Controls.Add(Me.REG77)
         Me.TabPage2.Controls.Add(Me.REG7E)
@@ -1202,7 +1185,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG71)
         Me.TabPage2.Controls.Add(Me.REG78)
         Me.TabPage2.Controls.Add(Me.REG70)
-        Me.TabPage2.Controls.Add(Me.TextBox43)
         Me.TabPage2.Controls.Add(Me.REG6F)
         Me.TabPage2.Controls.Add(Me.REG67)
         Me.TabPage2.Controls.Add(Me.REG6E)
@@ -1219,7 +1201,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG61)
         Me.TabPage2.Controls.Add(Me.REG68)
         Me.TabPage2.Controls.Add(Me.REG60)
-        Me.TabPage2.Controls.Add(Me.TextBox42)
         Me.TabPage2.Controls.Add(Me.REG5F)
         Me.TabPage2.Controls.Add(Me.REG57)
         Me.TabPage2.Controls.Add(Me.REG5E)
@@ -1236,7 +1217,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG51)
         Me.TabPage2.Controls.Add(Me.REG58)
         Me.TabPage2.Controls.Add(Me.REG50)
-        Me.TabPage2.Controls.Add(Me.TextBox41)
         Me.TabPage2.Controls.Add(Me.REG4F)
         Me.TabPage2.Controls.Add(Me.REG47)
         Me.TabPage2.Controls.Add(Me.REG4E)
@@ -1253,7 +1233,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG41)
         Me.TabPage2.Controls.Add(Me.REG48)
         Me.TabPage2.Controls.Add(Me.REG40)
-        Me.TabPage2.Controls.Add(Me.TextBox40)
         Me.TabPage2.Controls.Add(Me.REG3F)
         Me.TabPage2.Controls.Add(Me.REG37)
         Me.TabPage2.Controls.Add(Me.REG3E)
@@ -1270,7 +1249,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG31)
         Me.TabPage2.Controls.Add(Me.REG38)
         Me.TabPage2.Controls.Add(Me.REG30)
-        Me.TabPage2.Controls.Add(Me.TextBox39)
         Me.TabPage2.Controls.Add(Me.REG2F)
         Me.TabPage2.Controls.Add(Me.REG27)
         Me.TabPage2.Controls.Add(Me.REG2E)
@@ -1287,7 +1265,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG21)
         Me.TabPage2.Controls.Add(Me.REG28)
         Me.TabPage2.Controls.Add(Me.REG20)
-        Me.TabPage2.Controls.Add(Me.TextBox38)
         Me.TabPage2.Controls.Add(Me.REG1F)
         Me.TabPage2.Controls.Add(Me.REG17)
         Me.TabPage2.Controls.Add(Me.REG1E)
@@ -1304,8 +1281,6 @@ Partial Class frmMain
         Me.TabPage2.Controls.Add(Me.REG11)
         Me.TabPage2.Controls.Add(Me.REG18)
         Me.TabPage2.Controls.Add(Me.REG10)
-        Me.TabPage2.Controls.Add(Me.TextBox21)
-        Me.TabPage2.Controls.Add(Me.TextBox37)
         Me.TabPage2.Controls.Add(Me.REG00)
         Me.TabPage2.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
@@ -1352,12 +1327,12 @@ Partial Class frmMain
         '
         'Button19
         '
-        Me.Button19.Font = New System.Drawing.Font("微軟正黑體", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Button19.Font = New System.Drawing.Font("微軟正黑體", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Button19.Location = New System.Drawing.Point(56, 14)
         Me.Button19.Name = "Button19"
         Me.Button19.Size = New System.Drawing.Size(45, 39)
         Me.Button19.TabIndex = 7
-        Me.Button19.Text = "FF"
+        Me.Button19.Text = "Clear Color"
         Me.Button19.UseVisualStyleBackColor = True
         '
         'Button17
@@ -1400,19 +1375,6 @@ Partial Class frmMain
         Me.Button15.Text = "Save"
         Me.Button15.UseVisualStyleBackColor = True
         '
-        'TextBox36
-        '
-        Me.TextBox36.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox36.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox36.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox36.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox36.Location = New System.Drawing.Point(508, 6)
-        Me.TextBox36.Name = "TextBox36"
-        Me.TextBox36.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox36.TabIndex = 0
-        Me.TextBox36.Text = "0F"
-        Me.TextBox36.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG0F
         '
         Me.REG0F.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1423,19 +1385,6 @@ Partial Class frmMain
         Me.REG0F.TabIndex = 0
         Me.REG0F.Text = "00"
         Me.REG0F.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox35
-        '
-        Me.TextBox35.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox35.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox35.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox35.Location = New System.Drawing.Point(263, 6)
-        Me.TextBox35.Name = "TextBox35"
-        Me.TextBox35.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox35.TabIndex = 0
-        Me.TextBox35.Text = "07"
-        Me.TextBox35.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG07
         '
@@ -1448,19 +1397,6 @@ Partial Class frmMain
         Me.REG07.Text = "00"
         Me.REG07.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox34
-        '
-        Me.TextBox34.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox34.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox34.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox34.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox34.Location = New System.Drawing.Point(478, 6)
-        Me.TextBox34.Name = "TextBox34"
-        Me.TextBox34.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox34.TabIndex = 0
-        Me.TextBox34.Text = "0E"
-        Me.TextBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG0E
         '
         Me.REG0E.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1471,19 +1407,6 @@ Partial Class frmMain
         Me.REG0E.TabIndex = 0
         Me.REG0E.Text = "00"
         Me.REG0E.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox33
-        '
-        Me.TextBox33.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox33.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox33.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox33.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox33.Location = New System.Drawing.Point(233, 6)
-        Me.TextBox33.Name = "TextBox33"
-        Me.TextBox33.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox33.TabIndex = 0
-        Me.TextBox33.Text = "06"
-        Me.TextBox33.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG06
         '
@@ -1496,19 +1419,6 @@ Partial Class frmMain
         Me.REG06.Text = "00"
         Me.REG06.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox32
-        '
-        Me.TextBox32.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox32.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox32.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox32.Location = New System.Drawing.Point(448, 6)
-        Me.TextBox32.Name = "TextBox32"
-        Me.TextBox32.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox32.TabIndex = 0
-        Me.TextBox32.Text = "0D"
-        Me.TextBox32.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG0D
         '
         Me.REG0D.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1519,19 +1429,6 @@ Partial Class frmMain
         Me.REG0D.TabIndex = 0
         Me.REG0D.Text = "00"
         Me.REG0D.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox31
-        '
-        Me.TextBox31.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox31.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox31.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox31.Location = New System.Drawing.Point(203, 6)
-        Me.TextBox31.Name = "TextBox31"
-        Me.TextBox31.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox31.TabIndex = 0
-        Me.TextBox31.Text = "05"
-        Me.TextBox31.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG05
         '
@@ -1544,19 +1441,6 @@ Partial Class frmMain
         Me.REG05.Text = "00"
         Me.REG05.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox30
-        '
-        Me.TextBox30.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox30.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox30.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox30.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox30.Location = New System.Drawing.Point(418, 6)
-        Me.TextBox30.Name = "TextBox30"
-        Me.TextBox30.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox30.TabIndex = 0
-        Me.TextBox30.Text = "0C"
-        Me.TextBox30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG0C
         '
         Me.REG0C.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1567,19 +1451,6 @@ Partial Class frmMain
         Me.REG0C.TabIndex = 0
         Me.REG0C.Text = "00"
         Me.REG0C.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox29
-        '
-        Me.TextBox29.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox29.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox29.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox29.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox29.Location = New System.Drawing.Point(173, 6)
-        Me.TextBox29.Name = "TextBox29"
-        Me.TextBox29.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox29.TabIndex = 0
-        Me.TextBox29.Text = "04"
-        Me.TextBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG04
         '
@@ -1592,19 +1463,6 @@ Partial Class frmMain
         Me.REG04.Text = "00"
         Me.REG04.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox28
-        '
-        Me.TextBox28.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox28.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox28.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox28.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox28.Location = New System.Drawing.Point(388, 6)
-        Me.TextBox28.Name = "TextBox28"
-        Me.TextBox28.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox28.TabIndex = 0
-        Me.TextBox28.Text = "0B"
-        Me.TextBox28.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG0B
         '
         Me.REG0B.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1615,19 +1473,6 @@ Partial Class frmMain
         Me.REG0B.TabIndex = 0
         Me.REG0B.Text = "00"
         Me.REG0B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox27
-        '
-        Me.TextBox27.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox27.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox27.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox27.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox27.Location = New System.Drawing.Point(143, 6)
-        Me.TextBox27.Name = "TextBox27"
-        Me.TextBox27.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox27.TabIndex = 0
-        Me.TextBox27.Text = "03"
-        Me.TextBox27.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG03
         '
@@ -1640,19 +1485,6 @@ Partial Class frmMain
         Me.REG03.Text = "00"
         Me.REG03.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox26
-        '
-        Me.TextBox26.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox26.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox26.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox26.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox26.Location = New System.Drawing.Point(358, 6)
-        Me.TextBox26.Name = "TextBox26"
-        Me.TextBox26.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox26.TabIndex = 0
-        Me.TextBox26.Text = "0A"
-        Me.TextBox26.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG0A
         '
         Me.REG0A.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1663,19 +1495,6 @@ Partial Class frmMain
         Me.REG0A.TabIndex = 0
         Me.REG0A.Text = "00"
         Me.REG0A.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox25
-        '
-        Me.TextBox25.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox25.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox25.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox25.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox25.Location = New System.Drawing.Point(113, 6)
-        Me.TextBox25.Name = "TextBox25"
-        Me.TextBox25.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox25.TabIndex = 0
-        Me.TextBox25.Text = "02"
-        Me.TextBox25.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG02
         '
@@ -1688,19 +1507,6 @@ Partial Class frmMain
         Me.REG02.Text = "00"
         Me.REG02.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox24
-        '
-        Me.TextBox24.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox24.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox24.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox24.Location = New System.Drawing.Point(328, 6)
-        Me.TextBox24.Name = "TextBox24"
-        Me.TextBox24.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox24.TabIndex = 0
-        Me.TextBox24.Text = "09"
-        Me.TextBox24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG09
         '
         Me.REG09.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1711,19 +1517,6 @@ Partial Class frmMain
         Me.REG09.TabIndex = 0
         Me.REG09.Text = "00"
         Me.REG09.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox23
-        '
-        Me.TextBox23.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox23.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox23.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox23.Location = New System.Drawing.Point(83, 6)
-        Me.TextBox23.Name = "TextBox23"
-        Me.TextBox23.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox23.TabIndex = 0
-        Me.TextBox23.Text = "01"
-        Me.TextBox23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG01
         '
@@ -1736,19 +1529,6 @@ Partial Class frmMain
         Me.REG01.Text = "00"
         Me.REG01.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox22
-        '
-        Me.TextBox22.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox22.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox22.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox22.Location = New System.Drawing.Point(297, 6)
-        Me.TextBox22.Name = "TextBox22"
-        Me.TextBox22.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox22.TabIndex = 0
-        Me.TextBox22.Text = "08"
-        Me.TextBox22.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG08
         '
         Me.REG08.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1759,19 +1539,6 @@ Partial Class frmMain
         Me.REG08.TabIndex = 0
         Me.REG08.Text = "00"
         Me.REG08.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox52
-        '
-        Me.TextBox52.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox52.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox52.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox52.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox52.Location = New System.Drawing.Point(21, 444)
-        Me.TextBox52.Name = "TextBox52"
-        Me.TextBox52.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox52.TabIndex = 0
-        Me.TextBox52.Text = "F0"
-        Me.TextBox52.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REGFF
         '
@@ -1949,19 +1716,6 @@ Partial Class frmMain
         Me.REGF0.Text = "00"
         Me.REGF0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox51
-        '
-        Me.TextBox51.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox51.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox51.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox51.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox51.Location = New System.Drawing.Point(21, 390)
-        Me.TextBox51.Name = "TextBox51"
-        Me.TextBox51.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox51.TabIndex = 0
-        Me.TextBox51.Text = "D0"
-        Me.TextBox51.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REGDF
         '
         Me.REGDF.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2137,19 +1891,6 @@ Partial Class frmMain
         Me.REGD0.TabIndex = 0
         Me.REGD0.Text = "00"
         Me.REGD0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox50
-        '
-        Me.TextBox50.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox50.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox50.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox50.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox50.Location = New System.Drawing.Point(21, 336)
-        Me.TextBox50.Name = "TextBox50"
-        Me.TextBox50.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox50.TabIndex = 0
-        Me.TextBox50.Text = "B0"
-        Me.TextBox50.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REGBF
         '
@@ -2327,19 +2068,6 @@ Partial Class frmMain
         Me.REGB0.Text = "00"
         Me.REGB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox49
-        '
-        Me.TextBox49.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox49.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox49.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox49.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox49.Location = New System.Drawing.Point(21, 417)
-        Me.TextBox49.Name = "TextBox49"
-        Me.TextBox49.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox49.TabIndex = 0
-        Me.TextBox49.Text = "E0"
-        Me.TextBox49.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REGEF
         '
         Me.REGEF.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2515,19 +2243,6 @@ Partial Class frmMain
         Me.REGE0.TabIndex = 0
         Me.REGE0.Text = "00"
         Me.REGE0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox48
-        '
-        Me.TextBox48.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox48.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox48.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox48.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox48.Location = New System.Drawing.Point(21, 363)
-        Me.TextBox48.Name = "TextBox48"
-        Me.TextBox48.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox48.TabIndex = 0
-        Me.TextBox48.Text = "C0"
-        Me.TextBox48.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REGCF
         '
@@ -2705,19 +2420,6 @@ Partial Class frmMain
         Me.REGC0.Text = "00"
         Me.REGC0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox47
-        '
-        Me.TextBox47.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox47.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox47.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox47.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox47.Location = New System.Drawing.Point(21, 309)
-        Me.TextBox47.Name = "TextBox47"
-        Me.TextBox47.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox47.TabIndex = 0
-        Me.TextBox47.Text = "A0"
-        Me.TextBox47.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REGAF
         '
         Me.REGAF.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2893,19 +2595,6 @@ Partial Class frmMain
         Me.REGA0.TabIndex = 0
         Me.REGA0.Text = "00"
         Me.REGA0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox46
-        '
-        Me.TextBox46.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox46.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox46.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox46.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox46.Location = New System.Drawing.Point(21, 282)
-        Me.TextBox46.Name = "TextBox46"
-        Me.TextBox46.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox46.TabIndex = 0
-        Me.TextBox46.Text = "90"
-        Me.TextBox46.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG9F
         '
@@ -3083,19 +2772,6 @@ Partial Class frmMain
         Me.REG90.Text = "00"
         Me.REG90.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox45
-        '
-        Me.TextBox45.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox45.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox45.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox45.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox45.Location = New System.Drawing.Point(21, 255)
-        Me.TextBox45.Name = "TextBox45"
-        Me.TextBox45.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox45.TabIndex = 0
-        Me.TextBox45.Text = "80"
-        Me.TextBox45.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG8F
         '
         Me.REG8F.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -3271,19 +2947,6 @@ Partial Class frmMain
         Me.REG80.TabIndex = 0
         Me.REG80.Text = "00"
         Me.REG80.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox44
-        '
-        Me.TextBox44.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox44.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox44.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox44.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox44.Location = New System.Drawing.Point(21, 223)
-        Me.TextBox44.Name = "TextBox44"
-        Me.TextBox44.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox44.TabIndex = 0
-        Me.TextBox44.Text = "70"
-        Me.TextBox44.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG7F
         '
@@ -3461,19 +3124,6 @@ Partial Class frmMain
         Me.REG70.Text = "00"
         Me.REG70.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox43
-        '
-        Me.TextBox43.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox43.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox43.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox43.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox43.Location = New System.Drawing.Point(21, 196)
-        Me.TextBox43.Name = "TextBox43"
-        Me.TextBox43.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox43.TabIndex = 0
-        Me.TextBox43.Text = "60"
-        Me.TextBox43.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG6F
         '
         Me.REG6F.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -3649,19 +3299,6 @@ Partial Class frmMain
         Me.REG60.TabIndex = 0
         Me.REG60.Text = "00"
         Me.REG60.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox42
-        '
-        Me.TextBox42.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox42.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox42.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox42.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox42.Location = New System.Drawing.Point(21, 169)
-        Me.TextBox42.Name = "TextBox42"
-        Me.TextBox42.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox42.TabIndex = 0
-        Me.TextBox42.Text = "50"
-        Me.TextBox42.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG5F
         '
@@ -3839,19 +3476,6 @@ Partial Class frmMain
         Me.REG50.Text = "00"
         Me.REG50.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox41
-        '
-        Me.TextBox41.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox41.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox41.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox41.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox41.Location = New System.Drawing.Point(21, 142)
-        Me.TextBox41.Name = "TextBox41"
-        Me.TextBox41.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox41.TabIndex = 0
-        Me.TextBox41.Text = "40"
-        Me.TextBox41.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG4F
         '
         Me.REG4F.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -4027,19 +3651,6 @@ Partial Class frmMain
         Me.REG40.TabIndex = 0
         Me.REG40.Text = "00"
         Me.REG40.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox40
-        '
-        Me.TextBox40.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox40.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox40.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox40.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox40.Location = New System.Drawing.Point(21, 115)
-        Me.TextBox40.Name = "TextBox40"
-        Me.TextBox40.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox40.TabIndex = 0
-        Me.TextBox40.Text = "30"
-        Me.TextBox40.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG3F
         '
@@ -4217,19 +3828,6 @@ Partial Class frmMain
         Me.REG30.Text = "00"
         Me.REG30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox39
-        '
-        Me.TextBox39.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox39.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox39.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox39.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox39.Location = New System.Drawing.Point(21, 88)
-        Me.TextBox39.Name = "TextBox39"
-        Me.TextBox39.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox39.TabIndex = 0
-        Me.TextBox39.Text = "20"
-        Me.TextBox39.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG2F
         '
         Me.REG2F.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -4405,19 +4003,6 @@ Partial Class frmMain
         Me.REG20.TabIndex = 0
         Me.REG20.Text = "00"
         Me.REG20.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox38
-        '
-        Me.TextBox38.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox38.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox38.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox38.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox38.Location = New System.Drawing.Point(21, 61)
-        Me.TextBox38.Name = "TextBox38"
-        Me.TextBox38.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox38.TabIndex = 0
-        Me.TextBox38.Text = "10"
-        Me.TextBox38.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'REG1F
         '
@@ -4595,32 +4180,6 @@ Partial Class frmMain
         Me.REG10.Text = "00"
         Me.REG10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox21
-        '
-        Me.TextBox21.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox21.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox21.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox21.Location = New System.Drawing.Point(52, 6)
-        Me.TextBox21.Name = "TextBox21"
-        Me.TextBox21.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox21.TabIndex = 0
-        Me.TextBox21.Text = "00"
-        Me.TextBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox37
-        '
-        Me.TextBox37.BackColor = System.Drawing.SystemColors.Control
-        Me.TextBox37.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox37.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TextBox37.Location = New System.Drawing.Point(21, 34)
-        Me.TextBox37.Name = "TextBox37"
-        Me.TextBox37.Size = New System.Drawing.Size(25, 19)
-        Me.TextBox37.TabIndex = 0
-        Me.TextBox37.Text = "00"
-        Me.TextBox37.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'REG00
         '
         Me.REG00.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -4657,7 +4216,7 @@ Partial Class frmMain
         Me.TESTOutput.Name = "TESTOutput"
         Me.TESTOutput.Size = New System.Drawing.Size(222, 22)
         Me.TESTOutput.TabIndex = 8
-        Me.TESTOutput.Text = "STXSTX40112233ETX"
+        Me.TESTOutput.Text = "STXSTX40112233ETXSTX40112233ETX"
         '
         'btnTEST
         '
@@ -4752,14 +4311,235 @@ Partial Class frmMain
         '
         'OpenFileDialog1
         '
-        Me.OpenFileDialog1.FileName = " "
+        Me.OpenFileDialog1.FileName = "dump.txt"
         Me.OpenFileDialog1.Filter = """文字檔案(*.txt)|*.txt|逗號分隔檔案(*.csv)|*.csv"""
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 671)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(984, 25)
+        Me.StatusStrip1.TabIndex = 29
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(69, 20)
+        Me.ToolStripStatusLabel1.Text = "FilePath"
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "txt"
+        Me.SaveFileDialog1.FileName = "dump.txt"
+        '
+        'COMPORTSAVE
+        '
+        Me.COMPORTSAVE.AutoSize = True
+        Me.COMPORTSAVE.Location = New System.Drawing.Point(462, 29)
+        Me.COMPORTSAVE.Name = "COMPORTSAVE"
+        Me.COMPORTSAVE.Size = New System.Drawing.Size(114, 16)
+        Me.COMPORTSAVE.TabIndex = 30
+        Me.COMPORTSAVE.Text = "COM PORT SAVE"
+        Me.COMPORTSAVE.UseVisualStyleBackColor = True
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.Teal
+        Me.Label19.Location = New System.Drawing.Point(50, 5)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(488, 20)
+        Me.Label19.TabIndex = 31
+        Me.Label19.Text = "00   01   02   03   04   05   06   07   08   09   0A   0B   0C   0D   0E   0F "
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label20.ForeColor = System.Drawing.Color.Teal
+        Me.Label20.Location = New System.Drawing.Point(17, 33)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(27, 20)
+        Me.Label20.TabIndex = 32
+        Me.Label20.Text = "00"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label21.ForeColor = System.Drawing.Color.Teal
+        Me.Label21.Location = New System.Drawing.Point(17, 60)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(27, 20)
+        Me.Label21.TabIndex = 32
+        Me.Label21.Text = "10"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label22.ForeColor = System.Drawing.Color.Teal
+        Me.Label22.Location = New System.Drawing.Point(17, 87)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(27, 20)
+        Me.Label22.TabIndex = 32
+        Me.Label22.Text = "20"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.Teal
+        Me.Label23.Location = New System.Drawing.Point(17, 114)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(27, 20)
+        Me.Label23.TabIndex = 32
+        Me.Label23.Text = "30"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.Teal
+        Me.Label24.Location = New System.Drawing.Point(17, 141)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(27, 20)
+        Me.Label24.TabIndex = 32
+        Me.Label24.Text = "40"
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label25.ForeColor = System.Drawing.Color.Teal
+        Me.Label25.Location = New System.Drawing.Point(17, 195)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(27, 20)
+        Me.Label25.TabIndex = 32
+        Me.Label25.Text = "60"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label26.ForeColor = System.Drawing.Color.Teal
+        Me.Label26.Location = New System.Drawing.Point(17, 168)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(27, 20)
+        Me.Label26.TabIndex = 32
+        Me.Label26.Text = "50"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label27.ForeColor = System.Drawing.Color.Teal
+        Me.Label27.Location = New System.Drawing.Point(17, 222)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(27, 20)
+        Me.Label27.TabIndex = 32
+        Me.Label27.Text = "70"
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label28.ForeColor = System.Drawing.Color.Teal
+        Me.Label28.Location = New System.Drawing.Point(16, 254)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(27, 20)
+        Me.Label28.TabIndex = 32
+        Me.Label28.Text = "80"
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label29.ForeColor = System.Drawing.Color.Teal
+        Me.Label29.Location = New System.Drawing.Point(16, 362)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(29, 20)
+        Me.Label29.TabIndex = 32
+        Me.Label29.Text = "C0"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label30.ForeColor = System.Drawing.Color.Teal
+        Me.Label30.Location = New System.Drawing.Point(16, 308)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(29, 20)
+        Me.Label30.TabIndex = 32
+        Me.Label30.Text = "A0"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label31.ForeColor = System.Drawing.Color.Teal
+        Me.Label31.Location = New System.Drawing.Point(16, 416)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(27, 20)
+        Me.Label31.TabIndex = 32
+        Me.Label31.Text = "E0"
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label32.ForeColor = System.Drawing.Color.Teal
+        Me.Label32.Location = New System.Drawing.Point(16, 281)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(27, 20)
+        Me.Label32.TabIndex = 32
+        Me.Label32.Text = "90"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.Teal
+        Me.Label33.Location = New System.Drawing.Point(16, 389)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(30, 20)
+        Me.Label33.TabIndex = 32
+        Me.Label33.Text = "D0"
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.Teal
+        Me.Label34.Location = New System.Drawing.Point(16, 335)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(28, 20)
+        Me.Label34.TabIndex = 32
+        Me.Label34.Text = "B0"
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label35.ForeColor = System.Drawing.Color.Teal
+        Me.Label35.Location = New System.Drawing.Point(16, 443)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(26, 20)
+        Me.Label35.TabIndex = 32
+        Me.Label35.Text = "F0"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 675)
+        Me.ClientSize = New System.Drawing.Size(984, 696)
+        Me.Controls.Add(Me.COMPORTSAVE)
+        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.txtTransmit)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnGroupBox)
@@ -4781,7 +4561,6 @@ Partial Class frmMain
         Me.Name = "frmMain"
         Me.Text = "ML076Q TEST TOOL"
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
@@ -4792,6 +4571,8 @@ Partial Class frmMain
         Me.btnREGGroup.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4882,40 +4663,8 @@ Partial Class frmMain
     Friend WithEvents REG40 As System.Windows.Forms.TextBox
     Friend WithEvents REGD0 As System.Windows.Forms.TextBox
     Friend WithEvents REGC0 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox36 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox35 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox34 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox33 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox32 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox31 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox30 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox29 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox28 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox27 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox26 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox25 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox24 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox23 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox22 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox52 As System.Windows.Forms.TextBox
     Friend WithEvents REGF0 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox51 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox50 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox49 As System.Windows.Forms.TextBox
     Friend WithEvents REGE0 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox48 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox47 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox46 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox45 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox44 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox43 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox42 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox41 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox40 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox39 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox38 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox21 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox37 As System.Windows.Forms.TextBox
     Friend WithEvents REGFF As System.Windows.Forms.TextBox
     Friend WithEvents REGF7 As System.Windows.Forms.TextBox
     Friend WithEvents REGFE As System.Windows.Forms.TextBox
@@ -5165,5 +4914,26 @@ Partial Class frmMain
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents TESTOutput As System.Windows.Forms.TextBox
     Friend WithEvents btnTEST As System.Windows.Forms.Button
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents COMPORTSAVE As System.Windows.Forms.CheckBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label35 As System.Windows.Forms.Label
+    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents Label34 As System.Windows.Forms.Label
+    Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents Label32 As System.Windows.Forms.Label
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents Label31 As System.Windows.Forms.Label
+    Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents Label29 As System.Windows.Forms.Label
+    Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents Label20 As System.Windows.Forms.Label
 
 End Class
