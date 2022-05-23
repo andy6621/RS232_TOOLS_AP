@@ -83,6 +83,23 @@ Partial Class frmMain
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.btnREGGroup = New System.Windows.Forms.GroupBox()
         Me.Button18 = New System.Windows.Forms.Button()
@@ -365,23 +382,14 @@ Partial Class frmMain
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.COMPORTSAVE = New System.Windows.Forms.CheckBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label29 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.Label34 = New System.Windows.Forms.Label()
-        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -391,6 +399,7 @@ Partial Class frmMain
         Me.btnREGGroup.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnConnect
@@ -858,9 +867,8 @@ Partial Class frmMain
         Me.Label4.ForeColor = System.Drawing.Color.DarkBlue
         Me.Label4.Location = New System.Drawing.Point(600, 58)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(10, 21)
+        Me.Label4.Size = New System.Drawing.Size(0, 21)
         Me.Label4.TabIndex = 26
-        Me.Label4.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'Timer3
         '
@@ -1289,6 +1297,193 @@ Partial Class frmMain
         Me.TabPage2.Size = New System.Drawing.Size(544, 525)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "REG.功能"
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label35.ForeColor = System.Drawing.Color.Teal
+        Me.Label35.Location = New System.Drawing.Point(16, 443)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(26, 20)
+        Me.Label35.TabIndex = 32
+        Me.Label35.Text = "F0"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label27.ForeColor = System.Drawing.Color.Teal
+        Me.Label27.Location = New System.Drawing.Point(17, 222)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(27, 20)
+        Me.Label27.TabIndex = 32
+        Me.Label27.Text = "70"
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.Teal
+        Me.Label34.Location = New System.Drawing.Point(16, 335)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(28, 20)
+        Me.Label34.TabIndex = 32
+        Me.Label34.Text = "B0"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.Teal
+        Me.Label23.Location = New System.Drawing.Point(17, 114)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(27, 20)
+        Me.Label23.TabIndex = 32
+        Me.Label23.Text = "30"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.Teal
+        Me.Label33.Location = New System.Drawing.Point(16, 389)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(30, 20)
+        Me.Label33.TabIndex = 32
+        Me.Label33.Text = "D0"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label26.ForeColor = System.Drawing.Color.Teal
+        Me.Label26.Location = New System.Drawing.Point(17, 168)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(27, 20)
+        Me.Label26.TabIndex = 32
+        Me.Label26.Text = "50"
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label32.ForeColor = System.Drawing.Color.Teal
+        Me.Label32.Location = New System.Drawing.Point(16, 281)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(27, 20)
+        Me.Label32.TabIndex = 32
+        Me.Label32.Text = "90"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label21.ForeColor = System.Drawing.Color.Teal
+        Me.Label21.Location = New System.Drawing.Point(17, 60)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(27, 20)
+        Me.Label21.TabIndex = 32
+        Me.Label21.Text = "10"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label31.ForeColor = System.Drawing.Color.Teal
+        Me.Label31.Location = New System.Drawing.Point(16, 416)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(27, 20)
+        Me.Label31.TabIndex = 32
+        Me.Label31.Text = "E0"
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label25.ForeColor = System.Drawing.Color.Teal
+        Me.Label25.Location = New System.Drawing.Point(17, 195)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(27, 20)
+        Me.Label25.TabIndex = 32
+        Me.Label25.Text = "60"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label30.ForeColor = System.Drawing.Color.Teal
+        Me.Label30.Location = New System.Drawing.Point(16, 308)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(29, 20)
+        Me.Label30.TabIndex = 32
+        Me.Label30.Text = "A0"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label22.ForeColor = System.Drawing.Color.Teal
+        Me.Label22.Location = New System.Drawing.Point(17, 87)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(27, 20)
+        Me.Label22.TabIndex = 32
+        Me.Label22.Text = "20"
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label29.ForeColor = System.Drawing.Color.Teal
+        Me.Label29.Location = New System.Drawing.Point(16, 362)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(29, 20)
+        Me.Label29.TabIndex = 32
+        Me.Label29.Text = "C0"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.Teal
+        Me.Label24.Location = New System.Drawing.Point(17, 141)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(27, 20)
+        Me.Label24.TabIndex = 32
+        Me.Label24.Text = "40"
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label28.ForeColor = System.Drawing.Color.Teal
+        Me.Label28.Location = New System.Drawing.Point(16, 254)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(27, 20)
+        Me.Label28.TabIndex = 32
+        Me.Label28.Text = "80"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label20.ForeColor = System.Drawing.Color.Teal
+        Me.Label20.Location = New System.Drawing.Point(17, 33)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(27, 20)
+        Me.Label20.TabIndex = 32
+        Me.Label20.Text = "00"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.Teal
+        Me.Label19.Location = New System.Drawing.Point(50, 5)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(488, 20)
+        Me.Label19.TabIndex = 31
+        Me.Label19.Text = "00   01   02   03   04   05   06   07   08   09   0A   0B   0C   0D   0E   0F "
         '
         'ComboBox6
         '
@@ -4345,205 +4540,78 @@ Partial Class frmMain
         Me.COMPORTSAVE.Text = "COM PORT SAVE"
         Me.COMPORTSAVE.UseVisualStyleBackColor = True
         '
-        'Label19
+        'Button20
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label19.ForeColor = System.Drawing.Color.Teal
-        Me.Label19.Location = New System.Drawing.Point(50, 5)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(488, 20)
-        Me.Label19.TabIndex = 31
-        Me.Label19.Text = "00   01   02   03   04   05   06   07   08   09   0A   0B   0C   0D   0E   0F "
+        Me.Button20.Location = New System.Drawing.Point(467, 96)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(74, 23)
+        Me.Button20.TabIndex = 56
+        Me.Button20.Text = "ACCESS=1"
+        Me.Button20.UseVisualStyleBackColor = True
         '
-        'Label20
+        'Label36
         '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label20.ForeColor = System.Drawing.Color.Teal
-        Me.Label20.Location = New System.Drawing.Point(17, 33)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(27, 20)
-        Me.Label20.TabIndex = 32
-        Me.Label20.Text = "00"
+        Me.Label36.AutoSize = True
+        Me.Label36.Location = New System.Drawing.Point(480, 81)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(42, 12)
+        Me.Label36.TabIndex = 57
+        Me.Label36.Text = "TP2824"
         '
-        'Label21
+        'Label37
         '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label21.ForeColor = System.Drawing.Color.Teal
-        Me.Label21.Location = New System.Drawing.Point(17, 60)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(27, 20)
-        Me.Label21.TabIndex = 32
-        Me.Label21.Text = "10"
+        Me.Label37.AutoSize = True
+        Me.Label37.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label37.Location = New System.Drawing.Point(606, 34)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(0, 12)
+        Me.Label37.TabIndex = 58
         '
-        'Label22
+        'ContextMenuStrip1
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label22.ForeColor = System.Drawing.Color.Teal
-        Me.Label22.Location = New System.Drawing.Point(17, 87)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(27, 20)
-        Me.Label22.TabIndex = 32
-        Me.Label22.Text = "20"
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(101, 92)
         '
-        'Label23
+        'ToolStripMenuItem2
         '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label23.ForeColor = System.Drawing.Color.Teal
-        Me.Label23.Location = New System.Drawing.Point(17, 114)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(27, 20)
-        Me.Label23.TabIndex = 32
-        Me.Label23.Text = "30"
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(100, 22)
+        Me.ToolStripMenuItem2.Text = "黃色"
         '
-        'Label24
+        'ToolStripMenuItem3
         '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label24.ForeColor = System.Drawing.Color.Teal
-        Me.Label24.Location = New System.Drawing.Point(17, 141)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(27, 20)
-        Me.Label24.TabIndex = 32
-        Me.Label24.Text = "40"
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(100, 22)
+        Me.ToolStripMenuItem3.Text = "粉色"
         '
-        'Label25
+        'ToolStripMenuItem4
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label25.ForeColor = System.Drawing.Color.Teal
-        Me.Label25.Location = New System.Drawing.Point(17, 195)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(27, 20)
-        Me.Label25.TabIndex = 32
-        Me.Label25.Text = "60"
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(100, 22)
+        Me.ToolStripMenuItem4.Text = "藍色"
         '
-        'Label26
+        'ToolStripMenuItem5
         '
-        Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label26.ForeColor = System.Drawing.Color.Teal
-        Me.Label26.Location = New System.Drawing.Point(17, 168)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(27, 20)
-        Me.Label26.TabIndex = 32
-        Me.Label26.Text = "50"
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label27.ForeColor = System.Drawing.Color.Teal
-        Me.Label27.Location = New System.Drawing.Point(17, 222)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(27, 20)
-        Me.Label27.TabIndex = 32
-        Me.Label27.Text = "70"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label28.ForeColor = System.Drawing.Color.Teal
-        Me.Label28.Location = New System.Drawing.Point(16, 254)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(27, 20)
-        Me.Label28.TabIndex = 32
-        Me.Label28.Text = "80"
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label29.ForeColor = System.Drawing.Color.Teal
-        Me.Label29.Location = New System.Drawing.Point(16, 362)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(29, 20)
-        Me.Label29.TabIndex = 32
-        Me.Label29.Text = "C0"
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label30.ForeColor = System.Drawing.Color.Teal
-        Me.Label30.Location = New System.Drawing.Point(16, 308)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(29, 20)
-        Me.Label30.TabIndex = 32
-        Me.Label30.Text = "A0"
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label31.ForeColor = System.Drawing.Color.Teal
-        Me.Label31.Location = New System.Drawing.Point(16, 416)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(27, 20)
-        Me.Label31.TabIndex = 32
-        Me.Label31.Text = "E0"
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label32.ForeColor = System.Drawing.Color.Teal
-        Me.Label32.Location = New System.Drawing.Point(16, 281)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(27, 20)
-        Me.Label32.TabIndex = 32
-        Me.Label32.Text = "90"
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label33.ForeColor = System.Drawing.Color.Teal
-        Me.Label33.Location = New System.Drawing.Point(16, 389)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(30, 20)
-        Me.Label33.TabIndex = 32
-        Me.Label33.Text = "D0"
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label34.ForeColor = System.Drawing.Color.Teal
-        Me.Label34.Location = New System.Drawing.Point(16, 335)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(28, 20)
-        Me.Label34.TabIndex = 32
-        Me.Label34.Text = "B0"
-        '
-        'Label35
-        '
-        Me.Label35.AutoSize = True
-        Me.Label35.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label35.ForeColor = System.Drawing.Color.Teal
-        Me.Label35.Location = New System.Drawing.Point(16, 443)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(26, 20)
-        Me.Label35.TabIndex = 32
-        Me.Label35.Text = "F0"
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(100, 22)
+        Me.ToolStripMenuItem5.Text = "原色"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(984, 696)
+        Me.Controls.Add(Me.Label37)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label36)
+        Me.Controls.Add(Me.Button20)
         Me.Controls.Add(Me.COMPORTSAVE)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.txtTransmit)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnGroupBox)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Label2)
@@ -4559,7 +4627,7 @@ Partial Class frmMain
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "frmMain"
-        Me.Text = "ML076Q TEST TOOL"
+        Me.Text = "ML076Q TEST TOOL V1.0"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
@@ -4573,6 +4641,7 @@ Partial Class frmMain
         Me.TabPage3.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4935,5 +5004,13 @@ Partial Class frmMain
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Button20 As System.Windows.Forms.Button
+    Friend WithEvents Label36 As System.Windows.Forms.Label
+    Friend WithEvents Label37 As System.Windows.Forms.Label
+    Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

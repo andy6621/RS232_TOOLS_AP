@@ -34,13 +34,12 @@ Public Class frmMain
 
     'Dump 設定
     Dim Dump_Start, Dump_End, Dump_Loop As Integer
-    Dim Dump_Timer As Boolean = False
-
 
     'WriteREG 設定
     Dim WriteREG_Start, WriteREG_End, WriteREG_Loop As Integer
-    Dim WriteREG_Timer As Boolean = False
     Dim RW_REG_Action As Integer = 0
+    Dim strREGStopTime As String = ""
+
 
     'FW TEST FLAF
     Dim FW_ACTION As Integer = 0
@@ -48,6 +47,14 @@ Public Class frmMain
     Dim strWorKCOMPort As String = ""
 
     Dim btnINTFlag As Boolean = False
+
+    'TP2824 ACCESS set
+    Dim blnTP2824ACCESS As Boolean = True
+
+    'Select REGISTER
+    Dim strSelectRegister As String = ""
+
+    'Close FormFlag
 
     'Page Load Code Starts Here....
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -100,6 +107,15 @@ Public Class frmMain
         BootStartup()
 
         ToolStripStatusLabel1.Text = "工作目錄：" & Application.StartupPath
+
+        'Label37.Text = TimeOfDay.ToString("tt h:mm:ss ")
+        'Label37.Text = TimeOfDay.AddSeconds(12).ToString("mm:ss")
+
+        ' Me.REG00.ContextMenuStrip = ContextMenuStrip1
+
+        Install_REG_POPMENU()
+
+
 
     End Sub
     Sub BootStartup()
@@ -156,6 +172,32 @@ Public Class frmMain
 
         End Try
     End Sub
+    Sub Install_REG_POPMENU()
+        Dim REG() As TextBox = { _
+     REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+     REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+     REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+     REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+     REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+     REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+     REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+     REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+     REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+     REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+     REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+     REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+     REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+     REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+     REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+     REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        For index As Integer = 1 To 255
+            REG(index).ContextMenuStrip = ContextMenuStrip1
+        Next
+
+    End Sub
+
     Function ReceiveSerialData() As String
         ' Receive strings from a serial port.
         Dim returnStr As String = ""
@@ -189,12 +231,12 @@ Public Class frmMain
     End Sub
     Private Declare Function timeGetTime Lib "winmm.dll" () As Long
 
-    Sub Delay(ByVal DelayTime As Long) '单位是毫秒
-        DelayTime = DelayTime + timeGetTime
-        Do While timeGetTime < DelayTime
-            'DoEvents()
-        Loop
-    End Sub
+    'Sub Delay(ByVal DelayTime As Long) '单位是毫秒
+    '    DelayTime = DelayTime + timeGetTime
+    '    Do While timeGetTime < DelayTime
+    '        'DoEvents()
+    '    Loop
+    'End Sub
     'Page Load Code Ends Here ....
 
     'Connect Button Code Starts Here ....
@@ -329,7 +371,6 @@ Public Class frmMain
             btnINTFlag = True
             Dump_Loop = 255
             WriteREG_Loop = 255
-
             Exit Sub
         End If
 
@@ -452,10 +493,11 @@ Public Class frmMain
             Str = [text]
 
             Me.rtbReceived.Text &= [text]
+
             Me.RichTextBox1.Text &= [text]
             Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
             Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
-            ''Me.rtbReceived.Focus()
+            ' Me.rtbReceived.Focus()
             Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
 
             'Alignment
@@ -506,10 +548,17 @@ Public Class frmMain
 
                             PRINT("READ ALL OK!!")
 
-                            Timer6.Stop()
-                            Timer6.Enabled = False
-                            Timer6.Stop()
-                            Timer6.Start()
+
+                            RW_REG_Action = 0
+                            strREGStopTime = ""
+                            Label37.Text = "_"
+                            btnREGGroup.Enabled = True
+
+                            'Timer6.Interval = 15000
+                            'Timer6.Stop()
+                            'Timer6.Enabled = False
+                            'Timer6.Stop()
+                            'Timer6.Start()
                         End If
                     End If
 
@@ -527,10 +576,17 @@ Public Class frmMain
                             btnREGGroup.Enabled = True
                             PRINT("WRITE ALL OK!!")
 
-                            Timer6.Stop()
-                            Timer6.Enabled = False
-                            Timer6.Stop()
-                            Timer6.Start()
+                            ' Timer6.Interval = 15000
+                            'Timer6.Stop()
+                            'Timer6.Enabled = False
+                            'Timer6.Stop()
+                            'Timer6.Start()
+
+                            RW_REG_Action = 0
+                            strREGStopTime = ""
+                            Label37.Text = "_"
+                            btnREGGroup.Enabled = True
+
                         End If
 
                     End If
@@ -699,6 +755,24 @@ Public Class frmMain
         'TimeString = Format(Now, "AMPM(hh:mm:ss)") 'Format(Now, "AMPM hh:mm:ss") '指定TimeString為時間格式AMPM hh:mm:ss
         TimeString = TimeOfDay.ToString("tt h:mm:ss ")
         Label4.Text = DayString + Space(1) + TimeString '將結果Show在Label1(space(1)為空一格)
+
+        If strREGStopTime = TimeOfDay.ToString("hh:mm:ss") And RW_REG_Action <> 0 Then
+            If RW_REG_Action = REG_READ_MODE Then
+                PRINT("TIME OUT REG_READ_MODE = NG")
+            ElseIf RW_REG_Action = REG_WRITE_MODE Then
+                PRINT("TIME OUT REG_WRITE_MODE = NG")
+            End If
+
+            RW_REG_Action = 0
+            strREGStopTime = ""
+            Label37.Text = "_"
+            btnREGGroup.Enabled = True
+
+            'MsgBox("暫存器讀取時間到了", vbCritical)
+
+        End If
+
+
         If btnINTFlag = True And RW_REG_Action = 0 Then
 
             Try
@@ -761,6 +835,8 @@ Public Class frmMain
 
         Me.rtbReceived.ScrollToCaret()  '关键之语句：将焦点滚动到文本内容后
         Me.rtbReceived.SelectionStart = Me.rtbReceived.Text.Length   '文本的选取长度
+        'Me.rtbReceived.Focus()
+
         Me.rtbReceived.SelectionAlignment = 0 ' 設定顯示罝中
 
     End Sub
@@ -931,6 +1007,19 @@ Public Class frmMain
             strbuff = "CMDW" + " " + TextBox1.Text + " " + _
                 TextBox3.Text + " " + TextBox4.Text + Chr(13)  'CMD Write
             PRINT("CMDW" + " " + TextBox1.Text + " " + TextBox3.Text + " " + TextBox4.Text)
+        ElseIf idx = 23 Then
+            If blnTP2824ACCESS = False Then
+                PRINT("ACCESS=1")
+                strbuff = "ACCESS 1" + Chr(13) + "q" + Chr(13) '自動傳送資料
+                blnTP2824ACCESS = True
+                Button20.Text = "ACCESS=1"
+            Else
+                PRINT("ACCESS=0")
+                strbuff = "ACCESS 0" + Chr(13) + "q" + Chr(13) '自動傳送資料
+                blnTP2824ACCESS = False
+                Button20.Text = "ACCESS=0"
+            End If
+
         End If
 
         '  buff = HexStr2ByteArray(strbuff)
@@ -953,13 +1042,66 @@ Public Class frmMain
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
-        ExitSaveConfiguration()
+        'Dim buff() As Byte
+        'Dim s As String = ""
+        'Dim fw As String = ""
+        'Dim strbuff As String = ""
+
+        ' Try
+
+        'If SerialPort1.BytesToRead > 0 Then
+        '    ReDim buff(SerialPort1.BytesToRead - 1)
+
+        '    SerialPort1.Read(buff, 0, buff.Length)
+
+        '    's = ByteArrayToStr(buff)
+
+        '    'ReceivedText(s)
+        'End If
+        If RW_REG_Action Then
+            PRINT("COM PORT 使 用 中 延 遲 關 閉  !!")
+            ' Delay(1)  '暫停1秒
+            ' btnINTFlag = True
+            Dump_Loop = 255
+            WriteREG_Loop = 255
+            'Exit Sub
+
+            PRINT("Close Form..3")
+            Delay(1)
+            PRINT("Close Form..2")
+            Delay(1)
+            PRINT("Close Form..1")
+            Delay(1)
+
+        End If
+
+
+
 
         SerialPort1.Close()
-        Timer2.Enabled = False
+
         Timer1.Enabled = False
+        Timer2.Enabled = False
         Timer3.Enabled = False
+        Timer5.Enabled = False
+        Timer6.Enabled = False
+
+        ExitSaveConfiguration()
+
         Me.Close()
+        'Catch ex As Exception
+        '    'If RW_REG_Action Then
+        '    '    PRINT("COM PORT 使 用 中 無 法 中 斷 !!")
+        '    '    ' Delay(1)  '暫停1秒
+        '    '    btnINTFlag = True
+        '    '    Dump_Loop = 255
+        '    '    WriteREG_Loop = 255
+        '    '    Exit Sub
+        '    'End If
+        'End Try
+
+
+
     End Sub
     Sub ExitSaveConfiguration()
 
@@ -1040,8 +1182,6 @@ Public Class frmMain
             'PrintLine(FileNum, strTemp)
             'strTemp2 &= strTemp & vbNewLine
         Next
-
-
 
 
         FileClose(FileNum)
@@ -1347,16 +1487,19 @@ Public Class frmMain
         DEBUGTextBox1.Text = ""
         Dump_Start = 0
         Dump_End = &HFF '&  '0~255
-        Dump_Loop = Dump_Start
+        Dump_Loop = 0
         RW_REG_Action = REG_READ_MODE  'dump mode
         TextBox2.Text = Hex(Dump_Loop)
         SendCMD(21)
         'Button14.Enabled = False
         'Button15.Enabled = False
         btnREGGroup.Enabled = False
-        Timer6.Interval = 15000
-        Timer6.Enabled = True
-        Timer6.Start()
+        'Timer6.Interval = 15000
+        'Timer6.Enabled = True
+        'Timer6.Start()
+
+        Label37.Text = TimeOfDay.AddSeconds(10).ToString("hh:mm:ss")
+        strREGStopTime = Label37.Text
     End Sub
 
 
@@ -1531,18 +1674,18 @@ Public Class frmMain
             My.Computer.FileSystem.WriteAllText(My.Computer.FileSystem.CurrentDirectory() & "\dump.txt", strTemp, True)
         Next
 #End If
-            'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
+        'DEBUGTextBox1.Text &= "存檔完畢!" & vbNewLine
 #If FileModeAppend = False Then
-            Try
-                If intSaveFileFlag = False Then
-                    MsgBox("暫存器資料未存檔！", vbCritical)
-                Else
+        Try
+            If intSaveFileFlag = False Then
+                MsgBox("暫存器資料未存檔！", vbCritical)
+            Else
 
-                    MsgBox("暫存器資料存檔完畢！", vbInformation)
-                End If
-            Catch ex As Exception
+                MsgBox("暫存器資料存檔完畢！", vbInformation)
+            End If
+        Catch ex As Exception
 
-            End Try
+        End Try
 
 #Else
         MsgBox("增加資料存檔完畢！")
@@ -1746,7 +1889,7 @@ Public Class frmMain
         DEBUGTextBox1.Text = ""
         WriteREG_Start = 0
         WriteREG_End = &HFF  '0~255
-        WriteREG_Loop = WriteREG_Start
+        WriteREG_Loop = 0
         RW_REG_Action = REG_WRITE_MODE   'Write mode
         TextBox3.Text = Hex(WriteREG_Loop)
         TextBox4.Text = REG00.Text
@@ -1756,9 +1899,12 @@ Public Class frmMain
         'Button14.Enabled = False
         'Button15.Enabled = False
         'TabControl1.Enabled = False
-        Timer6.Interval = 15000
-        Timer6.Enabled = True
-        Timer6.Start()
+        'Timer6.Interval = 15000
+        'Timer6.Enabled = True
+        'Timer6.Start()
+
+        Label37.Text = TimeOfDay.AddSeconds(10).ToString("hh:mm:ss")
+        strREGStopTime = Label37.Text
 
     End Sub
 
@@ -2042,9 +2188,13 @@ Public Class frmMain
 
     Private Sub REG00_MouseClick(sender As Object, e As MouseEventArgs) Handles REG00.MouseClick, REGFF.MouseClick, REGFE.MouseClick, REGFD.MouseClick, REGFC.MouseClick, REGFB.MouseClick, REGFA.MouseClick, REGF9.MouseClick, REGF8.MouseClick, REGF7.MouseClick, REGF6.MouseClick, REGF5.MouseClick, REGF4.MouseClick, REGF3.MouseClick, REGF2.MouseClick, REGF1.MouseClick, REGF0.MouseClick, REGEF.MouseClick, REGEE.MouseClick, REGED.MouseClick, REGEC.MouseClick, REGEB.MouseClick, REGEA.MouseClick, REGE9.MouseClick, REGE8.MouseClick, REGE7.MouseClick, REGE6.MouseClick, REGE5.MouseClick, REGE4.MouseClick, REGE3.MouseClick, REGE2.MouseClick, REGE1.MouseClick, REGE0.MouseClick, REGDF.MouseClick, REGDE.MouseClick, REGDD.MouseClick, REGDC.MouseClick, REGDB.MouseClick, REGDA.MouseClick, REGD9.MouseClick, REGD8.MouseClick, REGD7.MouseClick, REGD6.MouseClick, REGD5.MouseClick, REGD4.MouseClick, REGD3.MouseClick, REGD2.MouseClick, REGD1.MouseClick, REGD0.MouseClick, REGCF.MouseClick, REGCE.MouseClick, REGCD.MouseClick, REGCC.MouseClick, REGCB.MouseClick, REGCA.MouseClick, REGC9.MouseClick, REGC8.MouseClick, REGC7.MouseClick, REGC6.MouseClick, REGC5.MouseClick, REGC4.MouseClick, REGC3.MouseClick, REGC2.MouseClick, REGC1.MouseClick, REGC0.MouseClick, REGBF.MouseClick, REGBE.MouseClick, REGBD.MouseClick, REGBC.MouseClick, REGBB.MouseClick, REGBA.MouseClick, REGB9.MouseClick, REGB8.MouseClick, REGB7.MouseClick, REGB6.MouseClick, REGB5.MouseClick, REGB4.MouseClick, REGB3.MouseClick, REGB2.MouseClick, REGB1.MouseClick, REGB0.MouseClick, REGAF.MouseClick, REGAE.MouseClick, REGAD.MouseClick, REGAC.MouseClick, REGAB.MouseClick, REGAA.MouseClick, REGA9.MouseClick, REGA8.MouseClick, REGA7.MouseClick, REGA6.MouseClick, REGA5.MouseClick, REGA4.MouseClick, REGA3.MouseClick, REGA2.MouseClick, REGA1.MouseClick, REGA0.MouseClick, REG9F.MouseClick, REG9E.MouseClick, REG9D.MouseClick, REG9C.MouseClick, REG9B.MouseClick, REG9A.MouseClick, REG99.MouseClick, REG98.MouseClick, REG97.MouseClick, REG96.MouseClick, REG95.MouseClick, REG94.MouseClick, REG93.MouseClick, REG92.MouseClick, REG91.MouseClick, REG90.MouseClick, REG8F.MouseClick, REG8E.MouseClick, REG8D.MouseClick, REG8C.MouseClick, REG8B.MouseClick, REG8A.MouseClick, REG89.MouseClick, REG88.MouseClick, REG87.MouseClick, REG86.MouseClick, REG85.MouseClick, REG84.MouseClick, REG83.MouseClick, REG82.MouseClick, REG81.MouseClick, REG80.MouseClick, REG7F.MouseClick, REG7E.MouseClick, REG7D.MouseClick, REG7C.MouseClick, REG7B.MouseClick, REG7A.MouseClick, REG79.MouseClick, REG78.MouseClick, REG77.MouseClick, REG76.MouseClick, REG75.MouseClick, REG74.MouseClick, REG73.MouseClick, REG72.MouseClick, REG71.MouseClick, REG70.MouseClick, REG6F.MouseClick, REG6E.MouseClick, REG6D.MouseClick, REG6C.MouseClick, REG6B.MouseClick, REG6A.MouseClick, REG69.MouseClick, REG68.MouseClick, REG67.MouseClick, REG66.MouseClick, REG65.MouseClick, REG64.MouseClick, REG63.MouseClick, REG62.MouseClick, REG61.MouseClick, REG60.MouseClick, REG5F.MouseClick, REG5E.MouseClick, REG5D.MouseClick, REG5C.MouseClick, REG5B.MouseClick, REG5A.MouseClick, REG59.MouseClick, REG58.MouseClick, REG57.MouseClick, REG56.MouseClick, REG55.MouseClick, REG54.MouseClick, REG53.MouseClick, REG52.MouseClick, REG51.MouseClick, REG50.MouseClick, REG4F.MouseClick, REG4E.MouseClick, REG4D.MouseClick, REG4C.MouseClick, REG4B.MouseClick, REG4A.MouseClick, REG49.MouseClick, REG48.MouseClick, REG47.MouseClick, REG46.MouseClick, REG45.MouseClick, REG44.MouseClick, REG43.MouseClick, REG42.MouseClick, REG41.MouseClick, REG40.MouseClick, REG3F.MouseClick, REG3E.MouseClick, REG3D.MouseClick, REG3C.MouseClick, REG3B.MouseClick, REG3A.MouseClick, REG39.MouseClick, REG38.MouseClick, REG37.MouseClick, REG36.MouseClick, REG35.MouseClick, REG34.MouseClick, REG33.MouseClick, REG32.MouseClick, REG31.MouseClick, REG30.MouseClick, REG2F.MouseClick, REG2E.MouseClick, REG2D.MouseClick, REG2C.MouseClick, REG2B.MouseClick, REG2A.MouseClick, REG29.MouseClick, REG28.MouseClick, REG27.MouseClick, REG26.MouseClick, REG25.MouseClick, REG24.MouseClick, REG23.MouseClick, REG22.MouseClick, REG21.MouseClick, REG20.MouseClick, REG1F.MouseClick, REG1E.MouseClick, REG1D.MouseClick, REG1C.MouseClick, REG1B.MouseClick, REG1A.MouseClick, REG19.MouseClick, REG18.MouseClick, REG17.MouseClick, REG16.MouseClick, REG15.MouseClick, REG14.MouseClick, REG13.MouseClick, REG12.MouseClick, REG11.MouseClick, REG10.MouseClick, REG0F.MouseClick, REG0E.MouseClick, REG0D.MouseClick, REG0C.MouseClick, REG0B.MouseClick, REG0A.MouseClick, REG09.MouseClick, REG08.MouseClick, REG07.MouseClick, REG06.MouseClick, REG05.MouseClick, REG04.MouseClick, REG03.MouseClick, REG02.MouseClick, REG01.MouseClick
         WRITEREGDATA(sender.Name)
+        PRINT("Select REG=" + Mid(sender.Name, 4, 2))
+        strSelectRegister = Mid(sender.Name, 4, 2)
+        Me.REG00.ContextMenuStrip = ContextMenuStrip1
+
     End Sub
 
-   
+
     Private Sub btnTEST_Click(sender As Object, e As EventArgs) Handles btnTEST.Click
 
         Dim Str As String = ""
@@ -2142,5 +2292,107 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
+        SendCMD(23)
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+
+        Dim REG() As TextBox = { _
+         REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+         REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+         REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+         REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+         REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+         REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+         REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+         REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+         REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+         REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+         REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+         REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+         REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+         REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+         REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+         REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        REG(Conversion.Val("&H" & strSelectRegister)).BackColor = Color.Yellow
+
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        Dim REG() As TextBox = { _
+            REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+            REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+            REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+            REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+            REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+            REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+            REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+            REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+            REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+            REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+            REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+            REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+            REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+            REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+            REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+            REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        REG(Conversion.Val("&H" & strSelectRegister)).BackColor = Color.Pink
+
+    End Sub
+
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
+
+        Dim REG() As TextBox = { _
+      REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+      REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+      REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+      REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+      REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+      REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+      REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+      REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+      REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+      REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+      REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+      REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+      REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+      REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+      REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+      REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        REG(Conversion.Val("&H" & strSelectRegister)).BackColor = Color.LightBlue
+
+    End Sub
+
+    Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
+
+        Dim REG() As TextBox = { _
+         REG00, REG01, REG02, REG03, REG04, REG05, REG06, REG07, REG08, REG09, REG0A, REG0B, REG0C, REG0D, REG0E, REG0F, _
+         REG10, REG11, REG12, REG13, REG14, REG15, REG16, REG17, REG18, REG19, REG1A, REG1B, REG1C, REG1D, REG1E, REG1F, _
+         REG20, REG21, REG22, REG23, REG24, REG25, REG26, REG27, REG28, REG29, REG2A, REG2B, REG2C, REG2D, REG2E, REG2F, _
+         REG30, REG31, REG32, REG33, REG34, REG35, REG36, REG37, REG38, REG39, REG3A, REG3B, REG3C, REG3D, REG3E, REG3F, _
+         REG40, REG41, REG42, REG43, REG44, REG45, REG46, REG47, REG48, REG49, REG4A, REG4B, REG4C, REG4D, REG4E, REG4F, _
+         REG50, REG51, REG52, REG53, REG54, REG55, REG56, REG57, REG58, REG59, REG5A, REG5B, REG5C, REG5D, REG5E, REG5F, _
+         REG60, REG61, REG62, REG63, REG64, REG65, REG66, REG67, REG68, REG69, REG6A, REG6B, REG6C, REG6D, REG6E, REG6F, _
+         REG70, REG71, REG72, REG73, REG74, REG75, REG76, REG77, REG78, REG79, REG7A, REG7B, REG7C, REG7D, REG7E, REG7F, _
+ _
+         REG80, REG81, REG82, REG83, REG84, REG85, REG86, REG87, REG88, REG89, REG8A, REG8B, REG8C, REG8D, REG8E, REG8F, _
+         REG90, REG91, REG92, REG93, REG94, REG95, REG96, REG97, REG98, REG99, REG9A, REG9B, REG9C, REG9D, REG9E, REG9F, _
+         REGA0, REGA1, REGA2, REGA3, REGA4, REGA5, REGA6, REGA7, REGA8, REGA9, REGAA, REGAB, REGAC, REGAD, REGAE, REGAF, _
+         REGB0, REGB1, REGB2, REGB3, REGB4, REGB5, REGB6, REGB7, REGB8, REGB9, REGBA, REGBB, REGBC, REGBD, REGBE, REGBF, _
+         REGC0, REGC1, REGC2, REGC3, REGC4, REGC5, REGC6, REGC7, REGC8, REGC9, REGCA, REGCB, REGCC, REGCD, REGCE, REGCF, _
+         REGD0, REGD1, REGD2, REGD3, REGD4, REGD5, REGD6, REGD7, REGD8, REGD9, REGDA, REGDB, REGDC, REGDD, REGDE, REGDF, _
+         REGE0, REGE1, REGE2, REGE3, REGE4, REGE5, REGE6, REGE7, REGE8, REGE9, REGEA, REGEB, REGEC, REGED, REGEE, REGEF, _
+         REGF0, REGF1, REGF2, REGF3, REGF4, REGF5, REGF6, REGF7, REGF8, REGF9, REGFA, REGFB, REGFC, REGFD, REGFE, REGFF}
+
+        REG(Conversion.Val("&H" & strSelectRegister)).BackColor = Color.Empty
+
+    End Sub
 End Class
 'Whole Code Ends Here ....
