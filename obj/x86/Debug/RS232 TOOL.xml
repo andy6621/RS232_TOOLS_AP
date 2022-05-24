@@ -15,6 +15,90 @@ RS232TOOL
   覆寫目前執行緒的 CurrentUICulture 屬性，對象是所有
   使用這個強類型資源類別的資源查閱。
 </summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.TP2824_01">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.TP2824_04">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.TP2824_05">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.TP2824_06">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.TP2824_07">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.TP2824_08">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_01">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_02">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_03">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_04">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_12">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_121">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_18">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A01">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A02">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A03">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A04">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A05">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A06">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A07">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A08">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
 </member><member name="T:RS232_TOOL.My.Resources.Resources">
 	<summary>
   用於查詢當地語系化字串等的強類型資源類別。

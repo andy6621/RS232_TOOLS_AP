@@ -109,6 +109,12 @@
     <Compile Include="Form2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form3.Designer.vb">
+      <DependentUpon>Form3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -176,6 +185,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="plane_115212.ico" />
+    <None Include="TP2824_01.jpg" />
+    <None Include="TP2824_04.jpg" />
+    <None Include="TP2824_05.jpg" />
+    <None Include="TP2824_06.jpg" />
+    <None Include="TP2824_07.jpg" />
+    <None Include="TP2824_08.jpg" />
+    <None Include="VS4210_01.jpg" />
+    <None Include="VS4210_02.jpg" />
+    <None Include="VS4210_03.jpg" />
+    <None Include="VS4210_04.jpg" />
+    <None Include="VS4210_A01.jpg" />
+    <None Include="VS4210_A02.jpg" />
+    <None Include="VS4210_A03.jpg" />
+    <None Include="VS4210_A04.jpg" />
+    <None Include="VS4210_A05.jpg" />
+    <None Include="VS4210_A06.jpg" />
+    <None Include="VS4210_A07.jpg" />
+    <None Include="VS4210_A08.jpg" />
+    <None Include="VS4210_12.bmp" />
+    <None Include="VS4210_18.bmp" />
     <Content Include="大象.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -115,7 +115,15 @@ Public Class frmMain
 
         Install_REG_POPMENU()
 
+        Form2.Close()
+        Form3.Close()
 
+        If TabControl1.SelectedIndex = 1 Then
+            GroupBox4.Enabled = True
+        Else
+            GroupBox4.Enabled = False
+        End If
+      
 
     End Sub
     Sub BootStartup()
@@ -288,6 +296,14 @@ Public Class frmMain
             TabControl1.Enabled = True
 
             strWorKCOMPort = cmbPort.Text
+
+
+            If TabControl1.SelectedIndex = 1 Then
+                GroupBox4.Enabled = True
+            Else
+                GroupBox4.Enabled = False
+            End If
+
         Catch ex As Exception
             MsgBox(cmbPort.Text & " 有問題無法使用")
         End Try
@@ -365,12 +381,13 @@ Public Class frmMain
     'Disconnect Button Code Starts Here ....
     Private Sub btnDisconnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDisconnect.Click
 
-        If RW_REG_Action Then
+        If RW_REG_Action Or Timer1.Enabled = True Then
             PRINT("COM PORT 使 用 中 無 法 中 斷 !!")
             ' Delay(1)  '暫停1秒
             btnINTFlag = True
             Dump_Loop = 255
             WriteREG_Loop = 255
+            Timer1.Enabled = False
             Exit Sub
         End If
 
@@ -413,6 +430,7 @@ Public Class frmMain
             'Timer6.Start()
             '  btnREGGroup.Enabled = True
 
+            GroupBox4.Enabled = False
         Catch ex As Exception
             MsgBox(cmbPort.Text & " 有問題無法關閉")
         End Try
@@ -1088,6 +1106,10 @@ Public Class frmMain
 
         ExitSaveConfiguration()
 
+        Form2.Close()
+
+        Form3.Close()
+
         Me.Close()
         'Catch ex As Exception
         '    'If RW_REG_Action Then
@@ -1206,7 +1228,7 @@ Public Class frmMain
             Timer1.Enabled = True
             Button3.Text = "停止"
             Button3.BackColor = Color.Red
-
+            Button2.Text = ComboBox3.Text
         Else
             Timer1.Enabled = False
             Button3.Text = "開始"
@@ -1484,12 +1506,13 @@ Public Class frmMain
     End Sub
 
     Private Sub Button14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button14.Click
+        ' PRINT("REGStart.Text Integer=" & Convert.ToInt32(REGStart.Text, 16))
         DEBUGTextBox1.Text = ""
-        Dump_Start = 0
-        Dump_End = &HFF '&  '0~255
-        Dump_Loop = 0
+        Dump_Start = Convert.ToInt32(REGStart.Text, 16) 'Conversion.Val("&H" + REGStart.Text) '0
+        Dump_End = Convert.ToInt32(REGEnd.Text, 16) 'Conversion.Val("&H" + REGEnd.Text) '&HFF '&  '0~255
+        Dump_Loop = Dump_Start
         RW_REG_Action = REG_READ_MODE  'dump mode
-        TextBox2.Text = Hex(Dump_Loop)
+        TextBox2.Text = Dump_Start 'Hex(Dump_Loop)
         SendCMD(21)
         'Button14.Enabled = False
         'Button15.Enabled = False
@@ -1887,9 +1910,9 @@ Public Class frmMain
 
     Private Sub Button18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button18.Click
         DEBUGTextBox1.Text = ""
-        WriteREG_Start = 0
-        WriteREG_End = &HFF  '0~255
-        WriteREG_Loop = 0
+        WriteREG_Start = Convert.ToInt32(REGStart.Text, 16) '0
+        WriteREG_End = Convert.ToInt32(REGEnd.Text, 16) '&HFF  '0~255
+        WriteREG_Loop = WriteREG_Start
         RW_REG_Action = REG_WRITE_MODE   'Write mode
         TextBox3.Text = Hex(WriteREG_Loop)
         TextBox4.Text = REG00.Text
@@ -1948,7 +1971,7 @@ Public Class frmMain
     End Sub
 
     Private Sub TextBox6_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles TextBox6.MouseClick
-        TextBox6.Text = ""
+        'TextBox6.Text = ""
     End Sub
 
     Private Sub rtbReceived_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles rtbReceived.KeyPress
@@ -2176,6 +2199,12 @@ Public Class frmMain
             ComboBox6.SelectedIndex = 0
         End If
 
+        If TabControl1.SelectedIndex = 1 Then
+            GroupBox4.Enabled = True
+        Else
+            GroupBox4.Enabled = False
+        End If
+
     End Sub
 
     Private Sub DEBUGTextBox1_TextChanged(sender As Object, e As EventArgs) Handles DEBUGTextBox1.TextChanged
@@ -2394,5 +2423,85 @@ Public Class frmMain
         REG(Conversion.Val("&H" & strSelectRegister)).BackColor = Color.Empty
 
     End Sub
+
+    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
+        SerialPort1.Write(TextBox6.Text + Chr(13))
+    End Sub
+
+
+    Private Sub Button23_Click(sender As Object, e As EventArgs) Handles Button23.Click
+        Form3.Show()
+    End Sub
+
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+
+
+
+
+        If m.Msg = 161 And m.WParam = 20 Then
+
+            '            MessageBox.Show("你點到 X 了，視窗即將關閉!")
+
+            Form2.Close()
+            Form3.Close()
+            Me.Close()
+
+        Else
+
+            MyBase.WndProc(m)
+
+        End If
+
+    End Sub
+
+
+    Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+        Form2.Show()
+
+    End Sub
+
+    Private Sub REGStart_KeyPress(sender As Object, e As KeyPressEventArgs) Handles REGStart.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            Dim intNumber As Integer = 0
+            REGStart.Text = UCase(REGStart.Text)
+
+            intNumber = Val("&H" + (REGStart.Text) + "&")
+
+            REGStart.Text = Hex(intNumber)
+
+            If intNumber >= 255 Then
+                intNumber = 255
+                REGStart.Text = Hex(intNumber)
+            ElseIf intNumber <= 0 Then
+                intNumber = 0
+                REGStart.Text = Hex(intNumber)
+            End If
+
+            'SendCMD(22)
+            'REGStart.Text = Integer.Parse(Val("&H" + UCase(REGStart.Text)) + "&")
+        End If
+    End Sub
+
+
+    Private Sub REGEnd_KeyPress(sender As Object, e As KeyPressEventArgs) Handles REGEnd.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            Dim intNumber As Integer = 0
+            REGEnd.Text = UCase(REGEnd.Text)
+
+            intNumber = Val("&H" + (REGEnd.Text) + "&")
+
+            REGEnd.Text = Hex(intNumber)
+
+            If intNumber >= 255 Then
+                intNumber = 255
+                REGEnd.Text = Hex(intNumber)
+            ElseIf intNumber <= 0 Then
+                intNumber = 0
+                REGEnd.Text = Hex(intNumber)
+            End If
+        End If
+    End Sub
+
+  
 End Class
 'Whole Code Ends Here ....

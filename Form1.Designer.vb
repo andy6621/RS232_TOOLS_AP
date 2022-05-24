@@ -74,7 +74,7 @@ Partial Class frmMain
         Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Button21 = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -365,6 +365,7 @@ Partial Class frmMain
         Me.REG10 = New System.Windows.Forms.TextBox()
         Me.REG00 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Button23 = New System.Windows.Forms.Button()
         Me.TESTOutput = New System.Windows.Forms.TextBox()
         Me.btnTEST = New System.Windows.Forms.Button()
         Me.ComboBox9 = New System.Windows.Forms.ComboBox()
@@ -374,6 +375,8 @@ Partial Class frmMain
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Button22 = New System.Windows.Forms.Button()
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
@@ -390,6 +393,11 @@ Partial Class frmMain
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.REGStart = New System.Windows.Forms.TextBox()
+        Me.REGEnd = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -398,8 +406,10 @@ Partial Class frmMain
         Me.TabPage2.SuspendLayout()
         Me.btnREGGroup.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnConnect
@@ -430,9 +440,9 @@ Partial Class frmMain
         Me.cmbPort.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.cmbPort.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cmbPort.FormattingEnabled = True
-        Me.cmbPort.Location = New System.Drawing.Point(172, 20)
+        Me.cmbPort.Location = New System.Drawing.Point(255, 21)
         Me.cmbPort.Name = "cmbPort"
-        Me.cmbPort.Size = New System.Drawing.Size(151, 24)
+        Me.cmbPort.Size = New System.Drawing.Size(75, 24)
         Me.cmbPort.TabIndex = 2
         '
         'cmbBaud
@@ -440,9 +450,9 @@ Partial Class frmMain
         Me.cmbBaud.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.cmbBaud.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cmbBaud.FormattingEnabled = True
-        Me.cmbBaud.Location = New System.Drawing.Point(172, 69)
+        Me.cmbBaud.Location = New System.Drawing.Point(255, 70)
         Me.cmbBaud.Name = "cmbBaud"
-        Me.cmbBaud.Size = New System.Drawing.Size(151, 24)
+        Me.cmbBaud.Size = New System.Drawing.Size(75, 24)
         Me.cmbBaud.TabIndex = 3
         '
         'Label1
@@ -450,7 +460,7 @@ Partial Class frmMain
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("微軟正黑體", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label1.Location = New System.Drawing.Point(44, 20)
+        Me.Label1.Location = New System.Drawing.Point(127, 21)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(120, 24)
         Me.Label1.TabIndex = 4
@@ -461,7 +471,7 @@ Partial Class frmMain
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("微軟正黑體", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label2.Location = New System.Drawing.Point(45, 69)
+        Me.Label2.Location = New System.Drawing.Point(128, 70)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(119, 24)
         Me.Label2.TabIndex = 5
@@ -705,7 +715,7 @@ Partial Class frmMain
         '
         'Button11
         '
-        Me.Button11.Location = New System.Drawing.Point(82, 400)
+        Me.Button11.Location = New System.Drawing.Point(82, 389)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(68, 37)
         Me.Button11.TabIndex = 39
@@ -725,7 +735,7 @@ Partial Class frmMain
         '
         'Button10
         '
-        Me.Button10.Location = New System.Drawing.Point(82, 341)
+        Me.Button10.Location = New System.Drawing.Point(82, 332)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(68, 37)
         Me.Button10.TabIndex = 37
@@ -879,6 +889,7 @@ Partial Class frmMain
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Location = New System.Drawing.Point(14, 118)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -888,7 +899,7 @@ Partial Class frmMain
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage1.Controls.Add(Me.Label16)
+        Me.TabPage1.Controls.Add(Me.Button21)
         Me.TabPage1.Controls.Add(Me.CheckBox1)
         Me.TabPage1.Controls.Add(Me.TextBox6)
         Me.TabPage1.Controls.Add(Me.Label15)
@@ -932,15 +943,14 @@ Partial Class frmMain
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "控制功能"
         '
-        'Label16
+        'Button21
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.Label16.Location = New System.Drawing.Point(59, 459)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(103, 21)
-        Me.Label16.TabIndex = 55
-        Me.Label16.Text = "TX Message"
+        Me.Button21.Location = New System.Drawing.Point(82, 448)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(68, 37)
+        Me.Button21.TabIndex = 56
+        Me.Button21.Text = "TX Message"
+        Me.Button21.UseVisualStyleBackColor = True
         '
         'CheckBox1
         '
@@ -960,6 +970,7 @@ Partial Class frmMain
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(142, 29)
         Me.TextBox6.TabIndex = 53
+        Me.TextBox6.Text = "ACCESS 0"
         '
         'Label15
         '
@@ -4389,6 +4400,7 @@ Partial Class frmMain
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage3.Controls.Add(Me.Button23)
         Me.TabPage3.Controls.Add(Me.TESTOutput)
         Me.TabPage3.Controls.Add(Me.btnTEST)
         Me.TabPage3.Controls.Add(Me.ComboBox9)
@@ -4405,9 +4417,18 @@ Partial Class frmMain
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "VS4210"
         '
+        'Button23
+        '
+        Me.Button23.Location = New System.Drawing.Point(47, 198)
+        Me.Button23.Name = "Button23"
+        Me.Button23.Size = New System.Drawing.Size(108, 31)
+        Me.Button23.TabIndex = 9
+        Me.Button23.Text = "show VS4210"
+        Me.Button23.UseVisualStyleBackColor = True
+        '
         'TESTOutput
         '
-        Me.TESTOutput.Location = New System.Drawing.Point(233, 191)
+        Me.TESTOutput.Location = New System.Drawing.Point(149, 158)
         Me.TESTOutput.Name = "TESTOutput"
         Me.TESTOutput.Size = New System.Drawing.Size(222, 22)
         Me.TESTOutput.TabIndex = 8
@@ -4415,7 +4436,7 @@ Partial Class frmMain
         '
         'btnTEST
         '
-        Me.btnTEST.Location = New System.Drawing.Point(131, 189)
+        Me.btnTEST.Location = New System.Drawing.Point(47, 156)
         Me.btnTEST.Name = "btnTEST"
         Me.btnTEST.Size = New System.Drawing.Size(75, 23)
         Me.btnTEST.TabIndex = 7
@@ -4487,6 +4508,25 @@ Partial Class frmMain
         Me.Label13.Size = New System.Drawing.Size(60, 12)
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "INPUT(1A)"
+        '
+        'TabPage4
+        '
+        Me.TabPage4.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage4.Controls.Add(Me.Button22)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(544, 525)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "TP2824"
+        '
+        'Button22
+        '
+        Me.Button22.Location = New System.Drawing.Point(30, 23)
+        Me.Button22.Name = "Button22"
+        Me.Button22.Size = New System.Drawing.Size(104, 34)
+        Me.Button22.TabIndex = 0
+        Me.Button22.Text = "Show TP2824"
+        Me.Button22.UseVisualStyleBackColor = True
         '
         'Timer5
         '
@@ -4597,11 +4637,64 @@ Partial Class frmMain
         Me.ToolStripMenuItem5.Size = New System.Drawing.Size(100, 22)
         Me.ToolStripMenuItem5.Text = "原色"
         '
+        'REGStart
+        '
+        Me.REGStart.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.REGStart.Location = New System.Drawing.Point(50, 13)
+        Me.REGStart.MaxLength = 2
+        Me.REGStart.Name = "REGStart"
+        Me.REGStart.Size = New System.Drawing.Size(26, 26)
+        Me.REGStart.TabIndex = 59
+        Me.REGStart.Text = "00"
+        Me.REGStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'REGEnd
+        '
+        Me.REGEnd.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.REGEnd.Location = New System.Drawing.Point(50, 45)
+        Me.REGEnd.MaxLength = 2
+        Me.REGEnd.Name = "REGEnd"
+        Me.REGEnd.Size = New System.Drawing.Size(26, 26)
+        Me.REGEnd.TabIndex = 59
+        Me.REGEnd.Text = "FF"
+        Me.REGEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(14, 21)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(26, 12)
+        Me.Label16.TabIndex = 60
+        Me.Label16.Text = "Start"
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(16, 55)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(24, 12)
+        Me.Label38.TabIndex = 61
+        Me.Label38.Text = "End"
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.REGStart)
+        Me.GroupBox4.Controls.Add(Me.REGEnd)
+        Me.GroupBox4.Controls.Add(Me.Label38)
+        Me.GroupBox4.Controls.Add(Me.Label16)
+        Me.GroupBox4.Location = New System.Drawing.Point(18, 21)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(87, 77)
+        Me.GroupBox4.TabIndex = 62
+        Me.GroupBox4.TabStop = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(984, 696)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.Label37)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label36)
@@ -4639,9 +4732,12 @@ Partial Class frmMain
         Me.btnREGGroup.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        Me.TabPage4.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4967,7 +5063,6 @@ Partial Class frmMain
     Friend WithEvents Timer5 As System.Windows.Forms.Timer
     Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
-    Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents ComboBox6 As System.Windows.Forms.ComboBox
     Friend WithEvents Timer6 As System.Windows.Forms.Timer
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
@@ -5012,5 +5107,14 @@ Partial Class frmMain
     Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Button21 As System.Windows.Forms.Button
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents Button23 As System.Windows.Forms.Button
+    Friend WithEvents Button22 As System.Windows.Forms.Button
+    Friend WithEvents REGStart As System.Windows.Forms.TextBox
+    Friend WithEvents REGEnd As System.Windows.Forms.TextBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label38 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
 
 End Class
