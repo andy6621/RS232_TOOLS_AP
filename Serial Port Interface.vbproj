@@ -205,6 +205,10 @@
     <None Include="VS4210_A08.jpg" />
     <None Include="VS4210_12.bmp" />
     <None Include="VS4210_18.bmp" />
+    <None Include="VS4210_BALL.jpg" />
+    <None Include="VS4210_B_title.jpg" />
+    <None Include="TP2824_B_All.jpg" />
+    <None Include="TP2824_B_Title.jpg" />
     <Content Include="大象.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

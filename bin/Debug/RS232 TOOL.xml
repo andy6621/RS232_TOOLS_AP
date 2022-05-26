@@ -39,6 +39,14 @@ RS232TOOL
 	<summary>
   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
 </summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.TP2824_B_All">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.TP2824_B_Title">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
 </member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_01">
 	<summary>
   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
@@ -96,6 +104,14 @@ RS232TOOL
   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
 </summary>
 </member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_A08">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_B_title">
+	<summary>
+  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+</summary>
+</member><member name="P:RS232_TOOL.My.Resources.Resources.VS4210_BALL">
 	<summary>
   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
 </summary>

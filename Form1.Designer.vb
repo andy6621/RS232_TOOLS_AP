@@ -376,7 +376,6 @@ Partial Class frmMain
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.Button22 = New System.Windows.Forms.Button()
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
@@ -406,7 +405,6 @@ Partial Class frmMain
         Me.TabPage2.SuspendLayout()
         Me.btnREGGroup.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -4400,7 +4398,6 @@ Partial Class frmMain
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage3.Controls.Add(Me.Button23)
         Me.TabPage3.Controls.Add(Me.TESTOutput)
         Me.TabPage3.Controls.Add(Me.btnTEST)
         Me.TabPage3.Controls.Add(Me.ComboBox9)
@@ -4419,11 +4416,11 @@ Partial Class frmMain
         '
         'Button23
         '
-        Me.Button23.Location = New System.Drawing.Point(47, 198)
+        Me.Button23.Location = New System.Drawing.Point(467, 91)
         Me.Button23.Name = "Button23"
-        Me.Button23.Size = New System.Drawing.Size(108, 31)
+        Me.Button23.Size = New System.Drawing.Size(54, 31)
         Me.Button23.TabIndex = 9
-        Me.Button23.Text = "show VS4210"
+        Me.Button23.Text = "規格書"
         Me.Button23.UseVisualStyleBackColor = True
         '
         'TESTOutput
@@ -4512,21 +4509,11 @@ Partial Class frmMain
         'TabPage4
         '
         Me.TabPage4.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage4.Controls.Add(Me.Button22)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Size = New System.Drawing.Size(544, 525)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "TP2824"
-        '
-        'Button22
-        '
-        Me.Button22.Location = New System.Drawing.Point(30, 23)
-        Me.Button22.Name = "Button22"
-        Me.Button22.Size = New System.Drawing.Size(104, 34)
-        Me.Button22.TabIndex = 0
-        Me.Button22.Text = "Show TP2824"
-        Me.Button22.UseVisualStyleBackColor = True
         '
         'Timer5
         '
@@ -4582,7 +4569,7 @@ Partial Class frmMain
         '
         'Button20
         '
-        Me.Button20.Location = New System.Drawing.Point(467, 96)
+        Me.Button20.Location = New System.Drawing.Point(467, 60)
         Me.Button20.Name = "Button20"
         Me.Button20.Size = New System.Drawing.Size(74, 23)
         Me.Button20.TabIndex = 56
@@ -4592,7 +4579,7 @@ Partial Class frmMain
         'Label36
         '
         Me.Label36.AutoSize = True
-        Me.Label36.Location = New System.Drawing.Point(480, 81)
+        Me.Label36.Location = New System.Drawing.Point(547, 65)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(42, 12)
         Me.Label36.TabIndex = 57
@@ -4694,6 +4681,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(984, 696)
+        Me.Controls.Add(Me.Button23)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.Label37)
         Me.Controls.Add(Me.Label4)
@@ -4732,7 +4720,6 @@ Partial Class frmMain
         Me.btnREGGroup.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
-        Me.TabPage4.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ContextMenuStrip1.ResumeLayout(False)
@@ -5110,7 +5097,6 @@ Partial Class frmMain
     Friend WithEvents Button21 As System.Windows.Forms.Button
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
     Friend WithEvents Button23 As System.Windows.Forms.Button
-    Friend WithEvents Button22 As System.Windows.Forms.Button
     Friend WithEvents REGStart As System.Windows.Forms.TextBox
     Friend WithEvents REGEnd As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label

@@ -123,6 +123,26 @@ Namespace My.Resources
         '''<summary>
         '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         '''</summary>
+        Friend ReadOnly Property TP2824_B_All() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("TP2824_B_All", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property TP2824_B_Title() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("TP2824_B_Title", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
         Friend ReadOnly Property VS4210_01() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("VS4210_01", resourceCulture)
@@ -266,6 +286,26 @@ Namespace My.Resources
         Friend ReadOnly Property VS4210_A08() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("VS4210_A08", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property VS4210_B_title() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("VS4210_B_title", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property VS4210_BALL() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("VS4210_BALL", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

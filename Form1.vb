@@ -2455,7 +2455,7 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+    Private Sub Button22_Click(sender As Object, e As EventArgs)
         Form2.Show()
 
     End Sub
