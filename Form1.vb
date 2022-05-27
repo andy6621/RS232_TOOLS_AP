@@ -39,7 +39,7 @@ Public Class frmMain
     Dim WriteREG_Start, WriteREG_End, WriteREG_Loop As Integer
     Dim RW_REG_Action As Integer = 0
     Dim strREGStopTime As String = ""
-
+    Dim strREGValueTemp As String = "00"
 
     'FW TEST FLAF
     Dim FW_ACTION As Integer = 0
@@ -1936,7 +1936,37 @@ Public Class frmMain
         '接著就是把該物件的Id顯示出來
         'Dim txt As TextBox = CType(sender, TextBox)
         'PRINT(txt.Name)
+        Dim charNumber As Integer = 0
+
         If Asc(e.KeyChar) = 13 Then
+
+            sender.Text = UCase(sender.Text)
+
+            If sender.Text = "" Then
+                sender.Text = strREGValueTemp '"00"
+            ElseIf Len(sender.Text) = 1 Then
+                sender.Text = strREGValueTemp 'sender.Text = "0" & sender.Text
+            End If
+
+            For i = 1 To Len(sender.Text)
+                charNumber = Asc(Mid(sender.Text, i, 1))
+
+                If (charNumber >= 48 And charNumber <= 59) Or (charNumber >= 65 And charNumber <= 70) Then
+                    PRINT("Key" & i & "=" & Asc(Mid(sender.Text, i, 1)))
+                Else
+                    If i = 1 Then
+                        '  PRINT("Key1=Error" & "Change To=0")
+                        sender.Text = Mid(strREGValueTemp, 1, 1) & Mid(sender.Text, 2, 1)
+                    Else
+                        'PRINT("Key2=Error" & "Change To=0")
+                        sender.Text = Mid(sender.Text, 1, 1) & Mid(strREGValueTemp, 2, 1)
+                    End If
+
+                End If
+
+            Next i
+
+
             WRITEREGDATA(sender.Name)
         End If
     End Sub
@@ -2216,8 +2246,10 @@ Public Class frmMain
     End Sub
 
     Private Sub REG00_MouseClick(sender As Object, e As MouseEventArgs) Handles REG00.MouseClick, REGFF.MouseClick, REGFE.MouseClick, REGFD.MouseClick, REGFC.MouseClick, REGFB.MouseClick, REGFA.MouseClick, REGF9.MouseClick, REGF8.MouseClick, REGF7.MouseClick, REGF6.MouseClick, REGF5.MouseClick, REGF4.MouseClick, REGF3.MouseClick, REGF2.MouseClick, REGF1.MouseClick, REGF0.MouseClick, REGEF.MouseClick, REGEE.MouseClick, REGED.MouseClick, REGEC.MouseClick, REGEB.MouseClick, REGEA.MouseClick, REGE9.MouseClick, REGE8.MouseClick, REGE7.MouseClick, REGE6.MouseClick, REGE5.MouseClick, REGE4.MouseClick, REGE3.MouseClick, REGE2.MouseClick, REGE1.MouseClick, REGE0.MouseClick, REGDF.MouseClick, REGDE.MouseClick, REGDD.MouseClick, REGDC.MouseClick, REGDB.MouseClick, REGDA.MouseClick, REGD9.MouseClick, REGD8.MouseClick, REGD7.MouseClick, REGD6.MouseClick, REGD5.MouseClick, REGD4.MouseClick, REGD3.MouseClick, REGD2.MouseClick, REGD1.MouseClick, REGD0.MouseClick, REGCF.MouseClick, REGCE.MouseClick, REGCD.MouseClick, REGCC.MouseClick, REGCB.MouseClick, REGCA.MouseClick, REGC9.MouseClick, REGC8.MouseClick, REGC7.MouseClick, REGC6.MouseClick, REGC5.MouseClick, REGC4.MouseClick, REGC3.MouseClick, REGC2.MouseClick, REGC1.MouseClick, REGC0.MouseClick, REGBF.MouseClick, REGBE.MouseClick, REGBD.MouseClick, REGBC.MouseClick, REGBB.MouseClick, REGBA.MouseClick, REGB9.MouseClick, REGB8.MouseClick, REGB7.MouseClick, REGB6.MouseClick, REGB5.MouseClick, REGB4.MouseClick, REGB3.MouseClick, REGB2.MouseClick, REGB1.MouseClick, REGB0.MouseClick, REGAF.MouseClick, REGAE.MouseClick, REGAD.MouseClick, REGAC.MouseClick, REGAB.MouseClick, REGAA.MouseClick, REGA9.MouseClick, REGA8.MouseClick, REGA7.MouseClick, REGA6.MouseClick, REGA5.MouseClick, REGA4.MouseClick, REGA3.MouseClick, REGA2.MouseClick, REGA1.MouseClick, REGA0.MouseClick, REG9F.MouseClick, REG9E.MouseClick, REG9D.MouseClick, REG9C.MouseClick, REG9B.MouseClick, REG9A.MouseClick, REG99.MouseClick, REG98.MouseClick, REG97.MouseClick, REG96.MouseClick, REG95.MouseClick, REG94.MouseClick, REG93.MouseClick, REG92.MouseClick, REG91.MouseClick, REG90.MouseClick, REG8F.MouseClick, REG8E.MouseClick, REG8D.MouseClick, REG8C.MouseClick, REG8B.MouseClick, REG8A.MouseClick, REG89.MouseClick, REG88.MouseClick, REG87.MouseClick, REG86.MouseClick, REG85.MouseClick, REG84.MouseClick, REG83.MouseClick, REG82.MouseClick, REG81.MouseClick, REG80.MouseClick, REG7F.MouseClick, REG7E.MouseClick, REG7D.MouseClick, REG7C.MouseClick, REG7B.MouseClick, REG7A.MouseClick, REG79.MouseClick, REG78.MouseClick, REG77.MouseClick, REG76.MouseClick, REG75.MouseClick, REG74.MouseClick, REG73.MouseClick, REG72.MouseClick, REG71.MouseClick, REG70.MouseClick, REG6F.MouseClick, REG6E.MouseClick, REG6D.MouseClick, REG6C.MouseClick, REG6B.MouseClick, REG6A.MouseClick, REG69.MouseClick, REG68.MouseClick, REG67.MouseClick, REG66.MouseClick, REG65.MouseClick, REG64.MouseClick, REG63.MouseClick, REG62.MouseClick, REG61.MouseClick, REG60.MouseClick, REG5F.MouseClick, REG5E.MouseClick, REG5D.MouseClick, REG5C.MouseClick, REG5B.MouseClick, REG5A.MouseClick, REG59.MouseClick, REG58.MouseClick, REG57.MouseClick, REG56.MouseClick, REG55.MouseClick, REG54.MouseClick, REG53.MouseClick, REG52.MouseClick, REG51.MouseClick, REG50.MouseClick, REG4F.MouseClick, REG4E.MouseClick, REG4D.MouseClick, REG4C.MouseClick, REG4B.MouseClick, REG4A.MouseClick, REG49.MouseClick, REG48.MouseClick, REG47.MouseClick, REG46.MouseClick, REG45.MouseClick, REG44.MouseClick, REG43.MouseClick, REG42.MouseClick, REG41.MouseClick, REG40.MouseClick, REG3F.MouseClick, REG3E.MouseClick, REG3D.MouseClick, REG3C.MouseClick, REG3B.MouseClick, REG3A.MouseClick, REG39.MouseClick, REG38.MouseClick, REG37.MouseClick, REG36.MouseClick, REG35.MouseClick, REG34.MouseClick, REG33.MouseClick, REG32.MouseClick, REG31.MouseClick, REG30.MouseClick, REG2F.MouseClick, REG2E.MouseClick, REG2D.MouseClick, REG2C.MouseClick, REG2B.MouseClick, REG2A.MouseClick, REG29.MouseClick, REG28.MouseClick, REG27.MouseClick, REG26.MouseClick, REG25.MouseClick, REG24.MouseClick, REG23.MouseClick, REG22.MouseClick, REG21.MouseClick, REG20.MouseClick, REG1F.MouseClick, REG1E.MouseClick, REG1D.MouseClick, REG1C.MouseClick, REG1B.MouseClick, REG1A.MouseClick, REG19.MouseClick, REG18.MouseClick, REG17.MouseClick, REG16.MouseClick, REG15.MouseClick, REG14.MouseClick, REG13.MouseClick, REG12.MouseClick, REG11.MouseClick, REG10.MouseClick, REG0F.MouseClick, REG0E.MouseClick, REG0D.MouseClick, REG0C.MouseClick, REG0B.MouseClick, REG0A.MouseClick, REG09.MouseClick, REG08.MouseClick, REG07.MouseClick, REG06.MouseClick, REG05.MouseClick, REG04.MouseClick, REG03.MouseClick, REG02.MouseClick, REG01.MouseClick
+        strREGValueTemp = sender.text
+        sender.SelectAll()
         WRITEREGDATA(sender.Name)
-        PRINT("Select REG=" + Mid(sender.Name, 4, 2))
+        PRINT("Select REG=" + Mid(sender.Name, 4, 2) + ", strREGValueTemp=" + sender.text)
         strSelectRegister = Mid(sender.Name, 4, 2)
         Me.REG00.ContextMenuStrip = ContextMenuStrip1
 
@@ -2462,20 +2494,50 @@ Public Class frmMain
 
     Private Sub REGStart_KeyPress(sender As Object, e As KeyPressEventArgs) Handles REGStart.KeyPress
         If Asc(e.KeyChar) = 13 Then
-            Dim intNumber As Integer = 0
+
+            Dim charNumber As Integer = 0
             REGStart.Text = UCase(REGStart.Text)
 
-            intNumber = Val("&H" + (REGStart.Text) + "&")
-
-            REGStart.Text = Hex(intNumber)
-
-            If intNumber >= 255 Then
-                intNumber = 255
-                REGStart.Text = Hex(intNumber)
-            ElseIf intNumber <= 0 Then
-                intNumber = 0
-                REGStart.Text = Hex(intNumber)
+            If REGStart.Text = "" Then
+                REGStart.Text = "00"
+            ElseIf Len(REGStart.Text) = 1 Then
+                REGStart.Text = "0" & REGStart.Text
             End If
+
+            For i = 1 To Len(REGStart.Text)
+                charNumber = Asc(Mid(REGStart.Text, i, 1))
+
+                If (charNumber >= 48 And charNumber <= 59) Or (charNumber >= 65 And charNumber <= 70) Then
+                    PRINT("Key" & i & "=" & Asc(Mid(REGStart.Text, i, 1)))
+                Else
+                    If i = 1 Then
+                        'PRINT("Key1=Error" & "Change To=0")
+                        'REGStart.Text = "0" & Mid(REGStart.Text, 2, 1)
+                        REGStart.Text = Mid(strREGValueTemp, 1, 1) & Mid(REGStart.Text, 2, 1)
+                    Else
+                        ' PRINT("Key2=Error" & "Change To=0")
+                        'REGStart.Text = Mid(REGStart.Text, 1, 1) & "0"
+                        REGStart.Text = Mid(REGStart.Text, 1, 1) & Mid(strREGValueTemp, 2, 1)
+                    End If
+
+                End If
+
+            Next i
+
+            'Dim intNumber As Integer = 0
+            'REGStart.Text = UCase(REGStart.Text)
+
+            'intNumber = Val("&H" + (REGStart.Text))
+
+            'REGStart.Text = Hex(intNumber)
+
+            'If intNumber >= 255 Then
+            '    intNumber = 255
+            '    REGStart.Text = Hex(intNumber)
+            'ElseIf intNumber <= 0 Then
+            '    intNumber = 0
+            '    REGStart.Text = Hex(intNumber)
+            'End If
 
             'SendCMD(22)
             'REGStart.Text = Integer.Parse(Val("&H" + UCase(REGStart.Text)) + "&")
@@ -2484,22 +2546,125 @@ Public Class frmMain
 
 
     Private Sub REGEnd_KeyPress(sender As Object, e As KeyPressEventArgs) Handles REGEnd.KeyPress
+
         If Asc(e.KeyChar) = 13 Then
-            Dim intNumber As Integer = 0
+            Dim charNumber As Integer = 0
             REGEnd.Text = UCase(REGEnd.Text)
 
-            intNumber = Val("&H" + (REGEnd.Text) + "&")
-
-            REGEnd.Text = Hex(intNumber)
-
-            If intNumber >= 255 Then
-                intNumber = 255
-                REGEnd.Text = Hex(intNumber)
-            ElseIf intNumber <= 0 Then
-                intNumber = 0
-                REGEnd.Text = Hex(intNumber)
+            If REGEnd.Text = "" Then
+                REGEnd.Text = "00"
+            ElseIf Len(REGEnd.Text) = 1 Then
+                REGEnd.Text = "0" & REGEnd.Text
             End If
+
+            For i = 1 To Len(REGEnd.Text)
+                charNumber = Asc(Mid(REGEnd.Text, i, 1))
+
+                If (charNumber >= 48 And charNumber <= 59) Or (charNumber >= 65 And charNumber <= 70) Then
+                    PRINT("Key" & i & "=" & Asc(Mid(REGEnd.Text, i, 1)))
+                Else
+                    If i = 1 Then
+                        'PRINT("Key1=Error" & "Change To=0")
+                        'REGStart.Text = "0" & Mid(REGStart.Text, 2, 1)
+                        REGEnd.Text = Mid(strREGValueTemp, 1, 1) & Mid(REGEnd.Text, 2, 1)
+                    Else
+                        ' PRINT("Key2=Error" & "Change To=0")
+                        'REGStart.Text = Mid(REGStart.Text, 1, 1) & "0"
+                        REGEnd.Text = Mid(REGEnd.Text, 1, 1) & Mid(strREGValueTemp, 2, 1)
+                    End If
+
+                End If
+
+            Next i
+
+            'If REGEnd.Text = "" Then
+            '    REGEnd.Text = "00"
+            'ElseIf Len(REGEnd.Text) = 1 Then
+            '    REGEnd.Text = "0" & REGEnd.Text
+            'End If
+
+            'For i = 1 To Len(REGEnd.Text)
+            '    PRINT("Key" & i & "=" & Asc(Mid(REGEnd.Text, i, 1)))
+            'Next i
+
+            'Dim intNumber As Integer = 0
+            'REGEnd.Text = UCase(REGEnd.Text)
+
+            'intNumber = Val("&H" + (REGEnd.Text) + "&")
+
+            'REGEnd.Text = Hex(intNumber)
+
+            'If intNumber >= 255 Then
+            '    intNumber = 255
+            '    REGEnd.Text = Hex(intNumber)
+            'ElseIf intNumber <= 0 Then
+            '    intNumber = 0
+            '    REGEnd.Text = Hex(intNumber)
+            'End If
         End If
+    End Sub
+
+
+    Private Sub REGEnd_TextChanged(sender As Object, e As EventArgs) Handles REGEnd.TextChanged
+
+
+        'REGEnd.Text = UCase(REGEnd.Text)
+
+        'If REGEnd.Text = "" Then
+        '    REGEnd.Text = "00"
+        'End If
+
+        'For i = 1 To Len(REGEnd.Text)
+        '    PRINT("Key" & i & "=" & Asc(Mid(REGEnd.Text, i, 1)))
+        'Next i
+
+
+    End Sub
+
+    
+    Private Sub REGStart_MouseClick(sender As Object, e As MouseEventArgs) Handles REGStart.MouseClick
+        strREGValueTemp = sender.Text
+        sender.SelectAll()
+        PRINT("strREGValueTemp=" + sender.Text)
+    End Sub
+
+    Private Sub REGEnd_MouseClick(sender As Object, e As MouseEventArgs) Handles REGEnd.MouseClick
+        strREGValueTemp = sender.Text
+        sender.SelectAll()
+        PRINT("strREGValueTemp=" + sender.Text)
+    End Sub
+
+    Private Sub REG00_Leave(sender As Object, e As EventArgs) Handles REG00.Leave, REGFF.Leave, REGFE.Leave, REGFD.Leave, REGFC.Leave, REGFB.Leave, REGFA.Leave, REGF9.Leave, REGF8.Leave, REGF7.Leave, REGF6.Leave, REGF5.Leave, REGF4.Leave, REGF3.Leave, REGF2.Leave, REGF1.Leave, REGF0.Leave, REGEF.Leave, REGEE.Leave, REGED.Leave, REGEC.Leave, REGEB.Leave, REGEA.Leave, REGE9.Leave, REGE8.Leave, REGE7.Leave, REGE6.Leave, REGE5.Leave, REGE4.Leave, REGE3.Leave, REGE2.Leave, REGE1.Leave, REGE0.Leave, REGDF.Leave, REGDE.Leave, REGDD.Leave, REGDC.Leave, REGDB.Leave, REGDA.Leave, REGD9.Leave, REGD8.Leave, REGD7.Leave, REGD6.Leave, REGD5.Leave, REGD4.Leave, REGD3.Leave, REGD2.Leave, REGD1.Leave, REGD0.Leave, REGCF.Leave, REGCE.Leave, REGCD.Leave, REGCC.Leave, REGCB.Leave, REGCA.Leave, REGC9.Leave, REGC8.Leave, REGC7.Leave, REGC6.Leave, REGC5.Leave, REGC4.Leave, REGC3.Leave, REGC2.Leave, REGC1.Leave, REGC0.Leave, REGBF.Leave, REGBE.Leave, REGBD.Leave, REGBC.Leave, REGBB.Leave, REGBA.Leave, REGB9.Leave, REGB8.Leave, REGB7.Leave, REGB6.Leave, REGB5.Leave, REGB4.Leave, REGB3.Leave, REGB2.Leave, REGB1.Leave, REGB0.Leave, REGAF.Leave, REGAE.Leave, REGAD.Leave, REGAC.Leave, REGAB.Leave, REGAA.Leave, REGA9.Leave, REGA8.Leave, REGA7.Leave, REGA6.Leave, REGA5.Leave, REGA4.Leave, REGA3.Leave, REGA2.Leave, REGA1.Leave, REGA0.Leave, REG9F.Leave, REG9E.Leave, REG9D.Leave, REG9C.Leave, REG9B.Leave, REG9A.Leave, REG99.Leave, REG98.Leave, REG97.Leave, REG96.Leave, REG95.Leave, REG94.Leave, REG93.Leave, REG92.Leave, REG91.Leave, REG90.Leave, REG8F.Leave, REG8E.Leave, REG8D.Leave, REG8C.Leave, REG8B.Leave, REG8A.Leave, REG89.Leave, REG88.Leave, REG87.Leave, REG86.Leave, REG85.Leave, REG84.Leave, REG83.Leave, REG82.Leave, REG81.Leave, REG80.Leave, REG7F.Leave, REG7E.Leave, REG7D.Leave, REG7C.Leave, REG7B.Leave, REG7A.Leave, REG79.Leave, REG78.Leave, REG77.Leave, REG76.Leave, REG75.Leave, REG74.Leave, REG73.Leave, REG72.Leave, REG71.Leave, REG70.Leave, REG6F.Leave, REG6E.Leave, REG6D.Leave, REG6C.Leave, REG6B.Leave, REG6A.Leave, REG69.Leave, REG68.Leave, REG67.Leave, REG66.Leave, REG65.Leave, REG64.Leave, REG63.Leave, REG62.Leave, REG61.Leave, REG60.Leave, REG5F.Leave, REG5E.Leave, REG5D.Leave, REG5C.Leave, REG5B.Leave, REG5A.Leave, REG59.Leave, REG58.Leave, REG57.Leave, REG56.Leave, REG55.Leave, REG54.Leave, REG53.Leave, REG52.Leave, REG51.Leave, REG50.Leave, REG4F.Leave, REG4E.Leave, REG4D.Leave, REG4C.Leave, REG4B.Leave, REG4A.Leave, REG49.Leave, REG48.Leave, REG47.Leave, REG46.Leave, REG45.Leave, REG44.Leave, REG43.Leave, REG42.Leave, REG41.Leave, REG40.Leave, REG3F.Leave, REG3E.Leave, REG3D.Leave, REG3C.Leave, REG3B.Leave, REG3A.Leave, REG39.Leave, REG38.Leave, REG37.Leave, REG36.Leave, REG35.Leave, REG34.Leave, REG33.Leave, REG32.Leave, REG31.Leave, REG30.Leave, REG2F.Leave, REG2E.Leave, REG2D.Leave, REG2C.Leave, REG2B.Leave, REG2A.Leave, REG29.Leave, REG28.Leave, REG27.Leave, REG26.Leave, REG25.Leave, REG24.Leave, REG23.Leave, REG22.Leave, REG21.Leave, REG20.Leave, REG1F.Leave, REG1E.Leave, REG1D.Leave, REG1C.Leave, REG1B.Leave, REG1A.Leave, REG19.Leave, REG18.Leave, REG17.Leave, REG16.Leave, REG15.Leave, REG14.Leave, REG13.Leave, REG12.Leave, REG11.Leave, REG10.Leave, REG0F.Leave, REG0E.Leave, REG0D.Leave, REG0C.Leave, REG0B.Leave, REG0A.Leave, REG09.Leave, REG08.Leave, REG07.Leave, REG06.Leave, REG05.Leave, REG04.Leave, REG03.Leave, REG02.Leave, REG01.Leave
+        PRINT(sender.Name + "_Leave")
+        Dim charNumber As Integer = 0
+        sender.Text = UCase(sender.Text)
+
+        If sender.Text = "" Then
+            sender.Text = strREGValueTemp '"00"
+        ElseIf Len(sender.Text) = 1 Then
+            sender.Text = strREGValueTemp 'sender.Text = "0" & sender.Text
+        End If
+
+        For i = 1 To Len(sender.Text)
+            charNumber = Asc(Mid(sender.Text, i, 1))
+
+            If (charNumber >= 48 And charNumber <= 59) Or (charNumber >= 65 And charNumber <= 70) Then
+                PRINT("Key" & i & "=" & Asc(Mid(sender.Text, i, 1)))
+            Else
+                If i = 1 Then
+                    '  PRINT("Key1=Error" & "Change To=0")
+                    sender.Text = Mid(strREGValueTemp, 1, 1) & Mid(sender.Text, 2, 1)
+                Else
+                    'PRINT("Key2=Error" & "Change To=0")
+                    sender.Text = Mid(sender.Text, 1, 1) & Mid(strREGValueTemp, 2, 1)
+                End If
+
+            End If
+
+        Next i
+
+
+        WRITEREGDATA(sender.Name)
     End Sub
 
   

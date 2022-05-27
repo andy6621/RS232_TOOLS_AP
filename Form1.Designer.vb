@@ -365,7 +365,6 @@ Partial Class frmMain
         Me.REG10 = New System.Windows.Forms.TextBox()
         Me.REG00 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.Button23 = New System.Windows.Forms.Button()
         Me.TESTOutput = New System.Windows.Forms.TextBox()
         Me.btnTEST = New System.Windows.Forms.Button()
         Me.ComboBox9 = New System.Windows.Forms.ComboBox()
@@ -376,6 +375,7 @@ Partial Class frmMain
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Button23 = New System.Windows.Forms.Button()
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
@@ -4414,15 +4414,6 @@ Partial Class frmMain
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "VS4210"
         '
-        'Button23
-        '
-        Me.Button23.Location = New System.Drawing.Point(467, 91)
-        Me.Button23.Name = "Button23"
-        Me.Button23.Size = New System.Drawing.Size(54, 31)
-        Me.Button23.TabIndex = 9
-        Me.Button23.Text = "規格書"
-        Me.Button23.UseVisualStyleBackColor = True
-        '
         'TESTOutput
         '
         Me.TESTOutput.Location = New System.Drawing.Point(149, 158)
@@ -4514,6 +4505,15 @@ Partial Class frmMain
         Me.TabPage4.Size = New System.Drawing.Size(544, 525)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "TP2824"
+        '
+        'Button23
+        '
+        Me.Button23.Location = New System.Drawing.Point(467, 91)
+        Me.Button23.Name = "Button23"
+        Me.Button23.Size = New System.Drawing.Size(54, 31)
+        Me.Button23.TabIndex = 9
+        Me.Button23.Text = "規格書"
+        Me.Button23.UseVisualStyleBackColor = True
         '
         'Timer5
         '
